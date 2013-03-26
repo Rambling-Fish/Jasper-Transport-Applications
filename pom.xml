@@ -8,5 +8,6 @@
         <module>jta</module>
         <module>jtaTest</module>
         <module>jtaDemo</module>
+        <module>jtaLibs</module>
     </modules>
 </project>
