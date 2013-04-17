@@ -98,6 +98,7 @@
         <module>jtaDemo-client-ground-vehicles</module>
         <module>jtaDemo-client-helicopters</module>
         <module>jtaDemo-interface-airport-map</module>
+        <module>jtaDemo-heart-rate-monitor-A</module>
     </modules>
     
 </project>
