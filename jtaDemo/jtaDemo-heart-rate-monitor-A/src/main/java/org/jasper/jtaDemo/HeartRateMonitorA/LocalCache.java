@@ -1,7 +1,5 @@
 package org.jasper.jtaDemo.HeartRateMonitorA;
 
-import org.jasper.jLib.jCommons.message.JasperSyncRequest;
-
 public class LocalCache {
 	private static Ward ward = new Ward("Wing-5-Floor-3-Ward-4");
 	
@@ -9,8 +7,8 @@ public class LocalCache {
 		ward.addPatientHeartRateData(p);
 	}
 	
-	public static Ward getWard(JasperSyncRequest req){
-		return getWard(req.getUri());
+	public static Ward getWard(String[] req){
+		return getWard(req[0]);
 	}
 
 	public static Ward getWard(String str){
