@@ -15,5 +15,10 @@
     <description></description>
 
     <dependencies>
+        <dependency>
+            <groupId>org.jasper.jLib</groupId>
+            <artifactId>jLib-jCommons-lib</artifactId>
+            <version>1.1</version>
+        </dependency>
     </dependencies>
 </project>
