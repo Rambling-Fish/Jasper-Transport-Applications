@@ -12,7 +12,6 @@ public class LocalCache {
 	}
 
 	public static Ward getWard(String str){
-		System.out.println("Ward " + str);
 		return ward;
 	}
 

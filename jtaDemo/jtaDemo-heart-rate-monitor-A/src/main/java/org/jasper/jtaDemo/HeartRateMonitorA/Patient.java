@@ -6,6 +6,7 @@ public class Patient {
 	
 	private String id;
 	private ArrayList<HeartRateData> heartRateData;
+	private static final int MAX_NUM_OF_RECORDS = 100;
 	
 	public Patient(String id) {
 		super();
@@ -22,6 +23,7 @@ public class Patient {
 	}
 
 	public void addHeartRateData(HeartRateData hrData){
+		if(heartRateData.size() > MAX_NUM_OF_RECORDS) heartRateData.remove(0);
 		heartRateData.add(hrData);
 	}
 	
