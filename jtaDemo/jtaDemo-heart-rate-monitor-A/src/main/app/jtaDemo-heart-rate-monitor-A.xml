@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:jasperengine="http://www.mulesoft.org/schema/mule/jasperengine" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.3.0" xsi:schemaLocation="
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:jasperengine="http://www.mulesoft.org/schema/mule/jasperengine" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.3.2" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd 
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/quartz/current/mule-quartz.xsd 
@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/jasperengine http://www.mulesoft.org/schema/
     <jasperengine:connector name="JEC" vendor="jasper" appName="jtaDemo-heart-rate-monitor-A" version="1.0" deploymentId="jasperLab" jasperEngineURL="${jasperEngineURL}" uri="${uri}" globalQueue="jms.jasper.delegate.global.queue" doc:name="Jasper Connector"></jasperengine:connector>
     <http:endpoint host="0.0.0.0" port="8081" path="jasper/HR" name="globalHttpEndpoint" doc:name="HTTP"/>
     <flow name="jtaDemo-client-aircrafts-flow" doc:name="jtaDemo-client-aircrafts-flow">
-        <quartz:inbound-endpoint jobName="eventTimer" repeatInterval="1000" startDelay="1" responseTimeout="10000" doc:name="Quartz">
+        <quartz:inbound-endpoint jobName="eventTimer" repeatInterval="61000" startDelay="1" responseTimeout="10000" doc:name="Quartz">
             <quartz:event-generator-job>
                 <quartz:payload>tick-tock</quartz:payload>
             </quartz:event-generator-job>

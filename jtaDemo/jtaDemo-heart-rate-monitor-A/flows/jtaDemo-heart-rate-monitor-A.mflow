@@ -1,181 +1,277 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-app-webview-rest-interface">
-    <global-unknown unknownName="JEC" entity-id="7c04509c-a836-40f2-bee3-5eafe65c3884">
+    <global-unknown index="1" unknownName="JEC" description="false" entity-id="global-unknown#1">
         <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-heart-rate-monitor-A&quot; version=&quot;1.0&quot; deploymentId=&quot;jasperLab&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; uri=&quot;${uri}&quot; globalQueue=&quot;jms.jasper.delegate.global.queue&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
     </global-unknown>
-    <global-element type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="3503e2fe-d9c7-4971-8ef8-9a86db608530">
+    <global-element type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="HTTP#1">
         <properties>
             <property name="exchange-pattern"/>
+            <property value="2" name="auxiliary;index"/>
             <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+            <property value="2" name="auxiliary;index"/>
             <property name="httpLabel"/>
             <property value="0.0.0.0" name="host"/>
             <property value="8081" name="port"/>
             <property value="jasper/HR" name="path"/>
             <property name="method"/>
+            <property value="2" name="auxiliary;index"/>
             <property value="globalHttpEndpoint" name="name"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
             <property name="businessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
+            <property value="2" name="auxiliary;index"/>
             <property name="address"/>
             <property name="encoding"/>
             <property name="disableTransportTransformer"/>
             <property name="mimeType"/>
             <property name="responseTimeout"/>
             <property name="followRedirects"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
             <property name="connector-ref"/>
             <property name="ref"/>
             <property name="transformer-refs"/>
             <property name="responseTransformer-refs"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
             <property name="user"/>
             <property name="password"/>
+            <property value="2" name="auxiliary;index"/>
             <property name="contentType"/>
             <property name="keep-alive"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;index"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="jtaDemo-client-aircrafts-flow">
+    <flow SubFlow="false" name="jtaDemo-client-aircrafts-flow" entity-id="1aa546d2-3fda-4e28-a8f1-6c1af9ef1592">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
+            <property value="3" name="auxiliary;index"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="3" name="auxiliary;index"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="03b0b8ad-3a8c-41be-9aea-cbf9272ea659">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" name="Quartz" entity-id="716a6a37-03ff-4785-a849-d6794fefc027">
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#1">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" name="Quartz" entity-id="Quartz#1">
                 <properties>
-                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="true" name="auxiliary;erased;mimeType"/>
+                    <property value="" name="businessEventsLabel"/>
+                    <property value="" name="repeatCount"/>
+                    <property value="false" name="disableTransportTransformer"/>
                     <property value="eventTimer" name="jobName"/>
-                    <property name="cronExpression"/>
-                    <property value="1000" name="repeatInterval"/>
-                    <property name="repeatCount"/>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="false" name="tracking:enable-default-events"/>
+                    <property value="" name="ref"/>
+                    <property value="" name="transformer-refs"/>
+                    <property value="61000" name="repeatInterval"/>
+                    <property value="" name="address"/>
                     <property value="1" name="startDelay"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property name="address"/>
+                    <property value="true" name="auxiliary;erased;encoding"/>
+                    <property value="" name="encoding"/>
+                    <property value="" name="cronExpression"/>
+                    <property value="" name="mimeType"/>
                     <property value="10000" name="responseTimeout"/>
-                    <property name="encoding"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="mimeType"/>
-                    <property name="connector-ref"/>
-                    <property name="ref"/>
-                    <property name="transformer-refs"/>
+                    <property value="" name="connector-ref"/>
+                    <property value="4" name="auxiliary;index"/>
+                    <property name="updated"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/event-generator-job;0">
+                        <property value="5" name="auxiliary;wrapIn"/>
+                        <property value="5" name="auxiliary;index"/>
                         <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/payload;1">
                             <property value="tick-tock" name="text"/>
+                            <property value="6" name="auxiliary;wrapIn"/>
+                            <property value="6" name="auxiliary;index"/>
                         </property-collection>
                     </property-collection>
                 </properties>
+                <description></description>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="HR_Generator" entity-id="5b71ff41-f618-4971-9e91-98764ead9357">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="HR_Generator" entity-id="Java#1">
                 <properties>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
                     <property name="class"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
+                    <property value="7" name="auxiliary;index"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property value="org.jasper.jtaDemo.HeartRateMonitorA.HeartRateMonitorAGenerator" name="class"/>
+                        <property value="8" name="auxiliary;wrapIn"/>
+                        <property value="8" name="auxiliary;index"/>
                     </property-collection>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="LocalCache" entity-id="f02d63ff-6a80-453c-ae95-cb308d76088e">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="LocalCache" entity-id="Java#2">
                 <properties>
+                    <property value="9" name="auxiliary;index"/>
+                    <property value="9" name="auxiliary;index"/>
+                    <property value="9" name="auxiliary;index"/>
                     <property name="class"/>
+                    <property value="9" name="auxiliary;index"/>
+                    <property value="9" name="auxiliary;index"/>
+                    <property value="9" name="auxiliary;index"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property value="org.jasper.jtaDemo.HeartRateMonitorA.LocalCache" name="class"/>
+                        <property value="10" name="auxiliary;wrapIn"/>
+                        <property value="10" name="auxiliary;index"/>
                     </property-collection>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow1">
+    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow1" entity-id="827e672d-c1bd-4900-b162-a6232364cc6f">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
+            <property value="11" name="auxiliary;index"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
+            <property value="11" name="auxiliary;index"/>
+            <property value="11" name="auxiliary;index"/>
+            <property value="11" name="auxiliary;index"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="1fd4b2cb-45da-46c6-9a31-520fd6d405f6">
-            <unknown entity-id="bf1af8be-87b4-4768-98dc-ca2505d27cd9">
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
+            <unknown index="12" description="false" entity-id="unknown#1">
                 <content>&lt;jasperengine:inbound-endpoint xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; connector-ref=&quot;JEC&quot; exchange-pattern=&quot;request-response&quot; queue=&quot;jms.jasper.jtaDemo-heart-rate-monitor-A.1.0.jasperLab.${uri}.queue&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;HRD&quot;/&gt;</content>
             </unknown>
-            <response entity-id="101235f1-b138-479b-894e-503fb68aeea8">
-                <compartment entity-id="0d31ec00-f8a3-443d-aa21-a647908493d8">
-                    <lane hadOnlyOneElement="false" entity-id="5bc2d286-ab27-486d-a474-2cc0e48892f2">
-                        <pattern type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" name="Object to JSON" entity-id="317cbd82-22e7-4b14-acd8-09b89074c3d0">
+            <response index="13" entity-id="response#1">
+                <compartment entity-id="compartment#1">
+                    <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#3">
+                        <pattern type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" name="Object to JSON" entity-id="Object to JSON#1">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
+<property value="14" name="auxiliary;index"/>
 <property name="mimeType"/>
+<property value="14" name="auxiliary;index"/>
+<property value="14" name="auxiliary;index"/>
 <property name="mapper-ref"/>
 <property name="sourceClass"/>
+<property value="14" name="auxiliary;index"/>
+<property value="14" name="auxiliary;index"/>
+<property value="14" name="auxiliary;index"/>
                             </properties>
                         </pattern>
                     </lane>
                 </compartment>
             </response>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="LocalCache" entity-id="52f93163-9598-4685-8de9-5487caa504d5">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="LocalCache" entity-id="Java#3">
                 <properties>
+                    <property value="15" name="auxiliary;index"/>
+                    <property value="15" name="auxiliary;index"/>
+                    <property value="15" name="auxiliary;index"/>
                     <property name="class"/>
+                    <property value="15" name="auxiliary;index"/>
+                    <property value="15" name="auxiliary;index"/>
+                    <property value="15" name="auxiliary;index"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property value="org.jasper.jtaDemo.HeartRateMonitorA.LocalCache" name="class"/>
+                        <property value="16" name="auxiliary;wrapIn"/>
+                        <property value="16" name="auxiliary;index"/>
                     </property-collection>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow2">
+    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow2" entity-id="4a8d39e5-65bb-4581-bf8b-82d542219c11">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
+            <property value="17" name="auxiliary;index"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
+            <property value="17" name="auxiliary;index"/>
+            <property value="17" name="auxiliary;index"/>
+            <property value="17" name="auxiliary;index"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="ea896a62-dbba-4362-bda1-29d418734995">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="httpInboundEndpoint" entity-id="64cfef4f-43bd-475b-8f97-2469d3ec67fc">
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#4">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="httpInboundEndpoint" entity-id="HTTP#2">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
+                    <property value="18" name="auxiliary;index"/>
                     <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="18" name="auxiliary;index"/>
                     <property name="httpLabel"/>
                     <property name="host"/>
                     <property name="port"/>
                     <property name="path"/>
                     <property name="method"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
                     <property name="businessEventsLabel"/>
                     <property name="tracking:enable-default-events"/>
+                    <property value="18" name="auxiliary;index"/>
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
                     <property name="responseTimeout"/>
                     <property name="followRedirects"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
                     <property name="connector-ref"/>
                     <property value="globalHttpEndpoint" name="ref"/>
                     <property name="transformer-refs"/>
                     <property name="responseTransformer-refs"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
                     <property name="user"/>
                     <property name="password"/>
+                    <property value="18" name="auxiliary;index"/>
                     <property name="contentType"/>
                     <property name="keep-alive"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
+                    <property value="18" name="auxiliary;index"/>
                 </properties>
             </endpoint>
-            <response entity-id="9aafce3b-d96c-47df-9351-29646f3090a8">
-                <compartment entity-id="6930dafd-76dc-44c9-a9ab-47a20a3e8ba2">
-                    <lane hadOnlyOneElement="false" entity-id="c4931304-00d0-4868-8758-7bd4bc213ccb">
-                        <pattern type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" name="Object to JSON" entity-id="00c370a7-1f31-4b8e-8213-daa5d460ea92">
+            <response index="19" entity-id="response#2">
+                <compartment entity-id="compartment#2">
+                    <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#5">
+                        <pattern type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" name="Object to JSON" entity-id="Object to JSON#2">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
 <property name="encoding"/>
+<property value="20" name="auxiliary;index"/>
 <property name="mimeType"/>
+<property value="20" name="auxiliary;index"/>
+<property value="20" name="auxiliary;index"/>
 <property name="mapper-ref"/>
 <property name="sourceClass"/>
+<property value="20" name="auxiliary;index"/>
+<property value="20" name="auxiliary;index"/>
+<property value="20" name="auxiliary;index"/>
                             </properties>
                         </pattern>
                     </lane>
                 </compartment>
             </response>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="LocalCache" entity-id="0b4a6bef-fc57-42f2-8b1f-09164c3b7b39">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="LocalCache" entity-id="Java#4">
                 <properties>
+                    <property value="21" name="auxiliary;index"/>
+                    <property value="21" name="auxiliary;index"/>
+                    <property value="21" name="auxiliary;index"/>
                     <property name="class"/>
+                    <property value="21" name="auxiliary;index"/>
+                    <property value="21" name="auxiliary;index"/>
+                    <property value="21" name="auxiliary;index"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property value="org.jasper.jtaDemo.HeartRateMonitorA.LocalCache" name="class"/>
+                        <property value="22" name="auxiliary;wrapIn"/>
+                        <property value="22" name="auxiliary;index"/>
                     </property-collection>
                 </properties>
             </pattern>
