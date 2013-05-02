@@ -7,7 +7,7 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
 http://www.mulesoft.org/schema/mule/jasperengine http://www.mulesoft.org/schema/mule/jasperengine/current/mule-jasperengine.xsd ">
-    <jasperengine:connector name="JEC" vendor="jasper" appName="jtaTest-interface-cat010-webview-traffic-ajax" version="1.1" deploymentId="jasperLab" jasperEngineURL="${jasperEngineURL}" doc:name="Jasper Connector"/>
+    <jasperengine:connector name="JEC" vendor="jasper" appName="jtaTest-interface-cat010-webview-traffic-ajax" version="1.1" jasperEngineURL="${jasperEngineURL}" doc:name="Jasper Connector"/>
     <ajax:connector name="AjaxConnector" serverUrl="http://${ajax.serverUrl.host}:${ajax.serverUrl.port}/${ajax.serverUrl.path}" resourceBase="${app.home}/docroot" jsonCommented="true" doc:name="AjaxGlobalConnector"/>
     <flow name="jtaTest-interface-cat010-webview-traffic-ajax-cat010-byteArray-flow" doc:name="jtaTest-interface-cat010-webview-traffic-ajax-cat010-byteArray-flow">
         <jasperengine:inbound-endpoint topic="jms.jasper.1.0.cat010.topic.byteArray" connector-ref="JEC" doc:name="JECCat010ByteArrayEndpoint"/>

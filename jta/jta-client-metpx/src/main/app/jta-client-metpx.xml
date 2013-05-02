@@ -29,7 +29,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	</amqp:endpoint>
 	<jasperengine:connector
 		xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="JEC"
-		vendor="jasper" appName="jta-client-metpx" version="1.1" deploymentId="jasperLab"
+		vendor="jasper" appName="jta-client-metpx" version="1.1" 
 		jasperEngineURL="${jasperEngineURL}"
 		doc:name="Jasper Connector" />
 	<http:endpoint host="${metpx.interface.rest.http.endpoint.host}"

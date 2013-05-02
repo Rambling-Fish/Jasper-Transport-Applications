@@ -8,7 +8,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
 http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd 
 http://www.mulesoft.org/schema/mule/jasperengine http://www.mulesoft.org/schema/mule/jasperengine/current/mule-jasperengine.xsd ">
-    <jasperengine:connector name="JEC" vendor="jasper" appName="jtaDemo-heart-rate-monitor-A" version="1.0" deploymentId="jasperLab" jasperEngineURL="${jasperEngineURL}" uri="${uri}" globalQueue="jms.jasper.delegate.global.queue" doc:name="Jasper Connector"></jasperengine:connector>
+    <jasperengine:connector name="JEC" vendor="jasper" appName="jtaDemo-heart-rate-monitor-A" version="1.0" jasperEngineURL="${jasperEngineURL}" globalQueue="jms.jasper.delegate.global.queue" doc:name="Jasper Connector"></jasperengine:connector>
     <http:endpoint host="0.0.0.0" port="8081" path="jasper/HR" name="globalHttpEndpoint" doc:name="HTTP"/>
     <flow name="jtaDemo-client-aircrafts-flow" doc:name="jtaDemo-client-aircrafts-flow">
         <quartz:inbound-endpoint jobName="eventTimer" repeatInterval="61000" startDelay="1" responseTimeout="10000" doc:name="Quartz">
@@ -24,7 +24,7 @@ http://www.mulesoft.org/schema/mule/jasperengine http://www.mulesoft.org/schema/
         </component>
     </flow>
     <flow name="mule-app-webview-rest-interfaceFlow1" doc:name="mule-app-webview-rest-interfaceFlow1">
-        <jasperengine:inbound-endpoint connector-ref="JEC" exchange-pattern="request-response" queue="jms.jasper.jtaDemo-heart-rate-monitor-A.1.0.jasperLab.${uri}.queue" doc:name="HRD"></jasperengine:inbound-endpoint>
+        <jasperengine:inbound-endpoint connector-ref="JEC" exchange-pattern="request-response" uri="http://coralcea.ca/jasper/MedicalSensorData/HR" queue="jms.jasper.jtaDemo-heart-rate-monitor-A.1.0.jasperLab.0.queue" doc:name="HRD"></jasperengine:inbound-endpoint>
         <response>
             <json:object-to-json-transformer doc:name="Object to JSON"/>
         </response>
