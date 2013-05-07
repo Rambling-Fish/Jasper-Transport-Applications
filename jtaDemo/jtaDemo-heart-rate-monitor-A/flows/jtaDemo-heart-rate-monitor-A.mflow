@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-app-webview-rest-interface">
     <global-unknown index="1" unknownName="JEC" description="false" entity-id="global-unknown#1">
-        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-heart-rate-monitor-A&quot; version=&quot;1.0&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; globalQueue=&quot;jms.jasper.delegate.global.queue&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
+        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-heart-rate-monitor-A&quot; version=&quot;1.0&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
     </global-unknown>
     <global-element type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="HTTP#1">
         <properties>
@@ -48,7 +48,7 @@
             <property value="2" name="auxiliary;index"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="jtaDemo-client-aircrafts-flow" entity-id="4b549078-50e2-401c-ab20-ce3a92813a1c">
+    <flow SubFlow="false" name="jtaDemo-client-aircrafts-flow" entity-id="5a94c22c-bd9c-4891-ad4e-5c6a3323b883">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -131,7 +131,7 @@
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow1" entity-id="842a0f07-87e5-4bff-a962-40c29da84b53">
+    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow1" entity-id="970f6507-c7ce-4764-9fbb-67107e58ff5d">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -186,7 +186,7 @@
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow2" entity-id="72ca50c4-c9c0-4912-b9dd-52e3823b622c">
+    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow2" entity-id="3c030462-c9e5-48e1-86a2-6dd98efa8203">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
