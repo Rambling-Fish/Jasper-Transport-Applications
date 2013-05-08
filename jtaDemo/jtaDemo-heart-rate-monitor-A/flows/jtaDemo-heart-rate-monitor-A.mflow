@@ -48,7 +48,7 @@
             <property value="2" name="auxiliary;index"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="jtaDemo-client-aircrafts-flow" entity-id="5a94c22c-bd9c-4891-ad4e-5c6a3323b883">
+    <flow SubFlow="false" name="jtaDemo-client-aircrafts-flow" entity-id="e609b0ca-abf3-478a-addf-3b7db48e600a">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -131,7 +131,7 @@
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow1" entity-id="970f6507-c7ce-4764-9fbb-67107e58ff5d">
+    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow1" entity-id="656e3728-8aec-4e30-8dfd-74da9ad0d42a">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
@@ -144,7 +144,7 @@
         </properties>
         <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
             <unknown index="12" description="false" entity-id="unknown#1">
-                <content>&lt;jasperengine:inbound-endpoint xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; connector-ref=&quot;JEC&quot; exchange-pattern=&quot;request-response&quot; uri=&quot;http://coralcea.ca/jasper/MedicalSensorData/HR&quot; queue=&quot;jms.jasper.jtaDemo-heart-rate-monitor-A.1.0.jasperLab.0.queue&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;HRD&quot;/&gt;</content>
+                <content>&lt;jasperengine:inbound-endpoint xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; connector-ref=&quot;JEC&quot; exchange-pattern=&quot;request-response&quot; uri=&quot;${uri}&quot; queue=&quot;jms.jasper.jtaDemo-heart-rate-monitor-A.1.0.jasperLab.0.queue&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;HRD&quot;/&gt;</content>
             </unknown>
             <response index="13" entity-id="response#1">
                 <compartment entity-id="compartment#1">
@@ -186,7 +186,7 @@
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow2" entity-id="3c030462-c9e5-48e1-86a2-6dd98efa8203">
+    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow2" entity-id="7a46954a-664c-4a5a-9c9c-da7df72c2f14">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
