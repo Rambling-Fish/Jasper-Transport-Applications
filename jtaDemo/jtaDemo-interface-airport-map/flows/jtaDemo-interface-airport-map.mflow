@@ -1,87 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-app-webview-rest-interface">
-    <global-unknown index="1" unknownName="JEC" description="false" entity-id="global-unknown#1">
-        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-interface-airport-map&quot; version=&quot;1.1&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
+    <global-unknown unknownName="JEC" entity-id="62c2683a-8ef6-440a-8d98-9e7daeca2f5b">
+        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-interface-airport-map&quot; version=&quot;2.0&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
     </global-unknown>
-    <global-element type="org.mule.tooling.ui.modules.core.global.ajaxConnector" name="Ajax" entity-id="Ajax#1">
+    <global-element type="org.mule.tooling.ui.modules.core.global.ajaxConnector" name="AjaxGlobalConnector" entity-id="fe4d8c39-d0b4-4ff9-84f6-006252bee06f">
         <properties>
             <property value="AjaxConnector" name="name"/>
             <property value="http://${ajax.serverUrl.host}:${ajax.serverUrl.port}/${ajax.serverUrl.path}" name="serverUrl"/>
             <property value="${app.home}/docroot" name="resourceBase"/>
             <property name="disableReplyTo"/>
-            <property value="2" name="auxiliary;index"/>
             <property name="logLevel"/>
             <property name="refsThreshold"/>
             <property value="true" name="jsonCommented"/>
-            <property value="2" name="auxiliary;index"/>
-            <property value="2" name="auxiliary;index"/>
             <property name="timeout"/>
             <property name="interval"/>
             <property name="maxInterval"/>
             <property name="multiFrameInterval"/>
-            <property value="2" name="auxiliary;index"/>
-            <property value="2" name="auxiliary;index"/>
-            <property value="2" name="auxiliary;index"/>
-            <property value="2" name="auxiliary;index"/>
-            <property value="2" name="auxiliary;index"/>
-            <property value="2" name="auxiliary;index"/>
-            <property value="2" name="auxiliary;index"/>
-            <property value="2" name="auxiliary;index"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="jtaDemo-interface-airport-map-publish-flow" entity-id="5a9d435f-8e1c-486d-a96f-f039b6d69f53">
+    <flow SubFlow="false" name="jtaDemo-interface-airport-map-publish-flow">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
-            <property value="3" name="auxiliary;index"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-            <property value="3" name="auxiliary;index"/>
-            <property value="3" name="auxiliary;index"/>
-            <property value="3" name="auxiliary;index"/>
         </properties>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#1">
-            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="TraxAggregator" entity-id="Java#1">
+        <lane hadOnlyOneElement="false" entity-id="abf70073-cf88-45bb-b4ba-e498f974d3dd">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="TraxAggregator" entity-id="572089c4-c34f-4795-841b-94580675f4bd">
                 <properties>
-                    <property value="4" name="auxiliary;index"/>
-                    <property value="4" name="auxiliary;index"/>
-                    <property value="4" name="auxiliary;index"/>
                     <property name="class"/>
-                    <property value="4" name="auxiliary;index"/>
-                    <property value="4" name="auxiliary;index"/>
-                    <property value="4" name="auxiliary;index"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property value="org.jasper.jtaDemo.cat010Webview.util.JasperTraxAggregatorSvgOutput" name="class"/>
-                        <property value="5" name="auxiliary;wrapIn"/>
-                        <property value="5" name="auxiliary;index"/>
                     </property-collection>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" name="Object to JSON" entity-id="Object to JSON#1">
+            <pattern type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" name="Object to JSON" entity-id="d8b9b872-9f76-496b-bf2e-ec1371daafd4">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
-                    <property value="6" name="auxiliary;index"/>
                     <property name="mimeType"/>
-                    <property value="6" name="auxiliary;index"/>
-                    <property value="6" name="auxiliary;index"/>
                     <property name="mapper-ref"/>
                     <property name="sourceClass"/>
-                    <property value="6" name="auxiliary;index"/>
-                    <property value="6" name="auxiliary;index"/>
-                    <property value="6" name="auxiliary;index"/>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="Ajax WebView Trax" entity-id="Ajax#2">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="Ajax WebView Trax" entity-id="3c06267b-c7e5-4919-86f6-c54aacc00a65">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="/webview/svgtrax" name="channel"/>
-                    <property value="7" name="auxiliary;index"/>
-                    <property value="7" name="auxiliary;index"/>
                     <property name="businessEventsLabel"/>
                     <property name="tracking:enable-default-events"/>
-                    <property value="7" name="auxiliary;index"/>
                     <property name="responseTimeout"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
@@ -89,105 +57,74 @@
                     <property name="address"/>
                     <property name="cacheMessages"/>
                     <property name="messageCacheSize"/>
-                    <property value="7" name="auxiliary;index"/>
-                    <property value="7" name="auxiliary;index"/>
                     <property value="AjaxConnector" name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
-                    <property value="7" name="auxiliary;index"/>
-                    <property value="7" name="auxiliary;index"/>
-                    <property value="7" name="auxiliary;index"/>
                 </properties>
             </endpoint>
         </lane>
     </flow>
-    <flow SubFlow="false" name="jtaDemo-interface-airport-map-cat010-flow" entity-id="ebfed700-113d-4da3-979e-fe9315980e69">
+    <flow SubFlow="false" name="jtaDemo-interface-airport-map-cat010-flow">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
-            <property value="8" name="auxiliary;index"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-            <property value="8" name="auxiliary;index"/>
-            <property value="8" name="auxiliary;index"/>
-            <property value="8" name="auxiliary;index"/>
         </properties>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
-            <unknown index="9" description="false" entity-id="unknown#1">
+        <lane hadOnlyOneElement="false" entity-id="6229dc7a-99a3-401b-9671-71cde0645564">
+            <unknown entity-id="7a4c94dc-8a87-4478-9f3b-1c15d3f4f743">
                 <content>&lt;jasperengine:inbound-endpoint xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; topic=&quot;jms.jasper.1.0.cat010.topic.tr&quot; connector-ref=&quot;JEC&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;JECEndpoint&quot;/&gt;</content>
             </unknown>
-            <pattern type="http://www.mulesoft.org/schema/mule/jms/jmsmessage-to-object-transformer" name="JEC msg to Cat010TargetReport" entity-id="JmsMessage to Object#1">
+            <pattern type="http://www.mulesoft.org/schema/mule/jms/jmsmessage-to-object-transformer" name="JEC msg to Cat010TargetReport" entity-id="7bf9449e-f6fe-40cb-b888-74c79c722042">
                 <properties>
                     <property value="org.jasper.jLib.cat010.codec.Cat010TargetReport" name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
-                    <property value="10" name="auxiliary;index"/>
                     <property name="mimeType"/>
-                    <property value="10" name="auxiliary;index"/>
-                    <property value="10" name="auxiliary;index"/>
-                    <property value="10" name="auxiliary;index"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Flow Reference" entity-id="Flow Reference#1">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Flow Reference" entity-id="68ce973c-b660-455f-ba34-74d60c5a1c37">
                 <properties>
                     <property value="jtaDemo-interface-airport-map-publish-flow" name="name"/>
-                    <property value="11" name="auxiliary;index"/>
-                    <property value="11" name="auxiliary;index"/>
-                    <property value="11" name="auxiliary;index"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="jtaDemo-interface-airport-map-trax-flow" entity-id="0dff2242-4ada-42fa-8b8a-df44a55b7ebb">
+    <flow SubFlow="false" name="jtaDemo-interface-airport-map-trax-flow">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
-            <property value="12" name="auxiliary;index"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-            <property value="12" name="auxiliary;index"/>
-            <property value="12" name="auxiliary;index"/>
-            <property value="12" name="auxiliary;index"/>
         </properties>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#3">
-            <unknown index="13" description="false" entity-id="unknown#2">
+        <lane hadOnlyOneElement="false" entity-id="12c14b8d-b1bf-4dae-9d4c-ea418f8040f6">
+            <unknown entity-id="bb2ad818-f9b7-4363-b342-8f0f608ac7e7">
                 <content>&lt;jasperengine:inbound-endpoint xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; topic=&quot;jms.jasper.1.0.webview.topic.trax&quot; connector-ref=&quot;JEC&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;JECEndpoint&quot;/&gt;</content>
             </unknown>
-            <pattern type="http://www.mulesoft.org/schema/mule/jms/jmsmessage-to-object-transformer" name="JEC msg to WebViewTrax" entity-id="JmsMessage to Object#2">
+            <pattern type="http://www.mulesoft.org/schema/mule/jms/jmsmessage-to-object-transformer" name="JEC msg to WebViewTrax" entity-id="37de74b2-0060-4e57-987b-01829be5feb7">
                 <properties>
                     <property value="org.jasper.jLib.webview.trax.decoder.WebViewTrax" name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
-                    <property value="14" name="auxiliary;index"/>
                     <property name="mimeType"/>
-                    <property value="14" name="auxiliary;index"/>
-                    <property value="14" name="auxiliary;index"/>
-                    <property value="14" name="auxiliary;index"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Flow Reference" entity-id="Flow Reference#2">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Flow Reference" entity-id="9127cdef-fde7-42f7-a6c7-f741d937e95e">
                 <properties>
                     <property value="jtaDemo-interface-airport-map-publish-flow" name="name"/>
-                    <property value="15" name="auxiliary;index"/>
-                    <property value="15" name="auxiliary;index"/>
-                    <property value="15" name="auxiliary;index"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="jtaDemo-interface-airport-map-quartz-flow" entity-id="77f43515-cfcc-43df-b2b4-31cb816fe1c5">
+    <flow SubFlow="false" name="jtaDemo-interface-airport-map-quartz-flow">
         <properties>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
-            <property value="16" name="auxiliary;index"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-            <property value="16" name="auxiliary;index"/>
-            <property value="16" name="auxiliary;index"/>
-            <property value="16" name="auxiliary;index"/>
         </properties>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#4">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" name="Quartz" entity-id="Quartz#1">
+        <lane hadOnlyOneElement="false" entity-id="91d5e607-bf13-41e5-870b-b1b9ea8ed6ae">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" name="Quartz" entity-id="d6e1ef0e-6663-4669-a4ed-265e3a010654">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="eventTimer" name="jobName"/>
@@ -195,41 +132,26 @@
                     <property value="10000" name="repeatInterval"/>
                     <property name="repeatCount"/>
                     <property value="5" name="startDelay"/>
-                    <property value="17" name="auxiliary;index"/>
-                    <property value="17" name="auxiliary;index"/>
                     <property name="businessEventsLabel"/>
                     <property name="tracking:enable-default-events"/>
-                    <property value="17" name="auxiliary;index"/>
                     <property name="address"/>
                     <property value="10000" name="responseTimeout"/>
                     <property name="encoding"/>
                     <property name="disableTransportTransformer"/>
                     <property name="mimeType"/>
-                    <property value="17" name="auxiliary;index"/>
-                    <property value="17" name="auxiliary;index"/>
                     <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
-                    <property value="17" name="auxiliary;index"/>
-                    <property value="17" name="auxiliary;index"/>
-                    <property value="17" name="auxiliary;index"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/event-generator-job;0">
-                        <property value="18" name="auxiliary;wrapIn"/>
-                        <property value="18" name="auxiliary;index"/>
                         <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/payload;1">
                             <property value="tick-tock" name="text"/>
-                            <property value="19" name="auxiliary;wrapIn"/>
-                            <property value="19" name="auxiliary;index"/>
                         </property-collection>
                     </property-collection>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Flow Reference" entity-id="Flow Reference#3">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Flow Reference" entity-id="1dcc2aba-666a-4172-846c-cf03bdaaed50">
                 <properties>
                     <property value="jtaDemo-interface-airport-map-publish-flow" name="name"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property value="20" name="auxiliary;index"/>
-                    <property value="20" name="auxiliary;index"/>
                 </properties>
             </pattern>
         </lane>

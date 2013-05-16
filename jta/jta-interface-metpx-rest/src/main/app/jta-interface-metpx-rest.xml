@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 http://www.mulesoft.org/schema/mule/amqp http://www.mulesoft.org/schema/mule/amqp/3.1/mule-amqp.xsd 
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
 http://www.mulesoft.org/schema/mule/jasperengine http://www.mulesoft.org/schema/mule/jasperengine/current/mule-jasperengine.xsd ">
-    <jasperengine:connector name="JEC" vendor="jasper" appName="jta-interface-metpx-rest" version="1.1" jasperEngineURL="${jasperEngineURL}" doc:name="Jasper Connector"/>
+    <jasperengine:connector name="JEC" vendor="jasper" appName="jta-interface-metpx-rest" version="2.0" jasperEngineURL="${jasperEngineURL}" doc:name="Jasper Connector"/>
     <http:endpoint host="${rest.http.endpoint.host}" port="${rest.http.endpoint.port}" path="${rest.http.endpoint.path}" name="globalHttpEndpoint" doc:name="HTTP"/>
     <flow name="jta-interface-metpx-rest" doc:name="jta-interface-metpx-rest">
         <jasperengine:inbound-endpoint topic="jms.jasper.1.0.metpx.topic" connector-ref="JEC" doc:name="JECEndpoint"/>

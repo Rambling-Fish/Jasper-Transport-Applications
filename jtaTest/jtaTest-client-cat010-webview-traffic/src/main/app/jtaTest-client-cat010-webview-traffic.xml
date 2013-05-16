@@ -7,7 +7,7 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
 http://www.mulesoft.org/schema/mule/jasperengine http://www.mulesoft.org/schema/mule/jasperengine/current/mule-jasperengine.xsd ">
-    <jasperengine:connector name="JEC" vendor="jasper" appName="jtaTest-client-cat010-webview-traffic" version="1.1" jasperEngineURL="${jasperEngineURL}" doc:name="Jasper Connector"/>
+    <jasperengine:connector name="JEC" vendor="jasper" appName="jtaTest-client-cat010-webview-traffic" version="2.0" jasperEngineURL="${jasperEngineURL}" doc:name="Jasper Connector"/>
     <ajax:connector name="AjaxConnector" serverUrl="http://${ajax.serverUrl.host}:${ajax.serverUrl.port}/${ajax.serverUrl.path}" resourceBase="${app.home}/docroot" jsonCommented="true" doc:name="AjaxGlobalConnector"/>
     <flow name="jtaTest-client-cat010-webview-traffic-stats-flow" doc:name="jtaTest-client-cat010-webview-traffic-stats-flow">
         <quartz:inbound-endpoint jobName="eventTimer0" repeatInterval="507" startDelay="1" responseTimeout="10000" doc:name="Quartz">

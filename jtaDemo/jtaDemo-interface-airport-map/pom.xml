@@ -5,25 +5,25 @@
     <parent>
         <groupId>org.jasper.jtaDemo</groupId>
         <artifactId>jtaDemo-parent</artifactId>
-        <version>1.1</version>
+        <version>2.0</version>
     </parent>
     <groupId>org.jasper.jtaDemo</groupId>
     <artifactId>jtaDemo-interface-airport-map</artifactId>
     <packaging>mule</packaging>
     <name>jtaDemo-interface-airport-map</name>
-    <version>1.1</version>
+    <version>2.0</version>
     <description></description>
 
     <dependencies>
         <dependency>
             <groupId>org.jasper.jLib</groupId>
             <artifactId>jLib-webview-codec</artifactId>
-            <version>1.1</version>
+            <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>org.jasper.jLib</groupId>
             <artifactId>jLib-cat010-codec</artifactId>
-            <version>1.1</version>
+            <version>2.0</version>
         </dependency>
     </dependencies>
 </project>
