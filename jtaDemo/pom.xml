@@ -99,6 +99,9 @@
         <module>jtaDemo-client-helicopters</module>
         <module>jtaDemo-interface-airport-map</module>
         <module>jtaDemo-heart-rate-monitor-A</module>
+        <module>jtaDemo-blood-pressure-monitor-B</module>
+        <module>jtaDemo-EMR-C</module>
+        <module>jtaDemo-heart-rate-monitor-D</module>
     </modules>
     
 </project>

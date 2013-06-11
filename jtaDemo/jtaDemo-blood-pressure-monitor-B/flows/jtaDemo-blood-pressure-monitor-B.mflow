@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-app-webview-rest-interface">
+    <global-unknown unknownName="JEC" entity-id="573eed1c-7e58-410a-acd8-783285c36ec1">
+        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-blood-pressure-monitor-B&quot; version=&quot;2.0&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
+    </global-unknown>
+    <global-element type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="25070349-541c-4754-8cdd-466d786c5487">
+        <properties>
+            <property name="exchange-pattern"/>
+            <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+            <property name="httpLabel"/>
+            <property value="0.0.0.0" name="host"/>
+            <property value="8081" name="port"/>
+            <property value="jasper/HR" name="path"/>
+            <property name="method"/>
+            <property value="globalHttpEndpoint" name="name"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="address"/>
+            <property name="encoding"/>
+            <property name="disableTransportTransformer"/>
+            <property name="mimeType"/>
+            <property name="responseTimeout"/>
+            <property name="followRedirects"/>
+            <property name="connector-ref"/>
+            <property name="ref"/>
+            <property name="transformer-refs"/>
+            <property name="responseTransformer-refs"/>
+            <property name="user"/>
+            <property name="password"/>
+            <property name="contentType"/>
+            <property name="keep-alive"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="jtaDemo-client-aircrafts-flow">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="49c67227-d86a-4e28-9e77-c34d71eda090">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" name="Quartz" entity-id="a4265947-f407-4b3e-83fd-1cd098da99c7">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="eventTimer" name="jobName"/>
+                    <property name="cronExpression"/>
+                    <property value="1000" name="repeatInterval"/>
+                    <property name="repeatCount"/>
+                    <property value="1" name="startDelay"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/event-generator-job;0">
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/payload;1">
+                            <property value="tick-tock" name="text"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="HR_Generator" entity-id="f57de394-00bb-41cc-bf3a-3a9612fc0794">
+                <properties>
+                    <property name="class"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property value="org.jasper.jtaDemo.BloodPressureB.HeartRateMonitorAGenerator" name="class"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="LocalCache" entity-id="94b284da-a7a1-4c7e-bda8-3d62b8e5ae85">
+                <properties>
+                    <property name="class"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property value="org.jasper.jtaDemo.BloodPressureB.LocalCache" name="class"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow1">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="d267c8fd-813f-4dca-915c-c925928756de">
+            <unknown entity-id="0c449c70-5f04-472e-8e5a-8cc8c1624454">
+                <content>&lt;jasperengine:inbound-endpoint xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; connector-ref=&quot;JEC&quot; exchange-pattern=&quot;request-response&quot; uri=&quot;${uri}&quot; queue=&quot;jms.jasper.jtaDemo-blood-pressure-monitor-B.1.0.jasperLab.0.queue&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;HRD&quot;/&gt;</content>
+            </unknown>
+            <response entity-id="62277aaf-810f-4b6f-afe2-ab4ffacc3e3b">
+                <compartment entity-id="bf974b5d-700c-456f-ae8f-5983a68aa1fe">
+                    <lane hadOnlyOneElement="false" entity-id="7130e077-4f2f-4463-805b-22127469534b">
+                        <pattern type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" name="Object to JSON" entity-id="4f1c1dfe-feae-45e5-a46f-60c1f7318012">
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property name="mapper-ref"/>
+<property name="sourceClass"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </response>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="LocalCache" entity-id="5f0b44bb-ece3-4d71-a51f-236624794ee4">
+                <properties>
+                    <property name="class"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property value="org.jasper.jtaDemo.BloodPressureB.LocalCache" name="class"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>
