@@ -14,7 +14,7 @@ public class LocalCache {
 			if(!(new File(filename)).exists()){
 				String workingDir = System.getProperty("user.dir");
 				workingDir = workingDir.substring(0, workingDir.length()-"bin/".length());
-				workingDir += "/apps/jtaDemo-heart-rate-monitor-A-2.0-static-payload/classes/hrData.json";
+				workingDir += "/apps/jtaDemo-heart-rate-monitor-A-static-payload-2.0/classes/hrData.json";
 				filename =  workingDir;
 			}
 			BufferedReader br = new BufferedReader(new FileReader(filename));
