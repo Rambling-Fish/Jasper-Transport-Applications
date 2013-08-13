@@ -20,7 +20,7 @@ public class HeartRateData {
 		this.bpm = bpm;
 	}
 	public String getTimestamp() {
-		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSS zzz"); 
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSSZ"); 
 		return dt.format(timestamp);
 	}
 	public void setTimestamp(Date timestamp) {
