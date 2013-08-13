@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-app-webview-rest-interface">
+    <global-unknown unknownName="JEC" entity-id="b1b68626-2b20-4e25-83b7-e1116e413cd5">
+        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-heart-rate-monitor-A&quot; version=&quot;2.0&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
+    </global-unknown>
+    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow1">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="1abf3b3f-edd4-4822-966c-535dc61eeb12">
+            <unknown entity-id="cb5345a5-9a51-40e8-a215-370d9c236458">
+                <content>&lt;jasperengine:inbound-endpoint xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; connector-ref=&quot;JEC&quot; exchange-pattern=&quot;request-response&quot; uri=&quot;${uri}&quot; queue=&quot;jms.jasper.jtaDemo-heart-rate-monitor-A.1.0.jasperLab.0.queue&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;HRD&quot;/&gt;</content>
+            </unknown>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="LocalCache" entity-id="ff2366de-3050-476e-8c74-4d023b633b4e">
+                <properties>
+                    <property name="class"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property value="org.jasper.jtaDemo.HeartRateMonitorA.LocalCache" name="class"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

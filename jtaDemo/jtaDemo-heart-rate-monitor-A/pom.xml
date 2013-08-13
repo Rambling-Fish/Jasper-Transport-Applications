@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.jasper.jtaDemo</groupId>
         <artifactId>jtaDemo-parent</artifactId>
-        <version>1.1</version>
+        <version>2.0</version>
     </parent>
     <groupId>org.jasper.jtaDemo</groupId>
     <artifactId>jtaDemo-heart-rate-monitor-A</artifactId>
     <packaging>mule</packaging>
     <name>jtaDemo-heart-rate-monitor-A</name>
-    <version>1.0</version>
+    <version>2.0</version>
     <description></description>
 
     <dependencies>

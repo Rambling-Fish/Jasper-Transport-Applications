@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:jasperengine="http://www.mulesoft.org/schema/mule/jasperengine" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.3.0" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/quartz/current/mule-quartz.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd 
+http://www.mulesoft.org/schema/mule/jasperengine http://www.mulesoft.org/schema/mule/jasperengine/current/mule-jasperengine.xsd ">
+    <jasperengine:connector name="JEC" vendor="jasper" appName="jtaDemo-EMR-C" version="2.0" jasperEngineURL="${jasperEngineURL}" doc:name="Jasper Connector"></jasperengine:connector>
+    <http:endpoint host="0.0.0.0" port="8081" path="jasper/HR" name="globalHttpEndpoint" doc:name="HTTP"/>
+    <flow name="jtaDemo-client-aircrafts-flow" doc:name="jtaDemo-client-aircrafts-flow">
+        <quartz:inbound-endpoint jobName="eventTimer" repeatInterval="1000" startDelay="1" responseTimeout="10000" doc:name="Quartz">
+            <quartz:event-generator-job>
+                <quartz:payload>tick-tock</quartz:payload>
+            </quartz:event-generator-job>
+        </quartz:inbound-endpoint>
+        <component doc:name="HR_Generator">
+            <singleton-object class="org.jasper.jtaDemo.EMRC.HeartRateMonitorAGenerator"/>
+        </component>
+        <component doc:name="LocalCache">
+            <singleton-object class="org.jasper.jtaDemo.EMRC.LocalCache"/>
+        </component>
+    </flow>
+    <flow name="mule-app-webview-rest-interfaceFlow1" doc:name="mule-app-webview-rest-interfaceFlow1">
+        <jasperengine:inbound-endpoint connector-ref="JEC" exchange-pattern="request-response" uri="${uri}" queue="jms.jasper.jtaDemo-EMR-C.1.0.jasperLab.0.queue" doc:name="HRD"></jasperengine:inbound-endpoint>
+        <response>
+            <json:object-to-json-transformer doc:name="Object to JSON"/>
+        </response>
+        <component doc:name="LocalCache">
+            <singleton-object class="org.jasper.jtaDemo.EMRC.LocalCache"/>
+        </component>
+    </flow>
+</mule>

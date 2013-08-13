@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.jasper</groupId>
         <artifactId>jasper-transport-applications</artifactId>
-        <version>1.1</version>
+        <version>2.0</version>
     </parent>
     <groupId>org.jasper.jtaDemo</groupId>
     <artifactId>jtaDemo-parent</artifactId>
     <packaging>pom</packaging>
     <name>jtaDemo-parent</name>
-    <version>1.1</version>
+    <version>2.0</version>
     <description></description>
 
     <properties>
@@ -99,6 +99,10 @@
         <module>jtaDemo-client-helicopters</module>
         <module>jtaDemo-interface-airport-map</module>
         <module>jtaDemo-heart-rate-monitor-A</module>
+        <module>jtaDemo-heart-rate-monitor-A-static-payload</module>
+        <module>jtaDemo-blood-pressure-monitor-B</module>
+        <module>jtaDemo-EMR-C</module>
+        <module>jtaDemo-heart-rate-monitor-D</module>
     </modules>
     
 </project>

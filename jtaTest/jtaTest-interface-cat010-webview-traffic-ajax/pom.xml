@@ -5,25 +5,25 @@
     <parent>
         <groupId>org.jasper.jtaTest</groupId>
         <artifactId>jtaTest-parent</artifactId>
-        <version>1.1</version>
+        <version>2.0</version>
     </parent>
     <groupId>org.jasper.jtaTest</groupId>
     <artifactId>jtaTest-interface-cat010-webview-traffic-ajax</artifactId>
     <packaging>mule</packaging>
     <name>jtaTest-interface-cat010-webview-traffic-ajax</name>
-    <version>1.1</version>
+    <version>2.0</version>
     <description></description>
 
     <dependencies>
         <dependency>
             <groupId>org.jasper.jLib</groupId>
             <artifactId>jLib-webview-codec</artifactId>
-            <version>1.1</version>
+            <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>org.jasper.jLib</groupId>
             <artifactId>jLib-cat010-codec</artifactId>
-            <version>1.1</version>
+            <version>2.0</version>
         </dependency>
     </dependencies>
 </project>
