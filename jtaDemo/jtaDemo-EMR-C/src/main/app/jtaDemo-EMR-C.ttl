@@ -1,0 +1,16 @@
+@prefix :      <http://coralcea.ca/jasper/vocabulary/> .
+@prefix jtaC:  <http://coralcea.ca/jasper/jtaC> .
+@prefix jta:   <http://coralcea.ca/jasper/jta/> .
+@prefix ward: <http://coralcea.ca/jasper/ward> .
+@prefix bed: <http://coralcea.ca/jasper/bed> .
+@prefix jasper: <http://coralcea.ca/jasper/> .
+@prefix patientID: <http://coralcea.ca/jasper/patient/id> .
+@prefix patient: <http://coralcea.ca/jasper/patient> .
+
+:jtaC   :is        :jta ;
+        :param     :patientID ;
+        :provides  :bed, :ward, :hrSID, :bpSID ;
+        :queue     :jms.jasper.jtaDemo-EMR-C.1.0.jasperLab.0.queue .
+
+:patient  :has        :ward , :patientID, :bed ;
+        :subClassOf  :msData .
