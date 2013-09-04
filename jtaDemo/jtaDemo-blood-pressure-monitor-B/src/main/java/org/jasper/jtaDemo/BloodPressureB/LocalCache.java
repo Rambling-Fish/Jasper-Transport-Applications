@@ -1,76 +1,80 @@
 package org.jasper.jtaDemo.BloodPressureB;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.codehaus.jackson.annotate.JsonProperty;
 
 public class LocalCache {
-	private static Ward ward = new Ward("Wing-5-Floor-3-Ward-4");
-	
-	public static void addPatientInfo(Patient p){
-		ward.addPatientHeartRateData(p);
-	}
-	
-	public static Ward getWard(String[] req){
-		return getWard(req[0]);
-	}
 
-	public static Ward getWard(String str){
-		return ward;
+	static SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSS zzz"); 
+	
+	private static final String BP_DATA_URI = "http://coralcea.ca/jasper/medicalSensor/bloodPressure/data";
+	private static final String BP_SYS_URI = "http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/systolic";
+	private static final String BP_DIA_URI = "http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/diastolic";
+	private static final String TIMESTAMP_URI = "http://coralcea.ca/jasper/timeStamp";
+	private static final String BP_SID_URI = "http://coralcea.ca/jasper/bpSID";
+	
+	public class BpData{
+		
+		@JsonProperty(value=BP_SYS_URI)
+		private int sys;
+		
+		@JsonProperty(value=BP_DIA_URI)
+		private int dia;
+
+		@JsonProperty(value=TIMESTAMP_URI)
+		private String timestamp;
+
+		public BpData(int systolic, int diastolic) {
+			super();
+			this.sys = systolic;
+			this.dia = diastolic;
+			timestamp = dt.format(new Date());
+		}
 	}
 	
-	public static String getWard(HashMap<String,String> map){
+	public class SensorData{
+		@JsonProperty(value=BP_DATA_URI)
+		private BpData[] bpData;
+		
+		public SensorData(BpData[] data){
+			this.bpData = data;
+		}
+	}
+	
+	private Map<String, ArrayList<BpData>> bpSensors = new ConcurrentHashMap<String, ArrayList<BpData>>();
+	
+	public SensorData getSensorData(Map<String,Serializable>  map){
 		int MAX_S = 145;
 		int MIN_S = 70;
 		int MAX_D = 90;
 		int MIN_D = 50;
-		int s1 = MIN_S + (int)(Math.random() * ((MAX_S - MIN_S) + 1));
-		int s2 = MIN_S + (int)(Math.random() * ((MAX_S - MIN_S) + 1));
-		int d1 = MIN_D + (int)(Math.random() * ((MAX_D - MIN_D) + 1));
-		int d2 = MIN_D + (int)(Math.random() * ((MAX_D - MIN_D) + 1));
+		int s = MIN_S + (int)(Math.random() * ((MAX_S - MIN_S) + 1));
+		int d = MIN_D + (int)(Math.random() * ((MAX_D - MIN_D) + 1));
 		
-		
-		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSS zzz"); 
-		Date t1 = new Date();
-		t1.setTime(t1.getTime()-5000);
-		String timeStamp1 =  dt.format(t1);
-		String timeStamp2 =  dt.format(new Date());
-		
-		System.out.println("map : " + map);
-		
-		
-		if(map.get("http://coralcea.ca/jasper/medicalSensor/bloodPressure/sensorId").equals("bp1")){
-			return  "{    \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/data\": [" +
-			"        {" +
-			"            \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/systolic\": " + s2 +  ", " +
-			"            \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/diastolic\":" + d2 +  "," +
-			"            \"http://coralcea.ca/jasper/timeStamp\": \"" + timeStamp2 +"\"" +
-			"        }, " +
-			"        {" +
-			"            \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/systolic\": " + s1 +  ", " +
-			"            \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/diastolic\":" + d1 +  "," +
-			"            \"http://coralcea.ca/jasper/timeStamp\": \"" + timeStamp1 +"\"" +
-			"        }" +
-			"    ], " +
-			"    \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/sensorId\": \"bp1\"" +
-			"}";	
-		}else if(map.get("http://coralcea.ca/jasper/medicalSensor/bloodPressure/sensorId").equals("bp3")){
-			return  "{    \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/data\": [" +
-			"        {" +
-			"            \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/systolic\": " + s2 +  ", " +
-			"            \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/diastolic\":" + d2 +  "," +
-			"            \"http://coralcea.ca/jasper/timeStamp\": \"" + timeStamp2 +"\"" +
-			"        }, " +
-			"        {" +
-			"            \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/systolic\": " + s1 +  ", " +
-			"            \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/diastolic\":" + d1 +  "," +
-			"            \"http://coralcea.ca/jasper/timeStamp\": \"" + timeStamp1 +"\"" +
-			"        }" +
-			"    ], " +
-			"    \"http://coralcea.ca/jasper/medicalSensor/bloodPressure/sensorId\": \"bp2\"" +
-			"}";	
-		}else {
-			return "{}";
+		if(map.get(BP_SID_URI) == null || !(map.get(BP_SID_URI) instanceof String)){
+			return null;
 		}
+		
+		String bpSID = (String)map.get(BP_SID_URI);
+		
+		ArrayList<BpData> bpData = bpSensors.get(bpSID);
+		
+		if(bpData == null){
+			bpData = new ArrayList<BpData>();
+			bpSensors.put(bpSID, bpData);
+		}
+		if(bpData.size()>10){
+			bpData.remove(0);
+		}
+		
+		bpData.add(new BpData(s,d));
+		
+		return new SensorData(bpData.toArray(new BpData[]{}));	
 	}
 }

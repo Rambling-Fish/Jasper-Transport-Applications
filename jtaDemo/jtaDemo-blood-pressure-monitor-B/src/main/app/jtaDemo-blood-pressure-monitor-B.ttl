@@ -1,19 +1,10 @@
 @prefix :      <http://coralcea.ca/jasper/vocabulary/> .
-@prefix jtaB:  <http://coralcea.ca/jasper/jtaB> .
-@prefix jta:   <http://coralcea.ca/jasper/jta/> .
-@prefix timeStamp: <http://coralcea.ca/jasper/timeStamp> .
-@prefix ms:    <http://coralcea.ca/jasper/medicalSensor/> .
-@prefix bpData: <http://coralcea.ca/jasper/medicalSensor/bloodPresure/data> .
 @prefix jasper: <http://coralcea.ca/jasper/> .
-@prefix bpDataDia: <http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/diastolic> .
-@prefix bpDataSys: <http://coralcea.ca/jasper/medicalSensor/bloodPressure/data/systolic> .
-@prefix hrSID: <http://coralcea.ca/jasper/medicalSensor/heartRate/sensorId> .
-@prefix msData: <http://coralcea.ca/jasper/medicalSensor/data> .
 
-:jtaB   :is        :jta ;
-        :param     :hrSID ;
-        :provides  :bpData ;
-        :queue     :jms.jasper.jtaDemo-blood-pressure-monitor-B.1.0.jasperLab.0.queue .
+jasper:jtaB  :is        :jta ;
+             :param     jasper:bpSID ;
+             :provides  jasper:bpData ;
+             :queue     "jms.jasper.jtaDemo-blood-pressure-monitor-B.1.0.jasperLab.0.queue" .
 
-:hrData  :has        :timeStamp , :bpDataDia, :bpDataSys ;
-        :subClassOf  :msData .
+jasper:bpData :has :timeStamp , jasper:bpDataDia, jasper:bpDataSys ;
+              :subClassOf jasper:msData .

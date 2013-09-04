@@ -3,6 +3,7 @@ package org.jasper.jtaDemo.HeartRateMonitorA;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Map;
 
 public class LocalCache {
 	
@@ -32,6 +33,11 @@ public class LocalCache {
 			e.printStackTrace();
 		}
 		wardInfo = tmp;
+	}
+	
+	public static String getWard(Map req){
+		System.out.print("recieved request at " + System.nanoTime());
+		return wardInfo;
 	}
 	
 	public static String getWard(String[] req){
