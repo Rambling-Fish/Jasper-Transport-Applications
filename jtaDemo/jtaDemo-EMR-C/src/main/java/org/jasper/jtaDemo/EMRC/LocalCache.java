@@ -10,8 +10,8 @@ public class LocalCache {
 	static{
 		Map<String, PatientInfo> aMap = new HashMap<String, PatientInfo>();
 		aMap.put("001", new PatientInfo("001", "ICU-3", "1", "hr1", "bp1"));	
-		aMap.put("002", new PatientInfo("002", "ICU-3", "3", "hr2", null));	
-		aMap.put("003", new PatientInfo("004", "ICU-3", "4", null, "bp3"));	
+		aMap.put("002", new PatientInfo("002", "ICU-3", "2", "hr2", null));	
+		aMap.put("003", new PatientInfo("003", "ICU-3", "3", null, "bp3"));	
 		PATIENTS = Collections.unmodifiableMap(aMap);
 	}
 	
