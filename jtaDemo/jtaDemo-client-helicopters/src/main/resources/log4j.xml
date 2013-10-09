@@ -22,6 +22,9 @@
       <appender-ref ref="stdout"/>
       <appender-ref ref="jtaLogger"/>
    </logger>
+   <logger name="org.mule.transport.jms" additivity="false">
+      <level value="OFF"/>
+   </logger>
    <!-- default mule logging -->
    <root>
       <level value="WARN" />

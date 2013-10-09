@@ -7,7 +7,7 @@
       </layout>
    </appender>
    <appender name="jtaLogger" class="org.apache.log4j.RollingFileAppender">
-      <param name="File" value="../../../logs/jtaDemo-EMR-C.log"/>
+      <param name="File" value="../../../logs/jtaDemo-EMR-C-2.1.log"/>
       <param name="MaxFileSize" value="5MB"/>
       <!--  Keep 10 backup files then reuse -->
       <param name="MaxBackupIndex" value="10"/>
@@ -21,6 +21,9 @@
       <level value="WARN"/>
       <appender-ref ref="stdout"/>
       <appender-ref ref="jtaLogger"/>
+   </logger>
+  <logger name="org.mule.transport.jms" additivity="false">
+      <level value="OFF"/>
    </logger>
    <!-- default mule logging -->
    <root>
