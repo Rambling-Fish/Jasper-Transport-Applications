@@ -6,8 +6,8 @@
         <param name="ConversionPattern" value="%-5p %d [%t] %c %F - %m%n" />
       </layout>
    </appender>
-   <appender name="jtaLogger" class="org.apache.log4j.RollingFileAppender">
-      <param name="File" value="../../../logs/jtaDemo-blood-pressure-monitor-B-2.1.log"/>
+   <appender name="dtaLogger" class="org.apache.log4j.RollingFileAppender">
+      <param name="File" value="../../../logs/dtaDemo-blood-pressure-monitor-B-2.1.log"/>
       <param name="MaxFileSize" value="5MB"/>
       <!--  Keep 10 backup files then reuse -->
       <param name="MaxBackupIndex" value="10"/>
@@ -20,7 +20,7 @@
    <logger name="org.jasper" additivity="false">
       <level value="WARN"/>
       <appender-ref ref="stdout"/>
-      <appender-ref ref="jtaLogger"/>
+      <appender-ref ref="dtaLogger"/>
    </logger>
    <logger name="org.mule.transport.jms" additivity="false">
       <level value="OFF"/>
@@ -29,6 +29,6 @@
    <root>
       <level value="WARN" />
       <appender-ref ref="stdout" />
-      <appender-ref ref="jtaLogger" />
+      <appender-ref ref="dtaLogger" />
    </root>
 </log4j:configuration>
