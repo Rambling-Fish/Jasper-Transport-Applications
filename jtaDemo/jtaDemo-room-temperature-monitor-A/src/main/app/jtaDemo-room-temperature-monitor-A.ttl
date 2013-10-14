@@ -1,0 +1,8 @@
+@prefix :      <http://coralcea.ca/jasper/vocabulary/> .
+@prefix jasper: <http://coralcea.ca/jasper/> .
+
+jasper:jtaDemo-room-temperature-monitor-A  :is        :jta ;
+             :provides  jasper:roomTempData ;
+             :queue     "jms.jasper.jtaDemo-room-temperature-monitor-A.2.1.jasperLab.0.queue" .
+
+jasper:roomTempData :has :timeStamp , jasper:currentTemp .
