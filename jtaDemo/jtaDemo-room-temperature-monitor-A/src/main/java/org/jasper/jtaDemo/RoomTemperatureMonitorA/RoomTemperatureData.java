@@ -9,7 +9,7 @@ public class RoomTemperatureData {
 
 private static final SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSS zzz"); 
 	
-	private static final String ROOM_TEMP_URI = "http://coralcea.ca/jasper/environmentalSensor/temperature/temp";
+	private static final String ROOM_TEMP_URI = "http://coralcea.ca/jasper/environmentalSensor/roomTemperature";
 	private static final String TIMESTAMP_URI = "http://coralcea.ca/jasper/timeStamp";
 	
 	@JsonProperty(value=ROOM_TEMP_URI)
