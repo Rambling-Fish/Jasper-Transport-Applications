@@ -1,14 +1,10 @@
-package org.jasper.jtaDemo.RoomTemperatureMonitorA;
+package org.jasper.jtaDemo.RoomTemperatureMonitorE;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class LocalCache {
 	
-	
-//	private static final String ROOM_TEMP_URI = "http://coralcea.ca/jasper/roomTemperature";
 	private static final String ROOM_TEMP_URI = "http://coralcea.ca/jasper/environmentalSensor/roomTemperature";
 	private static final int DEFAULT_TEMP = 25;
 	private static RoomTemperatureData rmTempData = new RoomTemperatureData(DEFAULT_TEMP);

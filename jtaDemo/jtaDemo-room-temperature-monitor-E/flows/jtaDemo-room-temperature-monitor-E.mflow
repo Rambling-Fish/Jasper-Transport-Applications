@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="jtaDemo-room-temperature-monitor-A">
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="jtaDemo-room-temperature-monitor-E">
     <global-unknown description="false" unknownName="JEC" index="1" entity-id="global-unknown#1">
-        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-room-temperature-monitor-A&quot; version=&quot;2.1&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
+        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-room-temperature-monitor-E&quot; version=&quot;2.1&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
     </global-unknown>
-    <flow SubFlow="false" name="jtaDemo-room-temperature-monitor-AFlow1" entity-id="8944ced9-2626-4373-81c8-86e99b74e038">
+    <flow SubFlow="false" name="jtaDemo-room-temperature-monitor-EFlow1" entity-id="8944ced9-2626-4373-81c8-86e99b74e038">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -67,7 +67,7 @@
                     <property name="class"/>
                     <property name="auxiliary;index" value="6"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
-                        <property name="class" value="org.jasper.jtaDemo.RoomTemperatureMonitorA.LocalCache"/>
+                        <property name="class" value="org.jasper.jtaDemo.RoomTemperatureMonitorE.LocalCache"/>
                         <property name="auxiliary;index" value="7"/>
                         <property name="auxiliary;wrapIn" value="7"/>
                     </property-collection>
@@ -75,7 +75,7 @@
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="jtaDemo-room-temperature-monitor-AFlow2" entity-id="c8c05700-e510-497c-b54e-bcec01b979c1">
+    <flow SubFlow="false" name="jtaDemo-room-temperature-monitor-EFlow2" entity-id="c8c05700-e510-497c-b54e-bcec01b979c1">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -87,7 +87,7 @@
             <graphicalData x="0" y="0" width="0" height="0"/>
             <unknown description="false" index="9" entity-id="unknown#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
-                <content>&lt;jasperengine:inbound-endpoint xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; connector-ref=&quot;JEC&quot; exchange-pattern=&quot;request-response&quot; uri=&quot;${uri}&quot; queue=&quot;jms.jasper.jtaDemo-room-temperature-monitor-A.2.1.jasperLab.0.queue&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;RTD&quot;/&gt;</content>
+                <content>&lt;jasperengine:inbound-endpoint xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; connector-ref=&quot;JEC&quot; exchange-pattern=&quot;request-response&quot; uri=&quot;${uri}&quot; queue=&quot;jms.jasper.jtaDemo-room-temperature-monitor-E.2.1.jasperLab.0.queue&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;RTD&quot;/&gt;</content>
             </unknown>
             <response index="10" entity-id="response#2">
                 <compartment entity-id="compartment#2">
@@ -112,7 +112,7 @@
                     <property name="class"/>
                     <property name="auxiliary;index" value="12"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
-                        <property name="class" value="org.jasper.jtaDemo.RoomTemperatureMonitorA.LocalCache"/>
+                        <property name="class" value="org.jasper.jtaDemo.RoomTemperatureMonitorE.LocalCache"/>
                         <property name="auxiliary;index" value="13"/>
                         <property name="auxiliary;wrapIn" value="13"/>
                     </property-collection>

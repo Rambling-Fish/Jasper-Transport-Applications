@@ -8,9 +8,9 @@
         <version>2.0</version>
     </parent>
     <groupId>org.jasper.jtaDemo</groupId>
-    <artifactId>jtaDemo-room-temperature-monitor-A</artifactId>
+    <artifactId>jtaDemo-room-temperature-monitor-E</artifactId>
     <packaging>mule</packaging>
-    <name>jtaDemo-room-temperature-monitor-A</name>
+    <name>jtaDemo-room-temperature-monitor-E</name>
     <version>2.0</version>
     <description></description>
 

@@ -2,8 +2,8 @@
 @prefix jasper: <http://coralcea.ca/jasper/> .
 @prefix envSensor: <http://coralcea.ca/jasper/environmentalSensor/> .
 
-jasper:jtaDemo-room-temperature-monitor-A  :is        :jta ;
+jasper:jtaDemo-room-temperature-monitor-E  :is        :jta ;
              :provides  jasper:roomTempData ;
-             :queue     "jms.jasper.jtaDemo-room-temperature-monitor-A.2.1.jasperLab.0.queue" .
+             :queue     "jms.jasper.jtaDemo-room-temperature-monitor-E.2.1.jasperLab.0.queue" .
 
 jasper:roomTempData :has :timeStamp , envSensor:roomTemperature .
