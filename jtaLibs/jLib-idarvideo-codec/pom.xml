@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.jasper.jLib</groupId>
         <artifactId>jtaLib-parent</artifactId>
-        <version>2.0</version>
+        <version>2.1</version>
     </parent>
 	<groupId>org.jasper.jLib</groupId>
 	<artifactId>jLib-idarvideo-codec</artifactId>
 	<packaging>jar</packaging>
 	<name>jLib-idarvideo-codec</name>
-	<version>2.0</version>
+	<version>2.1</version>
 	<description></description>
 
     <properties>
