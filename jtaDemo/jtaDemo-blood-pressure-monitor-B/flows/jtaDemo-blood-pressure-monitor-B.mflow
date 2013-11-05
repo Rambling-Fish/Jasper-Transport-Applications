@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-app-webview-rest-interface">
     <global-unknown description="false" unknownName="JEC" index="1" entity-id="global-unknown#1">
-        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-blood-pressure-monitor-B&quot; version=&quot;2.0&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
+        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-blood-pressure-monitor-B&quot; version=&quot;2.1&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
     </global-unknown>
-    <flow SubFlow="false" name="jtaDemo-bpSensors-flow" entity-id="98807ef2-f5d9-4ffa-9120-08cab548b7f6">
+    <flow SubFlow="false" name="jtaDemo-bpSensors-flow" entity-id="5aae0d89-e914-40a0-9c2c-338d117f93ee">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>

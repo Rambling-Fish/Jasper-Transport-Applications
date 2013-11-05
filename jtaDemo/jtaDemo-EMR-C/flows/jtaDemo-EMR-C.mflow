@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-app-webview-rest-interface">
     <global-unknown description="false" unknownName="JEC" index="1" entity-id="global-unknown#1">
-        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-EMR-C&quot; version=&quot;2.0&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
+        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-EMR-C&quot; version=&quot;2.1&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
     </global-unknown>
-    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow1" entity-id="f7605913-d211-4a9a-a79d-9054eeaeec02">
+    <flow SubFlow="false" name="mule-app-webview-rest-interfaceFlow1" entity-id="4d74ea15-cfa2-44e3-b8ed-4e4329aa6426">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>

@@ -8,7 +8,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
 http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd 
 http://www.mulesoft.org/schema/mule/jasperengine http://www.mulesoft.org/schema/mule/jasperengine/current/mule-jasperengine.xsd ">
-    <jasperengine:connector name="JEC" vendor="jasper" appName="jtaDemo-blood-pressure-monitor-B" version="2.0" jasperEngineURL="${jasperEngineURL}" doc:name="Jasper Connector"></jasperengine:connector>
+    <jasperengine:connector name="JEC" vendor="jasper" appName="jtaDemo-blood-pressure-monitor-B" version="2.1" jasperEngineURL="${jasperEngineURL}" doc:name="Jasper Connector"></jasperengine:connector>
     <flow name="jtaDemo-bpSensors-flow" doc:name="jtaDemo-bpSensors-flow">
         <jasperengine:inbound-endpoint connector-ref="JEC" exchange-pattern="request-response" uri="${uri}" queue="jms.jasper.jtaDemo-blood-pressure-monitor-B.1.0.jasperLab.0.queue" doc:name="HRD"></jasperengine:inbound-endpoint>
         <response>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mule-app-webview-rest-interface">
     <global-unknown description="false" unknownName="JEC" index="1" entity-id="global-unknown#1">
-        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-heart-rate-monitor-D&quot; version=&quot;2.0&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
+        <content>&lt;jasperengine:connector xmlns:jasperengine=&quot;http://www.mulesoft.org/schema/mule/jasperengine&quot; name=&quot;JEC&quot; vendor=&quot;jasper&quot; appName=&quot;jtaDemo-heart-rate-monitor-D&quot; version=&quot;2.1&quot; jasperEngineURL=&quot;${jasperEngineURL}&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;Jasper Connector&quot;/&gt;</content>
     </global-unknown>
-    <flow SubFlow="false" name="jtaDemo-hrSensors-flow" entity-id="e64cb8d2-730a-4030-b416-67ae907cf64a">
+    <flow SubFlow="false" name="jtaDemo-hrSensors-flow" entity-id="8112cc4d-148c-444e-b09d-1a39d68b3be4">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
