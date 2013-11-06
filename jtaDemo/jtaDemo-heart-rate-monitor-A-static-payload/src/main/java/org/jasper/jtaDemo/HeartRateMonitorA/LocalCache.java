@@ -15,7 +15,7 @@ public class LocalCache {
 			if(!(new File(filename)).exists()){
 				String workingDir = System.getProperty("user.dir");
 				workingDir = workingDir.substring(0, workingDir.length()-"bin/".length());
-				workingDir += "/apps/jtaDemo-heart-rate-monitor-A-static-payload-2.0/classes/hrData.json";
+				workingDir += "/apps/jtaDemo-heart-rate-monitor-A-static-payload-2.1/classes/hrData.json";
 				filename =  workingDir;
 			}
 			BufferedReader br = new BufferedReader(new FileReader(filename));
@@ -36,17 +36,17 @@ public class LocalCache {
 	}
 	
 	public static String getWard(Map req){
-		System.out.print("recieved request at " + System.nanoTime());
+		System.out.print("received request at " + System.nanoTime());
 		return wardInfo;
 	}
 	
 	public static String getWard(String[] req){
-		System.out.print("recieved request at " + System.nanoTime());
+		System.out.print("received request at " + System.nanoTime());
 		return wardInfo;
 	}
 
 	public static String getWard(String str){
-		System.out.print("-recieved request at " + System.nanoTime());
+		System.out.print("received request at " + System.nanoTime());
 		return wardInfo;
 	}
 
