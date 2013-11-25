@@ -1,0 +1,10 @@
+@prefix :      <http://coralcea.ca/jasper/vocabulary/> .
+@prefix jasper: <http://coralcea.ca/jasper/> .
+
+jasper:jtaD  :is        :jta ;
+             :param     jasper:hrSID ;
+             :provides  jasper:hrData ;
+             :queue     "jms.jasper.demo-heart-rate-monitor-D.1.0.jasperLab.0.queue" .
+
+jasper:hrData :has :timeStamp , jasper:hrDataBpm ;
+              :subClassOf jasper:msData .

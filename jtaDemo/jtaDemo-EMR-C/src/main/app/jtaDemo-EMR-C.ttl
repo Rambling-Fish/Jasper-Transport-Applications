@@ -1,9 +1,0 @@
-@prefix :      <http://coralcea.ca/jasper/vocabulary/> .
-@prefix jasper: <http://coralcea.ca/jasper/> .
-
-:jtaC   :is        :jta ;
-        :param     jasper:patientID ;
-        :provides  jasper:bed, jasper:ward, jasper:hrSID, jasper:bpSID ;
-        :queue     "jms.jasper.jtaDemo-EMR-C.1.0.jasperLab.0.queue" .
-
-jasper:patient  :has  jasper:ward , jasper:patientID, jasper:bed .

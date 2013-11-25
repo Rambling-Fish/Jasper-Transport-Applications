@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
+    <jasper:config name="demo-heart-rate-monitor-D" vendor="jasper" application="demo-heart-rate-monitor-D" version="1.0" doc:name="Jasper"/>
+    <flow name="demo-heart-rate-monitor-flow" doc:name="demo-heart-rate-monitor-flow">
+        <jasper:receive-from-queue-send-response config-ref="demo-heart-rate-monitor-D" queue="jms.jasper.demo-heart-rate-monitor-D.1.0.jasperLab.0.queue" doc:name="demo-heart-rate-monitor-inbound-endpoint"/>
+        <component doc:name="LocalCache">
+            <singleton-object class="org.jasper.dtaDemo.HeartRateMonitorD.LocalCache"/>
+        </component>
+    </flow>
+</mule>

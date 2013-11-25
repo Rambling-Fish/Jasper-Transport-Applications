@@ -1,0 +1,13 @@
+@prefix :      <http://coralcea.ca/jasper/vocabulary/> .
+@prefix jtaA:  <http://coralcea.ca/jasper/jtaA> .
+@prefix jta:   <http://coralcea.ca/jasper/jta/> .
+@prefix timeStamp: <http://coralcea.ca/jasper/timeStamp> .
+@prefix ms:    <http://coralcea.ca/jasper/medicalSensor/> .
+@prefix jasper: <http://coralcea.ca/jasper/> .
+
+jasper:jtaA   :is        :jta ;
+              :provides  jasper:hrData ;
+              :queue     "jms.jasper.demo-heart-rate-monitor-A.1.0.jasperLab.0.queue" .
+
+jasper:hrData  :has         :timeStamp , jasper:hrDataBpm ;
+               :subClassOf  jasper:msData .
