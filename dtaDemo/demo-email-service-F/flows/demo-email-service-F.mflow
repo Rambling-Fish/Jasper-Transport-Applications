@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="demo-room-temperature-monitor-E">
+    <flow SubFlow="false" name="demo-email-service-FFlow1" entity-id="ed8ef31d-f150-4838-a457-e159f877da27">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="1"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="port" value="${port}"/>
+                    <property name="host" value="${host}"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
+                    <property name="path" value="${path}"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method"/>
+                    <property name="user"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="SendTrigger" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="port" value="8080"/>
+                    <property name="host" value="${tomcat}"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="keep-alive" value="true"/>
+                    <property name="contentType" value="text/plain"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
+                    <property name="path" value="jsc-ws-2.1%2Fhttp%3A%2F%2Fcoralcea.ca%2Fjasper%2FroomTempData?trigger%3Dcompareint(http%3A%2F%2Fcoralcea.ca%2Fjasper%2FenvironmentalSensor%2FroomTemperature%2Cgt%2C10)%3Fexpiry%3D30"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method" value="GET"/>
+                    <property name="user"/>
+                    <property name="responseTimeout" value="100000"/>
+                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="SMTP" type="http://www.mulesoft.org/schema/mule/smtps/endpoint" entity-id="SMTP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="port" value="465"/>
+                    <property name="to" value="dta-test@coralcea.ca"/>
+                    <property name="host" value="smtp.gmail.com"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="subject" value="IMPORTANT Notification"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/smtps/endpoint"/>
+                    <property name="bcc"/>
+                    <property name="from" value="no-reply@mydomain.com"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password" value="${passwd}"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="replyTo"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="user" value="${user}"/>
+                    <property name="mimeType" value="text/plain"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property name="cc"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+</mule-configuration>

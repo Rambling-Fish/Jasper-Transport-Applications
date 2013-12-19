@@ -16,6 +16,8 @@
         <module>demo-heart-rate-monitor-A-static-payload</module>
         <module>demo-heart-rate-monitor-D</module>
         <module>demo-room-temperature-monitor-E</module>
+        <module>demo-email-service-F</module>
+        <module>demo-sms-service-G</module>
     </modules>
     <build>
        <plugins>
