@@ -1,0 +1,10 @@
+@prefix :      <http://coralcea.ca/jasper/vocabulary/> .
+@prefix jasper: <http://coralcea.ca/jasper/> .
+
+jasper:jtaB  :is        :jta ;
+             :param     jasper:bpSID ;
+             :provides  jasper:bpData ;
+             :queue     "jms.jasper.demo-blood-pressure-monitor-B.1.0.jasperLab.0.queue" .
+
+jasper:bpData :has :timeStamp , jasper:bpDataDia, jasper:bpDataSys ;
+              :subClassOf jasper:msData .

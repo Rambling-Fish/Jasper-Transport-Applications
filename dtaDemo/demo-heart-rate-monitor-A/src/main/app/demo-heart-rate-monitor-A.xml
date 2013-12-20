@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/quartz/current/mule-quartz.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
+    <jasper:config name="demo-heart-rate-monitor-A" vendor="jasper" application="demo-heart-rate-monitor-A" version="1.0" doc:name="Jasper"/>
+    <flow name="demo-hr-generator-flow" doc:name="demo-hr-generator-flow">
+        <quartz:inbound-endpoint jobName="eventTimer" repeatInterval="1000" startDelay="1" responseTimeout="10000" doc:name="Quartz">
+            <quartz:event-generator-job>
+                <quartz:payload>tick-tock</quartz:payload>
+            </quartz:event-generator-job>
+        </quartz:inbound-endpoint>
+        <component doc:name="HR_Generator">
+            <singleton-object class="org.jasper.dtaDemo.HeartRateMonitorA.HeartRateMonitorAGenerator"/>
+        </component>
+        <component doc:name="LocalCache">
+            <singleton-object class="org.jasper.dtaDemo.HeartRateMonitorA.LocalCache"/>
+        </component>
+    </flow>
+    <flow name="demo-heart-rate-monitor-A-flow" doc:name="demo-heart-rate-monitor-A-flow">
+        <jasper:receive-from-queue-send-response config-ref="demo-heart-rate-monitor-A" queue="jms.jasper.demo-heart-rate-monitor-A.1.0.jasperLab.0.queue" doc:name="heart-rate-monitor-inbound-endpoint"/>
+        <component doc:name="LocalCache">
+            <singleton-object class="org.jasper.dtaDemo.HeartRateMonitorA.LocalCache"/>
+        </component>
+    </flow>
+</mule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:twilio="http://www.mulesoft.org/schema/mule/twilio" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:smtps="http://www.mulesoft.org/schema/mule/smtps" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/smtps http://www.mulesoft.org/schema/mule/smtps/current/mule-smtps.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/twilio http://www.mulesoft.org/schema/mule/twilio/1.0/mule-twilio.xsd">
+    <flow name="demo-email-service-FFlow1" doc:name="demo-email-service-FFlow1">
+        <http:inbound-endpoint exchange-pattern="request-response" host="${host}" port="${port}" path="${path}" doc:name="HTTP"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="${tomcat}" port="8080" path="jsc-ws-2.1%2Fhttp%3A%2F%2Fcoralcea.ca%2Fjasper%2FroomTempData?trigger%3Dcompareint(http%3A%2F%2Fcoralcea.ca%2Fjasper%2FenvironmentalSensor%2FroomTemperature%2Cgt%2C10)%3Fexpiry%3D30" method="GET" responseTimeout="100000" contentType="text/plain" keep-alive="true" doc:name="SendTrigger"/>
+        <smtps:outbound-endpoint host="smtp.gmail.com" port="465" user="${user}" password="${passwd}" to="dta-test@coralcea.ca" from="no-reply@mydomain.com" subject="IMPORTANT Notification" responseTimeout="10000" mimeType="text/plain" doc:name="SMTP"/>
+    </flow>
+</mule>

@@ -1,0 +1,5 @@
+@prefix :      <http://coralcea.ca/jasper/vocabulary/> .
+
+:jtaASP :is       :jta ;
+        :provides  <http://jasper.com/hrData> ;
+        :queue     "jms.jasper.demo-heart-rate-monitor-A-static-payload.1.0.jasperLab.0.queue" .
