@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="demo-heart-rate-monitor-A">
+    <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
+        <properties>
+            <property name="application" value="demo-heart-rate-monitor-A"/>
+            <property name="vendor" value="jasper"/>
+            <property name="name" value="demo-heart-rate-monitor-A"/>
+            <property name="url" value="${jasperEngineURL}"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="version" value="1.0"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="demo-hr-generator-flow" entity-id="6037a6d7-5cc7-4ffd-918a-7099f4a47eb7">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="2"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Quartz" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" entity-id="Quartz#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="businessEventsLabel"/>
+                    <property name="repeatCount"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="jobName" value="eventTimer"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="repeatInterval" value="1000"/>
+                    <property name="address"/>
+                    <property name="startDelay" value="1"/>
+                    <property name="encoding"/>
+                    <property name="cronExpression"/>
+                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="connector-ref"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/event-generator-job;0">
+                        <property name="auxiliary;index" value="4"/>
+                        <property name="auxiliary;wrapIn" value="4"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/payload;1">
+                            <property name="text" value="tick-tock"/>
+                            <property name="auxiliary;index" value="5"/>
+                            <property name="auxiliary;wrapIn" value="5"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+            </endpoint>
+            <pattern name="HR_Generator" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property name="class" value="org.jasper.dtaDemo.HeartRateMonitorA.HeartRateMonitorAGenerator"/>
+                        <property name="auxiliary;index" value="7"/>
+                        <property name="auxiliary;wrapIn" value="7"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern name="LocalCache" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="8"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property name="class" value="org.jasper.dtaDemo.HeartRateMonitorA.LocalCache"/>
+                        <property name="auxiliary;index" value="9"/>
+                        <property name="auxiliary;wrapIn" value="9"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="demo-heart-rate-monitor-A-flow" entity-id="4cc9a4cd-7ff9-4204-b84f-8af76a5fb7e1">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="10"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="heart-rate-monitor-inbound-endpoint" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="Jasper (Streaming)#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="queue" value="jms.jasper.demo-heart-rate-monitor-A.1.0.jasperLab.0.queue"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/receive-from-queue-send-response"/>
+                    <property name="config-ref" value="demo-heart-rate-monitor-A"/>
+                    <property name="auxiliary;index" value="11"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                </properties>
+            </endpoint>
+            <pattern name="LocalCache" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#3">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="12"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property name="class" value="org.jasper.dtaDemo.HeartRateMonitorA.LocalCache"/>
+                        <property name="auxiliary;index" value="13"/>
+                        <property name="auxiliary;wrapIn" value="13"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+</mule-configuration>

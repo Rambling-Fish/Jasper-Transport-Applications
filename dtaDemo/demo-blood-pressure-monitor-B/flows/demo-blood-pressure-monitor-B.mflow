@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="demo-blood-pressure-monitor-B">
+    <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
+        <properties>
+            <property name="application" value="demo-blood-pressure-monitor-B"/>
+            <property name="vendor" value="jasper"/>
+            <property name="name" value="demo-blood-pressure-monitor-B"/>
+            <property name="url" value="${jasperEngineURL}"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="version" value="1.0"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="demo-blood-pressure-monitor-B-Flow" entity-id="6085e534-7bce-4716-b0be-78652c2f87c6">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="2"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="demo-blood-pressure-monitor-inbound-endpoint" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="Jasper (Streaming)#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="queue" value="jms.jasper.demo-blood-pressure-monitor-B.1.0.jasperLab.0.queue"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/receive-from-queue-send-response"/>
+                    <property name="config-ref" value="demo-blood-pressure-monitor-B"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                </properties>
+            </endpoint>
+            <pattern name="LocalCache" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property name="class" value="org.jasper.dtaDemo.BloodPressureB.LocalCache"/>
+                        <property name="auxiliary;index" value="5"/>
+                        <property name="auxiliary;wrapIn" value="5"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+</mule-configuration>

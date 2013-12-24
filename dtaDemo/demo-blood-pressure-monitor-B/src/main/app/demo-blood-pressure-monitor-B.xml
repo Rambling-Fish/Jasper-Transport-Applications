@@ -5,7 +5,7 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
-    <jasper:config name="demo-blood-pressure-monitor-B" vendor="jasper" application="demo-blood-pressure-monitor-B" version="1.0" doc:name="Jasper"/>
+    <jasper:config name="demo-blood-pressure-monitor-B" vendor="jasper" application="demo-blood-pressure-monitor-B" version="1.0" url="${jasperEngineURL}" doc:name="Jasper"/>
     <flow name="demo-blood-pressure-monitor-B-Flow" doc:name="demo-blood-pressure-monitor-B-Flow">
         <jasper:receive-from-queue-send-response config-ref="demo-blood-pressure-monitor-B" queue="jms.jasper.demo-blood-pressure-monitor-B.1.0.jasperLab.0.queue" doc:name="demo-blood-pressure-monitor-inbound-endpoint"/>
         <component doc:name="LocalCache">

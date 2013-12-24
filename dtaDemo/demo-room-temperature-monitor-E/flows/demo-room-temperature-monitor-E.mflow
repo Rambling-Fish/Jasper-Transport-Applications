@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="demo-room-temperature-monitor-E">
+    <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
+        <properties>
+            <property name="application" value="demo-room-temperature-monitor-E"/>
+            <property name="vendor" value="jasper"/>
+            <property name="name" value="demo-room-temperature-monitor-E"/>
+            <property name="url" value="${jasperEngineURL}"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="version" value="1.0"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="jtaDemo-room-temperature-monitor-EFlow1" entity-id="2fca2c9f-718b-4726-b9d9-93a0680800f5">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="2"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="port" value="8081"/>
+                    <property name="host" value="0.0.0.0"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
+                    <property name="path" value="${path}"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method"/>
+                    <property name="user"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <response index="4" entity-id="response#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
+                        <pattern name="Object to JSON" type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" entity-id="Object to JSON#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="sourceClass"/>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mapper-ref"/>
+<property name="mimeType"/>
+<property name="auxiliary;index" value="5"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </response>
+            <pattern name="LocalCache" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property name="class" value="org.jasper.dtaDemo.RoomTemperatureMonitorE.LocalCache"/>
+                        <property name="auxiliary;index" value="7"/>
+                        <property name="auxiliary;wrapIn" value="7"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="demo-room-temperature-monitor-EFlow1" entity-id="e185c470-772a-4a6b-98f2-b9b3a5da2935">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="8"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="demo-room-temperature-monitor-E" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="Jasper (Streaming)#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="queue" value="jms.jasper.demo-room-temperature-monitor-E.1.0.jasperLab.0.queue"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/receive-from-queue-send-response"/>
+                    <property name="config-ref" value="demo-room-temperature-monitor-E"/>
+                    <property name="auxiliary;index" value="9"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                </properties>
+            </endpoint>
+            <response index="10" entity-id="response#2">
+                <compartment entity-id="compartment#2">
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
+                        <pattern name="Object to JSON" type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" entity-id="Object to JSON#2">
+                            <properties>
+<property name="sourceClass"/>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mapper-ref"/>
+<property name="mimeType"/>
+<property name="auxiliary;index" value="11"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </response>
+            <pattern name="LocalCache" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="12"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property name="class" value="org.jasper.dtaDemo.RoomTemperatureMonitorE.LocalCache"/>
+                        <property name="auxiliary;index" value="13"/>
+                        <property name="auxiliary;wrapIn" value="13"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+</mule-configuration>

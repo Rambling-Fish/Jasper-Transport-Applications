@@ -7,7 +7,7 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
-    <jasper:config name="demo-room-temperature-monitor-E" vendor="jasper" application="demo-room-temperature-monitor-E" version="1.0" doc:name="Jasper"/>
+    <jasper:config name="demo-room-temperature-monitor-E" vendor="jasper" application="demo-room-temperature-monitor-E" version="1.0" url="${jasperEngineURL}" doc:name="Jasper"/>
     <flow name="jtaDemo-room-temperature-monitor-EFlow1" doc:name="jtaDemo-room-temperature-monitor-EFlow1">
         <http:inbound-endpoint exchange-pattern="request-response" host="0.0.0.0" port="8081" doc:name="HTTP" path="${path}"/>
         <response>
