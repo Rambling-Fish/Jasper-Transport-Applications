@@ -8,11 +8,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.jena.atlas.json.JSON;
 import org.apache.jena.atlas.json.JsonObject;
 import org.apache.jena.atlas.json.JsonValue;
+import org.apache.log4j.Logger;
 
 public class LocalCache {
 	
 	
 	private static final String HR_SID_URI = "http://coralcea.ca/jasper/hrSID";
+	static Logger logger = Logger.getLogger(LocalCache.class.getName());
 
 	private static final SensorData SENSOR_DATA_100K;
 	static{
@@ -31,6 +33,8 @@ public class LocalCache {
 	private Map<String, ArrayList<HrData>> hrSensors = new ConcurrentHashMap<String, ArrayList<HrData>>();
 
 	public SensorData getSensorData(Map<String,Serializable>  map){
+		
+		logger.info("TIMECHECK DTA received request from UDE at" + System.currentTimeMillis());
 
 		if(map.get(HR_SID_URI) == null || !(map.get(HR_SID_URI) instanceof String)){
 			return null;
@@ -61,6 +65,8 @@ public class LocalCache {
 	}
 
 	public SensorData getSensorData(String str){
+		
+		logger.info("TIMECHECK DTA received request from UDE at" + System.currentTimeMillis());
 
 		JsonObject myjobj = JSON.parse(str);
 		JsonValue myjvalue = myjobj.get(HR_SID_URI);
@@ -71,6 +77,7 @@ public class LocalCache {
 		hrSID = hrSID.replaceAll("\"","");
 				
 		if(isSpecialSID(hrSID)){
+			logger.info("TIMECHECK DTA sending response back to UDE at" + System.currentTimeMillis());
 			return specialSensorInfo(hrSID);
 		}
 		
@@ -89,6 +96,7 @@ public class LocalCache {
 		
 		hrData.add(new HrData(bpm));
 		
+		logger.info("TIMECHECK DTA sending response back to UDE at" + System.currentTimeMillis());
 		return new SensorData(hrData.toArray(new HrData[]{}));		
 	}
 
