@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="dta-room-temperature">
+    <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
+        <properties>
+            <property name="application" value="dta-room-temperature-E"/>
+            <property name="vendor" value="jasper"/>
+            <property name="name" value="Jasper"/>
+            <property name="url"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="version" value="1.0"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="dta-room-temperature-E-Get-Flow" entity-id="8437e4f2-ec5f-4575-9a37-d0ff54386dba">
+        <properties>
+            <property name="updated"/>
+            <property name="processingStrategy2" value=""/>
+            <property name="initialState" value=""/>
+            <property name="auxiliary;erased;initialState" value="true"/>
+            <property name="auxiliary;erased;processingStrategy2" value="true"/>
+            <property name="auxiliary;index" value="2"/>
+        </properties>
+        <description></description>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="Jasper (Streaming)#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="operation" value="http://coralcea.ca/jasper/getRoomTemp"/>
+                    <property name="updated"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/execute"/>
+                    <property name="config-ref" value="Jasper"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern name="GetRoomTemp" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="4118fe88-fdee-4f22-862e-4c882426559f">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="ref" value=""/>
+                    <property name="updated"/>
+                    <property name="class" value=""/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1109793634">
+                        <property name="ref" value=""/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;1402837437">
+                        <property name="class" value="org.jasper.dtademo.roomtemperature.GetRoomTemp"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="dta-room-temperatureFlow1" entity-id="6777d107-f5de-444d-a90a-43ee4529e857">
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="3f5e82a2-aadd-424a-b8e0-51ee661a0fa0">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="2f4a5957-f1bf-4423-bf5b-6dd8cfaa51d5">
+                <graphicalData x="19" y="325" width="112" height="67"/>
+                <properties>
+                    <property name="operation" value="http://coralcea.ca/jasper/updateRoomTemp"/>
+                    <property name="updated"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/execute"/>
+                    <property name="config-ref" value="Jasper"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern name="UpdateRoomTemp" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="9b129e97-4290-47de-a03b-0ed648664e7a">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="ref" value=""/>
+                    <property name="updated"/>
+                    <property name="class" value=""/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1475879947">
+                        <property name="ref" value=""/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;1693488668">
+                        <property name="class" value="org.jasper.dtademo.roomtemperature.UpdateRoomTemp"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>
