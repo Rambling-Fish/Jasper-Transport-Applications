@@ -1,0 +1,57 @@
+@prefix :      <http://coralcea.ca/jasper/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix hrSensor: <http://coralcea.ca/jasper/hrSensor/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+
+:dta-D  a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dtademo.heartratemonitor"^^xsd:string .
+
+:timestamp  a        owl:DatatypeProperty ;
+        rdfs:domain  :HrData ;
+        rdfs:range   xsd:string .
+
+:hrSID  a            owl:DatatypeProperty ;
+        rdfs:domain  :HrDataReq ;
+        rdfs:range   xsd:string .
+
+:HrData  a               owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   hrSensor:bpm
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :timestamp
+                         ] ;
+        dta:x            "462"^^xsd:int ;
+        dta:y            "15"^^xsd:int .
+
+:dta-heart-rate-monitor-D
+        a              dta:DTA ;
+        dta:operation  :getHrData ;
+        dta:x          "15"^^xsd:int ;
+        dta:y          "15"^^xsd:int .
+
+:hrData  a          owl:ObjectProperty ;
+        rdfs:range  :HrData .
+
+:HrDataReq  a            owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :hrSID
+                         ] ;
+        dta:x            "279"^^xsd:int ;
+        dta:y            "15"^^xsd:int .
+
+hrSensor:bpm  a      owl:DatatypeProperty ;
+        rdfs:domain  :HrData ;
+        rdfs:range   xsd:integer .
+
+:getHrData  a            dta:Operation ;
+        dta:destination  "dta-heart-rate-monitor-d/gethrdata/dcf65af0-c286-472f-a4f1-03dd900eec1c"^^xsd:string ;
+        dta:input        :HrDataReq ;
+        dta:kind         dta:Get ;
+        dta:output       :hrData .

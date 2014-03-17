@@ -19,6 +19,9 @@
         <module>demo-email-service-F</module>
         <module>demo-sms-service-G</module>
         <module>dta-room-temperature-E</module>
+        <module>dta-blood-pressure-monitor-B</module>
+        <module>dta-EMR-C</module>
+        <module>dta-heart-rate-monitor-D</module>
     </modules>
     <build>
        <plugins>
