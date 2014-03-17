@@ -18,6 +18,7 @@
         <module>demo-room-temperature-monitor-E</module>
         <module>demo-email-service-F</module>
         <module>demo-sms-service-G</module>
+        <module>dta-room-temperature-E</module>
     </modules>
     <build>
        <plugins>
