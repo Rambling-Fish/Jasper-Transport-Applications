@@ -2,6 +2,8 @@ package org.jasper.dtademo.roomtemperature;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Generated;
 
@@ -14,7 +16,7 @@ import org.mule.api.lifecycle.Callable;
 @JsonTypeName("http://coralcea.ca/jasper/updateRoomTemp")
 public class UpdateRoomTemp implements Callable {
 	
-	private static final RoomTempDataImpl roomTempData = new RoomTempDataImpl();
+	private static Map<String,RoomTempDataImpl> roomTempData = new ConcurrentHashMap<String,RoomTempDataImpl>();
 	private static final SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSSZ");
 
 	/**
@@ -31,8 +33,8 @@ public class UpdateRoomTemp implements Callable {
 		return message;
 	}
 	
-	public RoomTempDataImpl getInstance(){
-		return roomTempData;
+	public RoomTempDataImpl getRoomTempData(String roomId){
+		return roomTempData.get(roomId);
 	}
 
 	/**
@@ -42,18 +44,25 @@ public class UpdateRoomTemp implements Callable {
 	 */
 	@Generated("false")
 	private Object process(RoomTempUpdateReq roomTempUpdateReq, MuleMessage muleMessage) throws Exception {
+		RoomTempDataImpl newRoomTemp = new RoomTempDataImpl();
 		int newTemp = roomTempUpdateReq.getRoomTemperature();
 		String newTimestamp = roomTempUpdateReq.getTimestamp();
+		String roomId = roomTempUpdateReq.getRoomId();
+		
+		if(roomId == null || roomId.length() == 0){
+			return null;
+		}
 		
 		if(newTimestamp == null || newTimestamp.length() == 0){
 			newTimestamp = dt.format(new Date());
 		}
 		
-		roomTempData.setRoomTemperature(newTemp);
-		roomTempData.setTimestamp(newTimestamp);
+		newRoomTemp.setRoomTemperature(newTemp);
+		newRoomTemp.setTimestamp(newTimestamp);
+		roomTempData.put(roomId, newRoomTemp);
 		muleMessage.setOutboundProperty("statusCode", 200);
 		
-		return roomTempData;
+		return newRoomTemp;
 	}
 }
 

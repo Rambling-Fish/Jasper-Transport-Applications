@@ -35,8 +35,9 @@ public class GetRoomTemp implements Callable {
 	@Generated("false")
 	private Object process(RoomTempDataReq roomTempDataReq, MuleMessage muleMessage) throws Exception {
 		muleMessage.setOutboundProperty("statusCode", 200);
+		String roomId = roomTempDataReq.getRoomId();
 		
-		return updateTemp.getInstance();
+		return updateTemp.getRoomTempData(roomId);
 	}
 }
 
