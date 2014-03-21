@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
+    <jasper:config name="Jasper" vendor="jasper" application="dta-building-mgmt-generator" version="1.0" doc:name="Jasper"/>
+    <flow name="dta-building-mgmt-generatorFlow1" doc:name="dta-building-mgmt-generatorFlow1">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8083" path="rbm" doc:name="HTTP"/>
+        <choice doc:name="Choice">
+            <when expression="#[payload.contains('/roomTempUpdate?')]">
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/BuildingMgmt/sendRoomTempUpdate" doc:name="Jasper (sendRoomTempUpdate)"/>
+                <set-payload value="200 Ok" doc:name="Set Payload"/>
+                <http:message-to-http-response-transformer doc:name="Message to HTTP Response"/>
+            </when>
+            <when expression="#[payload.contains('/doorStateChange?')]">
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/BuildingMgmt/sendDoorStateChange" doc:name="Jasper (sendDoorStateChange)"/>
+                <set-payload value="200 Ok" doc:name="Set Payload"/>
+                <http:message-to-http-response-transformer doc:name="Message to HTTP Response"/>
+            </when>
+            <otherwise>
+                <logger message="unknown event, path= #[payload]" level="INFO" doc:name="Logger"/>
+                <set-payload value="&lt;Unknown event&gt; : #[payload]" doc:name="Set Payload"/>
+            </otherwise>
+        </choice>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <logger message="MESSAGE= #[exception.causeException.message]" level="INFO" doc:name="Logger"/>
+            <set-payload value="&quot;#[exception.causeException]&quot;" doc:name="Set Payload"/>
+            <http:message-to-http-response-transformer doc:name="Message to HTTP Response"/>
+        </catch-exception-strategy>
+    </flow>
+</mule>

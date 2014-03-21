@@ -1,0 +1,87 @@
+@prefix :      <http://coralcea.ca/jasper/BuildingMgmt/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix jasper: <http://coralcea.ca/jasper/> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+
+:doorStateChange  a      owl:Class ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      :payload
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :doorID
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :doorState
+                         ] ;
+        dta:x            "259"^^xsd:int ;
+        dta:y            "15"^^xsd:int .
+
+:doorID  a           owl:DatatypeProperty ;
+        rdfs:domain  :doorStateChange ;
+        rdfs:range   xsd:string .
+
+:roomTempUpdate  a       owl:Class ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      :payload
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      jasper:timestamp
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :temperature
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :roomID
+                         ] ;
+        dta:x            "15"^^xsd:int ;
+        dta:y            "15"^^xsd:int .
+
+jasper:timestamp  a  owl:DatatypeProperty ;
+        rdfs:domain  :roomTempUpdate ;
+        rdfs:range   xsd:string .
+
+:payload  a          owl:DatatypeProperty ;
+        rdfs:domain  :roomTempUpdate , :doorStateChange ;
+        rdfs:range   xsd:string .
+
+:doorState  a        owl:DatatypeProperty ;
+        rdfs:domain  :doorStateChange ;
+        rdfs:range   xsd:string .
+
+:dta-building-mgmt-generator
+        a            dta:DTA ;
+        dta:request  :sendDoorStateChange , :sendRoomTempUpdate ;
+        dta:x        "465"^^xsd:int ;
+        dta:y        "15"^^xsd:int .
+
+:sendRoomTempUpdate  a   dta:Request ;
+        dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
+        dta:input        :roomTempUpdate ;
+        dta:kind         dta:Publish .
+
+:sendDoorStateChange  a  dta:Request ;
+        dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
+        dta:input        :doorStateChange ;
+        dta:kind         dta:Publish .
+
+:temperature  a      owl:DatatypeProperty ;
+        rdfs:domain  :roomTempUpdate ;
+        rdfs:range   xsd:integer .
+
+:roomID  a           owl:DatatypeProperty ;
+        rdfs:domain  :roomTempUpdate ;
+        rdfs:range   xsd:string .
+
+jasper:dta-building-mgmt-generator
+        a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dta.bmgen"^^xsd:string .

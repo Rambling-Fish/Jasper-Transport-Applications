@@ -22,6 +22,8 @@
         <module>dta-EMR-C</module>
         <module>dta-heart-rate-monitor-D</module>
         <module>dta-room-temperature-E</module>
+        <module>dta-nurse-call-generator</module>
+        <module>dta-building-mgmt-generator</module>
     </modules>
     <build>
        <plugins>

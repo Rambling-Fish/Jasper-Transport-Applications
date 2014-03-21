@@ -1,0 +1,26 @@
+Call Nurse
+  http://0.0.0.0:8082/rnc/callNurse?http://coralcea.ca/jasper/nc/location=bed010
+
+Cancel Call Nurse
+  http://0.0.0.0:8082/rnc/cancelCallNurse?http://coralcea.ca/jasper/nc/location=bed020
+
+Emergency
+  http://0.0.0.0:8082/rnc/emergency?http://coralcea.ca/jasper/nc/location=bed030
+
+Cancel Emergency
+  http://0.0.0.0:8082/rnc/cancelEmergency?http://coralcea.ca/jasper/nc/location=bed010
+
+
+Notes:
+For location=bed010 payload is set to 10K
+For location=bed020 payload is set to 20K
+For location=bed030 payload is set to 30K
+For location=bed040 payload is set to 40K
+For location=bed050 payload is set to 50K
+For location=bed060 payload is set to 60K
+For location=bed070 payload is set to 70K
+For location=bed080 payload is set to 80K
+For location=bed090 payload is set to 90K
+For location=bed100 payload is set to 100K
+
+For location not equal to above, payload is size 0 (empty string) 

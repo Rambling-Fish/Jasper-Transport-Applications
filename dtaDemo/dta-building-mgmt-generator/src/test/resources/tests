@@ -1,0 +1,20 @@
+Room Temperature Update
+  http://0.0.0.0:8083/rbm/roomTempUpdate?http://coralcea.ca/jasper/BuildingMgmt/roomID=010&http://coralcea.ca/jasper/BuildingMgmt/temperature=19&http://coralcea.ca/jasper/timestamp=20140318-101100EST
+
+Door State Change
+  http://0.0.0.0:8083/rbm/doorStateChange?http://coralcea.ca/jasper/BuildingMgmt/doorID=001&http://coralcea.ca/jasper/BuildingMgmt/doorState=open
+
+
+Notes:
+For roomID=010 or doorID=010 payload is set to 10K
+For roomID=020 or doorID=020 payload is set to 20K
+For roomID=030 or doorID=030 payload is set to 30K
+For roomID=040 or doorID=040 payload is set to 40K
+For roomID=050 or doorID=050 payload is set to 50K
+For roomID=060 or doorID=060 payload is set to 60K
+For roomID=070 or doorID=070 payload is set to 70K
+For roomID=080 or doorID=080 payload is set to 80K
+For roomID=090 or doorID=090 payload is set to 90K
+For roomID=100 or doorID=100 payload is set to 100K
+
+For roomID (or doorID) not equal to above, payload is size 0 (empty string) 
