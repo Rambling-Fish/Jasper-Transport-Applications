@@ -1,14 +1,14 @@
 Call Nurse
-  http://0.0.0.0:8082/rnc/callNurse?http://coralcea.ca/jasper/nc/location=bed010
+  http://0.0.0.0:8082/rnc/callNurse?http://coralcea.ca/jasper/NurseCall/location=bed010
 
 Cancel Call Nurse
-  http://0.0.0.0:8082/rnc/cancelCallNurse?http://coralcea.ca/jasper/nc/location=bed020
+  http://0.0.0.0:8082/rnc/cancelCallNurse?http://coralcea.ca/jasper/NurseCall/location=bed020
 
 Emergency
-  http://0.0.0.0:8082/rnc/emergency?http://coralcea.ca/jasper/nc/location=bed030
+  http://0.0.0.0:8082/rnc/emergency?http://coralcea.ca/jasper/NurseCall/location=bed030
 
 Cancel Emergency
-  http://0.0.0.0:8082/rnc/cancelEmergency?http://coralcea.ca/jasper/nc/location=bed010
+  http://0.0.0.0:8082/rnc/cancelEmergency?http://coralcea.ca/jasper/NurseCall/location=bed010
 
 
 Notes:

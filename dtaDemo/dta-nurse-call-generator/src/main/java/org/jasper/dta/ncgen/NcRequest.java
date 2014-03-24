@@ -8,18 +8,20 @@ public class NcRequest {
 
 	public static final String PREFIX                 = "http://coralcea.ca/jasper/NurseCall/";
 
+	public static final String LOCATION               = "location";
+
 	public static final String CALL_NURSE             = "callNurse";
 	public static final String CANCEL_CALL_NURSE      = "cancelCallNurse";
 	public static final String EMERGENCY              = "emergency";
 	public static final String CANCEL_EMERGENCY       = "cancelEmergency";
+
+	public static final String LOCATION_URI           = PREFIX + LOCATION;
 
 	public static final String CALL_NURSE_URI         = PREFIX + CALL_NURSE;
 	public static final String CANCEL_CALL_NURSE_URI  = PREFIX + CANCEL_CALL_NURSE;
 	public static final String EMERGENCY_URI          = PREFIX + EMERGENCY;
 	public static final String CANCEL_EMERGENCY_URI   = PREFIX + CANCEL_EMERGENCY;
 	
-	public static final String LOCATION_URI           = "http://coralcea.ca/jasper/nc/location";
-
 	public static final Map<String, String> PAYLOADS;
 
     private static final String PAYLOAD_10K  = SetPayload("PAYLOAD_10k",   10000);
