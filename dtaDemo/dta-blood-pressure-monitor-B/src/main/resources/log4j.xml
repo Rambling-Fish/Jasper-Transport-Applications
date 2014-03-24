@@ -7,7 +7,7 @@
       </layout>
    </appender>
    <appender name="dtaLogger" class="org.apache.log4j.RollingFileAppender">
-      <param name="File" value="../../../logs/dta-blood-pressure-monitor-B-2.0.log"/>
+      <param name="File" value="../../../logs/dta-blood-pressure-monitor-B-1.0.log"/>
       <param name="MaxFileSize" value="5MB"/>
       <!--  Keep 10 backup files then reuse -->
       <param name="MaxBackupIndex" value="10"/>
