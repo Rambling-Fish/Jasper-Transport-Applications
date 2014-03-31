@@ -87,7 +87,7 @@ public class SendRoomTempUpdate implements Callable {
 		String requestArray[] = browserInput.split("\\?");
 
 		if (requestArray.length != 2) {
-			errorText = "invalid request : " + browserInput;
+			errorText = "Invalid request : " + browserInput;
 			log.warn(errorText);
 			return false;
 		}
@@ -100,7 +100,7 @@ public class SendRoomTempUpdate implements Callable {
 			String parmPair[] = parmPairString.split("\\=");
 			
 			if (parmPair.length != 2) {
-				errorText = "invalid parameter (expect key=value) : " + parmPairString;
+				errorText = "Invalid parameter (expect key=value) : " + parmPairString;
 				log.warn(errorText);
 				return false;
 			}
@@ -144,7 +144,7 @@ public class SendRoomTempUpdate implements Callable {
 		}
 		else
 		{
-			errorText = "mandatory parameter missing";
+			errorText = "Mandatory parameter missing";
 			return false;
 		}
 	}

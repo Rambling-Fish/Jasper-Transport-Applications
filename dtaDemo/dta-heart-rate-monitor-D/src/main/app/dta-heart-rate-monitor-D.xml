@@ -5,7 +5,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
-    <jasper:config name="Jasper" vendor="jasper" application="dta-heart-rate-monitor-D" version="1.0" doc:name="Jasper"/>
+    <jasper:config name="Jasper" vendor="jasper" application="dta-heart-rate-monitor-D" version="1.0" doc:name="Jasper" model="dta-heart-rate-monitor-D.dta"/>
     <flow name="JSC-8080-dta-heart-rate-monitor-D-Flow" doc:name="JSC-8080-dta-heart-rate-monitor-D-Flow">
         <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/getHrData" doc:name="Jasper"/>
         <component doc:name="Get HeartRate Data">

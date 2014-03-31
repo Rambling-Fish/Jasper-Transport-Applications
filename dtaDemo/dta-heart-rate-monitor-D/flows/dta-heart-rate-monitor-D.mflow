@@ -3,14 +3,17 @@
     <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
         <properties>
             <property name="application" value="dta-heart-rate-monitor-D"/>
+            <property name="model" value="dta-heart-rate-monitor-D.dta"/>
+            <property name="updated"/>
             <property name="vendor" value="jasper"/>
             <property name="name" value="Jasper"/>
             <property name="auxiliary;index" value="1"/>
-            <property name="url"/>
+            <property name="url" value=""/>
             <property name="version" value="1.0"/>
         </properties>
+        <description></description>
     </global-element>
-    <flow SubFlow="false" name="JSC-8080-dta-heart-rate-monitor-D-Flow" entity-id="8e10eeaf-086c-4850-b290-5e56d23af72f">
+    <flow SubFlow="false" name="JSC-8080-dta-heart-rate-monitor-D-Flow" entity-id="835d2050-f10f-4d6c-a43b-99215edb518f">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -46,7 +49,7 @@
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="APACHE-8081-dta-heart-rate-monitor-D-Flow" entity-id="7fea68c9-d979-4c4e-93df-f26c002cea5f">
+    <flow SubFlow="false" name="APACHE-8081-dta-heart-rate-monitor-D-Flow" entity-id="b0a65822-4779-414f-89a5-37f65dcecb51">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -58,7 +61,7 @@
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
-                <graphicalData x="19" y="252" width="68" height="236"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="port" value="8081"/>
                     <property name="host" value="localhost"/>
@@ -87,7 +90,7 @@
                 </properties>
             </endpoint>
             <pattern name="Get HeartRate Data" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#2">
-                <graphicalData x="147" y="252" width="116" height="67"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="class"/>
                     <property name="auxiliary;index" value="8"/>
@@ -100,14 +103,14 @@
                 </properties>
             </pattern>
             <pattern name="Object to JSON" type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" entity-id="Object to JSON#1">
-                <graphicalData x="748" y="252" width="93" height="67"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="sourceClass"/>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="mapper-ref"/>
-                    <property name="auxiliary;index" value="16"/>
+                    <property name="auxiliary;index" value="10"/>
                     <property name="mimeType"/>
                 </properties>
             </pattern>

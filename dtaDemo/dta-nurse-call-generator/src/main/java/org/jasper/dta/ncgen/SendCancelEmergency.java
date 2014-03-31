@@ -49,21 +49,21 @@ public class SendCancelEmergency implements Callable {
 
 		String requestArray[] = browserInput.split("\\?");
 		if (requestArray.length != 2) {
-			errorText = "invalid request : " + browserInput;
+			errorText = "Invalid request : " + browserInput;
 			log.warn(errorText);
 			return null;
 		}
 		
 		String parmPair[] = requestArray[1].split("\\=");
 		if (parmPair.length != 2) {
-			errorText = "invalid parameter (expect key=value) : " + requestArray[1];
+			errorText = "Invalid parameter (expect key=value) : " + requestArray[1];
 			log.warn(errorText);
 			return null;
 		}
 		
 		if (!parmPair[0].matches(NcRequest.LOCATION_URI))
 		{
-			errorText = "invalid parameter : " + parmPair[0];
+			errorText = "Invalid parameter : " + parmPair[0];
 			log.warn(errorText);
 			return null;
 		}

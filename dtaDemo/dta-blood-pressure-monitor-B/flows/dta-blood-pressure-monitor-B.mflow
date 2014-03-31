@@ -1,99 +1,118 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="dta-blood-pressure-monitor-B">
-    <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="!!!364fc906-c7eb-474a-b475-f16f4c11f921">
+    <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
         <properties>
             <property name="application" value="dta-blood-pressure-monitor-B"/>
+            <property name="model" value="dta-blood-pressure-monitor-B.dta"/>
+            <property name="updated"/>
             <property name="vendor" value="jasper"/>
             <property name="name" value="Jasper"/>
-            <property name="url" value="tcp://0.0.0.0:61616"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="url" value=""/>
             <property name="version" value="1.0"/>
         </properties>
         <description></description>
     </global-element>
-    <flow SubFlow="false" name="dta-blood-pressure-monitor-BFlow1" entity-id="7f4a650e-fed7-471f-8bf1-f5fff40a5714">
-        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="0f335141-313d-4686-958a-f04e19de80f0">
+    <flow SubFlow="false" name="dta-blood-pressure-monitor-BFlow1" entity-id="320b03b9-2103-40f3-a38e-a5f31d7c6043">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="2"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
-            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/https/endpoint" entity-id="a124777f-fbda-4205-9c41-816966af1ab5">
-                <graphicalData x="19" y="195" width="68" height="169"/>
+            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="auxiliary;erased;contentType" value="true"/>
                     <property name="port" value="8081"/>
-                    <property name="auxiliary;erased;mimeType" value="true"/>
                     <property name="host" value="localhost"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="keep-alive" value="false"/>
-                    <property name="contentType" value=""/>
-                    <property name="disableTransportTransformer" value="false"/>
-                    <property name="password" value=""/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
                     <property name="exchange-pattern" value="request-response"/>
-                    <property name="ref" value=""/>
-                    <property name="httpLabel" value=""/>
-                    <property name="transformer-refs" value=""/>
-                    <property name="updated"/>
-                    <property name="address" value=""/>
-                    <property name="auxiliary;erased;encoding" value="true"/>
-                    <property name="encoding" value=""/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
                     <property name="path" value="bpData"/>
-                    <property name="responseTransformer-refs" value=""/>
-                    <property name="user" value=""/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="mimeType" value=""/>
-                    <property name="connector-ref" value=""/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method"/>
+                    <property name="user"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
                 </properties>
-                <description></description>
             </endpoint>
-            <pattern name="Get BloodPressure Data" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="671cd20e-d8dc-4912-9544-6885adb18a09">
-                <graphicalData x="147" y="195" width="68" height="67"/>
+            <pattern name="Get BloodPressure Data" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="ref" value=""/>
-                    <property name="updated"/>
-                    <property name="class" value=""/>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1033057124">
-                        <property name="ref" value=""/>
-                        <property name="isProcessed$$$$" value="true"/>
-                    </property-collection>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;461270229">
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dtademo.bloodpressuremonitor.GetBpData"/>
                         <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;index" value="5"/>
+                        <property name="auxiliary;wrapIn" value="5"/>
                     </property-collection>
                 </properties>
-                <description></description>
             </pattern>
-            <pattern name="Object to JSON" type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" entity-id="89826719-9619-422c-9c8f-a798b38cb22c">
+            <pattern name="Object to JSON" type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" entity-id="Object to JSON#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="sourceClass"/>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mapper-ref"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property name="mimeType"/>
+                </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="dta-blood-pressure-monitor-BFlow2" entity-id="2a5d22a8-5468-4fdc-9d35-8ac9a458b3ea">
-        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="e6fb9a89-9cbd-4492-8aaf-fea92e9ca45f">
+    <flow SubFlow="false" name="dta-blood-pressure-monitor-BFlow2" entity-id="8bedbf03-aa7b-4b6b-9d1e-15fd2258f557">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="7"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
             <graphicalData x="0" y="0" width="0" height="0"/>
-            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="cef5a92e-bbba-4fae-a0f6-db2583d49b15">
-                <graphicalData x="19" y="364" width="112" height="67"/>
-                <properties>
-                    <property name="operation" value="http://coralcea.ca/jasper/getBpData"/>
-                    <property name="updated"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/execute"/>
-                    <property name="config-ref" value="Jasper"/>
-                    <property name="exchange-pattern" value="one-way"/>
-                </properties>
-                <description></description>
-            </endpoint>
-            <pattern name="Get BloodPressure Data" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="a6365d1d-ac09-4533-9937-593245bd4e71">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="Jasper (Streaming)#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="ref" value=""/>
-                    <property name="updated"/>
-                    <property name="class" value=""/>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;55419671">
-                        <property name="ref" value=""/>
-                        <property name="isProcessed$$$$" value="true"/>
-                    </property-collection>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;532208214">
+                    <property name="operation" value="http://coralcea.ca/jasper/getBpData"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/execute"/>
+                    <property name="config-ref" value="Jasper"/>
+                    <property name="auxiliary;index" value="8"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                </properties>
+            </endpoint>
+            <pattern name="Get BloodPressure Data" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="9"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dtademo.bloodpressuremonitor.GetBpData"/>
                         <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;index" value="10"/>
+                        <property name="auxiliary;wrapIn" value="10"/>
                     </property-collection>
                 </properties>
-                <description></description>
             </pattern>
         </lane>
     </flow>
