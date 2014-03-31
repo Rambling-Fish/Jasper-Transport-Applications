@@ -1,0 +1,53 @@
+@prefix :      <http://coralcea.ca/jasper/Sms/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix jasper: <http://coralcea.ca/jasper/> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+
+:SmsPostReq  a           owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :bodySms
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :fromSms
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      :logId
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :toSms
+                         ] .
+
+:dta-sms-terminator  a  dta:DTA ;
+        dta:operation  :sendSms .
+
+:sendSms  a              dta:Operation ;
+        dta:destination  "dta-sms-terminator/sendsms/a8ad9225-75f8-4c59-8275-5994e9d8a031"^^xsd:string ;
+        dta:input        :SmsPostReq ;
+        dta:kind         dta:Post .
+
+:fromSms  a          owl:DatatypeProperty ;
+        rdfs:domain  :SmsPostReq ;
+        rdfs:range   xsd:string .
+
+:logId  a            owl:DatatypeProperty ;
+        rdfs:domain  :SmsPostReq ;
+        rdfs:range   xsd:string .
+
+:toSms  a            owl:DatatypeProperty ;
+        rdfs:domain  :SmsPostReq ;
+        rdfs:range   xsd:string .
+
+jasper:dtamodel-sms-terminator
+        a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dta.smsterminator"^^xsd:string .
+
+:bodySms  a          owl:DatatypeProperty ;
+        rdfs:domain  :SmsPostReq ;
+        rdfs:range   xsd:string .

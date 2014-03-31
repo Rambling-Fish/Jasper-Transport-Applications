@@ -24,6 +24,7 @@
         <module>dta-room-temperature-E</module>
         <module>dta-nurse-call-generator</module>
         <module>dta-building-mgmt-generator</module>
+        <module>dta-sms-terminator</module>
     </modules>
     <build>
        <plugins>
