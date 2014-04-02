@@ -1,0 +1,8 @@
+@prefix :      <http://coralcea.ca/jasper/vocabulary/> .
+@prefix jasper: <http://coralcea.ca/jasper/> .
+@prefix demo: <http://coralcea.ca/demo/> .
+
+jasper:jtaH  :is        :jta ;
+             :param     demo:wardId ;
+             :provides  demo:wardHeartRateData ;
+             :queue     "jms.jasper.demo-wardinfo-H.jasperLab.0.queue" .

@@ -25,6 +25,7 @@
         <module>dta-nurse-call-generator</module>
         <module>dta-building-mgmt-generator</module>
         <module>dta-sms-terminator</module>
+        <module>demo-wardinfo-H</module>
     </modules>
     <build>
        <plugins>
