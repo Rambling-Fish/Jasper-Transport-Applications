@@ -336,7 +336,7 @@
 	<dependency>
 <groupId>org.jasper.jTransports</groupId>
 <artifactId>JasperConnector</artifactId>
-<version>1.0</version>
+<version>1.0-SNAPSHOT</version>
 </dependency>
 	<dependency>
 		<groupId>org.mule.modules</groupId>
