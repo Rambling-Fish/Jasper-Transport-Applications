@@ -6,6 +6,8 @@
 @prefix bpSensor: <http://coralcea.ca/jasper/bpSensor/> .
 @prefix dta:   <http://coralcea.ca/2014/01/dta#> .
 
+:MsData  a      owl:Class .
+
 bpSensor:diastolic  a  owl:DatatypeProperty ;
         rdfs:domain  :BpData ;
         rdfs:range   xsd:integer .
@@ -15,9 +17,10 @@ bpSensor:systolic  a  owl:DatatypeProperty ;
         rdfs:range   xsd:integer .
 
 :BpData  a               owl:Class ;
+        rdfs:subClassOf  :MsData ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
-                           owl:onProperty   :timestamp
+                           owl:onProperty   bpSensor:diastolic
                          ] ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
@@ -25,7 +28,7 @@ bpSensor:systolic  a  owl:DatatypeProperty ;
                          ] ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
-                           owl:onProperty   bpSensor:diastolic
+                           owl:onProperty   :timestamp
                          ] .
 
 :timestamp  a        owl:DatatypeProperty ;
@@ -41,8 +44,9 @@ bpSensor:systolic  a  owl:DatatypeProperty ;
 :dta-B  a                owl:Ontology ;
         dta:basepackage  "org.jasper.dtademo.bloodpressuremonitor"^^xsd:string .
 
-:bpData  a          owl:ObjectProperty ;
-        rdfs:range  :BpData .
+:bpData  a                  owl:ObjectProperty ;
+        rdfs:range          :BpData ;
+        rdfs:subPropertyOf  :msData .
 
 :bpSID  a            owl:DatatypeProperty ;
         rdfs:domain  :BpDataReq ;
@@ -57,3 +61,6 @@ bpSensor:systolic  a  owl:DatatypeProperty ;
         dta:input        :BpDataReq ;
         dta:kind         dta:Get ;
         dta:output       :bpData .
+
+:msData  a          owl:ObjectProperty ;
+        rdfs:range  :MsData .

@@ -6,6 +6,8 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix dta:   <http://coralcea.ca/2014/01/dta#> .
 
+:MsData  a      owl:Class .
+
 :dta-D  a                owl:Ontology ;
         dta:basepackage  "org.jasper.dtademo.heartratemonitor"^^xsd:string .
 
@@ -18,13 +20,14 @@
         rdfs:range   xsd:string .
 
 :HrData  a               owl:Class ;
-        dta:restriction  [ a                owl:Restriction ;
-                           owl:cardinality  "1"^^xsd:int ;
-                           owl:onProperty   hrSensor:bpm
-                         ] ;
+        rdfs:subClassOf  :MsData ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
                            owl:onProperty   :timestamp
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   hrSensor:bpm
                          ] ;
         dta:x            "462"^^xsd:int ;
         dta:y            "15"^^xsd:int .
@@ -35,8 +38,12 @@
         dta:x          "15"^^xsd:int ;
         dta:y          "15"^^xsd:int .
 
-:hrData  a          owl:ObjectProperty ;
-        rdfs:range  :HrData .
+:hrData  a                  owl:ObjectProperty ;
+        rdfs:range          :HrData ;
+        rdfs:subPropertyOf  :msData .
+
+:msData  a          owl:ObjectProperty ;
+        rdfs:range  :MsData .
 
 :HrDataReq  a            owl:Class ;
         dta:restriction  [ a                owl:Restriction ;
