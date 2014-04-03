@@ -2,25 +2,23 @@
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="dta-room-temperature">
     <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
         <properties>
-            <property name="application" value="dta-room-temperature-E"/>
             <property name="model" value="dta-room-temperature-E.dta"/>
-            <property name="updated"/>
+            <property name="application" value="dta-room-temperature-E"/>
             <property name="vendor" value="jasper"/>
             <property name="name" value="Jasper"/>
+            <property name="url" value="${jasperUrl}"/>
             <property name="auxiliary;index" value="1"/>
-            <property name="url" value=""/>
             <property name="version" value="1.0"/>
         </properties>
-        <description></description>
     </global-element>
-    <flow SubFlow="false" name="dta-room-temperature-E-Get-Flow" entity-id="0798b848-79e6-4cb4-abfd-646967056560">
+    <flow SubFlow="false" name="dta-room-temperature-E-Get-Flow" entity-id="9504f247-1fba-4114-87f1-7f1017a9ee1a">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="2"/>
             <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="2"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -41,7 +39,6 @@
                     <property name="auxiliary;index" value="4"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dtademo.roomtemperature.GetRoomTemp"/>
-                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="5"/>
                         <property name="auxiliary;wrapIn" value="5"/>
                     </property-collection>
@@ -49,14 +46,14 @@
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="dta-room-temperatureFlow1" entity-id="730cbe07-0ee0-4644-8572-61ce4d3a5fd4">
+    <flow SubFlow="false" name="dta-room-temperatureFlow1" entity-id="62923358-01c8-45a5-bdd6-11f1d8710f5f">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="6"/>
             <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="6"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -77,7 +74,6 @@
                     <property name="auxiliary;index" value="8"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dtademo.roomtemperature.UpdateRoomTemp"/>
-                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="9"/>
                         <property name="auxiliary;wrapIn" value="9"/>
                     </property-collection>
