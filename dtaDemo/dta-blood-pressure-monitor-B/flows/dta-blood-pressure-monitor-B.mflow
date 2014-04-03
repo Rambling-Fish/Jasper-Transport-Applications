@@ -2,25 +2,22 @@
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="dta-blood-pressure-monitor-B">
     <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
         <properties>
-            <property name="application" value="dta-blood-pressure-monitor-B"/>
             <property name="model" value="dta-blood-pressure-monitor-B.dta"/>
-            <property name="updated"/>
+            <property name="application" value="dta-blood-pressure-monitor-B"/>
             <property name="vendor" value="jasper"/>
             <property name="name" value="Jasper"/>
+            <property name="url" value="${jasperUrl}"/>
             <property name="auxiliary;index" value="1"/>
-            <property name="url" value=""/>
             <property name="version" value="1.0"/>
         </properties>
-        <description></description>
     </global-element>
-    <flow SubFlow="false" name="dta-blood-pressure-monitor-BFlow1" entity-id="320b03b9-2103-40f3-a38e-a5f31d7c6043">
+    <flow SubFlow="false" name="dta-blood-pressure-monitor-BFlow1" entity-id="d525076c-548f-43d8-b8cc-66233f007b46">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
-            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="2"/>
             <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="2"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -47,9 +44,9 @@
                     <property name="responseTransformer-refs"/>
                     <property name="method"/>
                     <property name="user"/>
-                    <property name="auxiliary;index" value="3"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
+                    <property name="auxiliary;index" value="3"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
@@ -60,7 +57,6 @@
                     <property name="auxiliary;index" value="4"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dtademo.bloodpressuremonitor.GetBpData"/>
-                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="5"/>
                         <property name="auxiliary;wrapIn" value="5"/>
                     </property-collection>
@@ -74,20 +70,19 @@
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="mapper-ref"/>
-                    <property name="auxiliary;index" value="6"/>
                     <property name="mimeType"/>
+                    <property name="auxiliary;index" value="6"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="dta-blood-pressure-monitor-BFlow2" entity-id="8bedbf03-aa7b-4b6b-9d1e-15fd2258f557">
+    <flow SubFlow="false" name="dta-blood-pressure-monitor-BFlow2" entity-id="bd48c2f5-f8db-4607-b2ac-621527b3199b">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
-            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="7"/>
             <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="7"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -108,7 +103,6 @@
                     <property name="auxiliary;index" value="9"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dtademo.bloodpressuremonitor.GetBpData"/>
-                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="10"/>
                         <property name="auxiliary;wrapIn" value="10"/>
                     </property-collection>
