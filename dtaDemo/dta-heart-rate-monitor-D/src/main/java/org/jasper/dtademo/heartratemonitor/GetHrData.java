@@ -2,7 +2,9 @@ package org.jasper.dtademo.heartratemonitor;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,22 +21,66 @@ import org.apache.log4j.Logger;
 public class GetHrData implements Callable {
 
 	private static final SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSSZ");
-	
-	private static final HrDataImpl[] shrData = new HrDataImpl[600];
-	static{
-		int MAX_HR = 145;
-		int MIN_HR = 45;
-		
-		for(int i = 0;i<shrData.length;i++){
-			int bpm = MIN_HR + (int)(Math.random() * ((MAX_HR - MIN_HR) + 1));
-			String timestamp = dt.format(new Date());
 
-			shrData[i] = new HrDataImpl();
-			shrData[i].setBpm(bpm);
-			shrData[i].setTimestamp(timestamp);
-		}
-		
-	}	
+    private static final Map<String, SensorData> SENSORS;
+    
+    private static final SensorData SENSOR_DATA_2K;
+    private static final SensorData SENSOR_DATA_5K;
+    private static final SensorData SENSOR_DATA_10K;
+    private static final SensorData SENSOR_DATA_20K;
+    private static final SensorData SENSOR_DATA_30K;
+    private static final SensorData SENSOR_DATA_40K;
+    private static final SensorData SENSOR_DATA_50K;
+    private static final SensorData SENSOR_DATA_60K;
+    private static final SensorData SENSOR_DATA_70K;
+    private static final SensorData SENSOR_DATA_80K;
+    private static final SensorData SENSOR_DATA_90K;
+    private static final SensorData SENSOR_DATA_100K;
+    
+    static{
+        SENSOR_DATA_2K  = new SensorData(generateArray(13));
+        SENSOR_DATA_5K  = new SensorData(generateArray(32));
+        SENSOR_DATA_10K = new SensorData(generateArray(63));
+        SENSOR_DATA_20K = new SensorData(generateArray(126));
+        SENSOR_DATA_30K = new SensorData(generateArray(190));
+        SENSOR_DATA_40K = new SensorData(generateArray(253));
+        SENSOR_DATA_50K = new SensorData(generateArray(317));
+        SENSOR_DATA_60K = new SensorData(generateArray(380));
+        SENSOR_DATA_70K = new SensorData(generateArray(443));
+        SENSOR_DATA_80K = new SensorData(generateArray(507));
+        SENSOR_DATA_90K = new SensorData(generateArray(570));
+        SENSOR_DATA_100K = new SensorData(generateArray(633));
+
+        Map<String, SensorData> aMap = new HashMap<String, SensorData>();
+    
+        aMap.put("2k", SENSOR_DATA_2K);
+        aMap.put("5k", SENSOR_DATA_5K);
+        aMap.put("10k", SENSOR_DATA_10K);
+        aMap.put("20k", SENSOR_DATA_20K);
+        aMap.put("30k", SENSOR_DATA_30K);
+        aMap.put("40k", SENSOR_DATA_40K);
+        aMap.put("50k", SENSOR_DATA_50K);
+        aMap.put("60k", SENSOR_DATA_60K);
+        aMap.put("70k", SENSOR_DATA_70K);
+        aMap.put("80k", SENSOR_DATA_80K);
+        aMap.put("90k", SENSOR_DATA_90K);
+        aMap.put("100k", SENSOR_DATA_100K);
+
+        SENSORS = Collections.unmodifiableMap(aMap);
+    }
+	
+    private static HrData[] generateArray(int size){
+        HrData[] array = new HrData[size];
+        int MAX_HR = 99;
+        int MIN_HR = 45;
+        for(int i = 0;i<array.length;i++){
+                int bpm = MIN_HR + (int)(Math.random() * ((MAX_HR - MIN_HR) + 1));
+                array[i] = new HrDataImpl();
+                array[i].setBpm(bpm);
+                array[i].setTimestamp(dt.format(new Date()));
+        }
+        return array;
+    }
 	
 	private Map<String, ArrayList<HrDataImpl>> hrSensors = new ConcurrentHashMap<String, ArrayList<HrDataImpl>>();	
 
@@ -79,11 +125,11 @@ public class GetHrData implements Callable {
 			muleMessage.setOutboundProperty("statusCode", 400);  // Bad request
 			return new HrData[] {null};
 		}
-		
-		if(isSpecialSID(hrSid)){
-			return specialSensorInfo(hrSid);
+
+		if(SENSORS.containsKey(hrSid)) {
+			return SENSORS.get(hrSid).getSensorData();
 		}
-		
+
 		int MAX_HR = 145;
 		int MIN_HR = 45;
 		int bpm = MIN_HR + (int)(Math.random() * ((MAX_HR - MIN_HR) + 1));
@@ -108,17 +154,6 @@ public class GetHrData implements Callable {
 		return hrData.toArray(new HrDataImpl[]{});							
 	}
 
-	private HrData[] specialSensorInfo(String sID) {
-		if("100k".equals(sID)){
-			return shrData;
-		}
-		return new HrData[] {null};
-	}
-
-	private boolean isSpecialSID(String sID) {
-		return ("100k".equals(sID));
-	}
-	
 	// method below is temporary and to be removed once above JSC code can be tested
 	/**
 	 * @param String
@@ -157,9 +192,9 @@ public class GetHrData implements Callable {
 			muleMessage.setOutboundProperty("statusCode", 400);  // Bad request
 			return new HrData[] {null};
 		}
-		
-		if(isSpecialSID(hrSid)){
-			return specialSensorInfo(hrSid);
+
+		if(SENSORS.containsKey(hrSid)) {
+			return SENSORS.get(hrSid).getSensorData();
 		}
 		
 		int MAX_HR = 145;

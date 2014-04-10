@@ -6,8 +6,8 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
     <jasper:config name="Jasper" vendor="jasper" application="dta-EMR-C" version="1.0" doc:name="Jasper" model="dta-EMR-C.dta" url="${jasperUrl}"/>
-    <flow name="APACHE-8081-dta-EMR-C-Flow" doc:name="APACHE-8081-dta-EMR-C-Flow">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="patientInfo" doc:name="HTTP"/>
+    <flow name="HTTP-8085-dta-EMR-C-Flow" doc:name="HTTP-8085-dta-EMR-C-Flow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8085" path="patientInfo" doc:name="HTTP"/>
         <component doc:name="Provide PatientInfo">
             <singleton-object class="org.jasper.dtademo.emr.GetPatientInfo"/>
         </component>

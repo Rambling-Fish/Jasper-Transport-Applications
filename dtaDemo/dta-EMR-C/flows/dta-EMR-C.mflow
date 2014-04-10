@@ -6,25 +6,27 @@
             <property name="application" value="dta-EMR-C"/>
             <property name="vendor" value="jasper"/>
             <property name="name" value="Jasper"/>
-            <property name="url" value="${jasperUrl}"/>
             <property name="auxiliary;index" value="1"/>
+            <property name="url" value="${jasperUrl}"/>
             <property name="version" value="1.0"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="APACHE-8081-dta-EMR-C-Flow" entity-id="ee65c739-6d4a-4c00-bfe5-fa457e8b96ab">
+    <flow SubFlow="false" name="HTTP-8085-dta-EMR-C-Flow" entity-id="bf66524e-21cb-4214-a5be-570c82dd44a3">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
+            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
             <property name="auxiliary;index" value="2"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
+        <description></description>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
-            <graphicalData x="0" y="0" width="0" height="0"/>
+            <graphicalData x="14" y="39" width="406" height="179"/>
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="port" value="8081"/>
+                    <property name="port" value="8085"/>
                     <property name="host" value="localhost"/>
                     <property name="businessEventsLabel"/>
                     <property name="followRedirects"/>
@@ -44,9 +46,9 @@
                     <property name="responseTransformer-refs"/>
                     <property name="method"/>
                     <property name="user"/>
+                    <property name="auxiliary;index" value="3"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
-                    <property name="auxiliary;index" value="3"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
@@ -57,6 +59,7 @@
                     <property name="auxiliary;index" value="4"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dtademo.emr.GetPatientInfo"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="5"/>
                         <property name="auxiliary;wrapIn" value="5"/>
                     </property-collection>
@@ -70,19 +73,20 @@
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="mapper-ref"/>
-                    <property name="mimeType"/>
                     <property name="auxiliary;index" value="6"/>
+                    <property name="mimeType"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="JSC-8080-dta-EMR-C-Flow" entity-id="7561c9ab-610e-42ce-8a78-eec99105c4c6">
+    <flow SubFlow="false" name="JSC-8080-dta-EMR-C-Flow" entity-id="f2474ae5-ab73-44f4-a406-6a38506c4e2b">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
+            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
             <property name="auxiliary;index" value="7"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -103,6 +107,7 @@
                     <property name="auxiliary;index" value="9"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dtademo.emr.GetPatientInfo"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="10"/>
                         <property name="auxiliary;wrapIn" value="10"/>
                     </property-collection>

@@ -6,14 +6,14 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
     <jasper:config name="Jasper" vendor="jasper" application="dta-blood-pressure-monitor-B" version="1.0" doc:name="Jasper" model="dta-blood-pressure-monitor-B.dta" url="${jasperUrl}"/>
-    <flow name="dta-blood-pressure-monitor-BFlow1" doc:name="dta-blood-pressure-monitor-BFlow1">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="bpData" doc:name="HTTP"/>
+    <flow name="HTTP-8084-dta-blood-pressure-monitor-B-Flow" doc:name="HTTP-8084-dta-blood-pressure-monitor-B-Flow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8084" path="bpData" doc:name="HTTP"/>
         <component doc:name="Get BloodPressure Data">
             <singleton-object class="org.jasper.dtademo.bloodpressuremonitor.GetBpData"/>
         </component>
         <json:object-to-json-transformer doc:name="Object to JSON"/>
     </flow>
-    <flow name="dta-blood-pressure-monitor-BFlow2" doc:name="dta-blood-pressure-monitor-BFlow2">
+    <flow name="JSC-8080-dta-blood-pressure-monitor-B-Flow" doc:name="JSC-8080-dta-blood-pressure-monitor-B-Flow">
         <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/getBpData" doc:name="Jasper"/>
         <component doc:name="Get BloodPressure Data">
             <singleton-object class="org.jasper.dtademo.bloodpressuremonitor.GetBpData"/>

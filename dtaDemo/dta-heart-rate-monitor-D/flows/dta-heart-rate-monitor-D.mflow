@@ -6,18 +6,19 @@
             <property name="application" value="dta-heart-rate-monitor-D"/>
             <property name="vendor" value="jasper"/>
             <property name="name" value="Jasper"/>
-            <property name="url" value="${jasperUrl}"/>
             <property name="auxiliary;index" value="1"/>
+            <property name="url" value="${jasperUrl}"/>
             <property name="version" value="1.0"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="JSC-8080-dta-heart-rate-monitor-D-Flow" entity-id="8f96f95b-87a1-45a6-a10e-cd9884f35b8c">
+    <flow SubFlow="false" name="JSC-8080-dta-heart-rate-monitor-D-Flow" entity-id="c32b792b-4af7-485c-b250-725608e18cfd">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
+            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
             <property name="auxiliary;index" value="2"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -38,6 +39,7 @@
                     <property name="auxiliary;index" value="4"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dtademo.heartratemonitor.GetHrData"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="5"/>
                         <property name="auxiliary;wrapIn" value="5"/>
                     </property-collection>
@@ -45,44 +47,47 @@
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="APACHE-8081-dta-heart-rate-monitor-D-Flow" entity-id="a30ddfaf-ad28-42b0-a1d8-7b8034a687f3">
+    <flow SubFlow="false" name="HTTP-8086-dta-heart-rate-monitor-D-Flow" entity-id="4776dea0-9f22-4a8b-9137-87256e987632">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
+            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
             <property name="auxiliary;index" value="6"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
+        <description></description>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
-            <graphicalData x="0" y="0" width="0" height="0"/>
+            <graphicalData x="14" y="190" width="407" height="179"/>
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="port" value="8081"/>
+                    <property name="auxiliary;erased;contentType" value="true"/>
+                    <property name="port" value="8086"/>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
                     <property name="host" value="localhost"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="followRedirects"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="keep-alive"/>
-                    <property name="contentType"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="password"/>
+                    <property name="keep-alive" value="false"/>
+                    <property name="contentType" value=""/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="password" value=""/>
                     <property name="exchange-pattern" value="request-response"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property name="ref"/>
-                    <property name="transformer-refs"/>
-                    <property name="httpLabel"/>
-                    <property name="address"/>
+                    <property name="ref" value=""/>
+                    <property name="httpLabel" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="updated"/>
+                    <property name="address" value=""/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="encoding" value=""/>
                     <property name="path" value="hrData"/>
-                    <property name="encoding"/>
-                    <property name="responseTransformer-refs"/>
-                    <property name="method"/>
-                    <property name="user"/>
-                    <property name="responseTimeout"/>
-                    <property name="mimeType"/>
+                    <property name="responseTransformer-refs" value=""/>
+                    <property name="user" value=""/>
                     <property name="auxiliary;index" value="7"/>
-                    <property name="connector-ref"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="mimeType" value=""/>
+                    <property name="connector-ref" value=""/>
                 </properties>
+                <description></description>
             </endpoint>
             <pattern name="Get HeartRate Data" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#2">
                 <graphicalData x="0" y="0" width="0" height="0"/>
@@ -91,6 +96,7 @@
                     <property name="auxiliary;index" value="8"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dtademo.heartratemonitor.GetHrData"/>
+                        <property name="isProcessed$$$$" value="true"/>
                         <property name="auxiliary;index" value="9"/>
                         <property name="auxiliary;wrapIn" value="9"/>
                     </property-collection>
@@ -104,8 +110,8 @@
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="mapper-ref"/>
-                    <property name="mimeType"/>
                     <property name="auxiliary;index" value="10"/>
+                    <property name="mimeType"/>
                 </properties>
             </pattern>
         </lane>
