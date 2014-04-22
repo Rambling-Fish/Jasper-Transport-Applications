@@ -6,6 +6,6 @@ http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/j
     <jasper:config name="Jasper" vendor="jasper" application="dta-sms-terminator" version="1.0" model="dta-sms-terminator.dta" doc:name="Jasper"/>
     <flow name="dta-sms-terminatorFlow1" doc:name="dta-sms-terminatorFlow1">
         <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/Sms/sendSms" doc:name="Jasper"/>
-        <component class="org.jasper.dta.smsterminator.LogSmsRequest" doc:name="Java (log SMS)"/>
+        <component class="org.jasper.dta.smsterminator.SendSms" doc:name="Java (send SMS - does nothing)"/>
     </flow>
 </mule>

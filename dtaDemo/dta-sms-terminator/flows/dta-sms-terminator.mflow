@@ -11,7 +11,7 @@
             <property name="version" value="1.0"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="dta-sms-terminatorFlow1" entity-id="1d47e269-fe91-47a1-bee3-e938971e239d">
+    <flow SubFlow="false" name="dta-sms-terminatorFlow1" entity-id="c0b7896d-76ca-4648-a86f-5f3cd116870d">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -23,7 +23,7 @@
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="Jasper (Streaming)#1">
-                <graphicalData x="19" y="136" width="68" height="67"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="operation" value="http://coralcea.ca/jasper/Sms/sendSms"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/execute"/>
@@ -32,12 +32,19 @@
                     <property name="exchange-pattern" value="one-way"/>
                 </properties>
             </endpoint>
-            <pattern name="Java (log SMS)" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
-                <graphicalData x="147" y="136" width="88" height="67"/>
+            <pattern name="Java (send SMS - does nothing)" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="class" value="org.jasper.dta.smsterminator.LogSmsRequest"/>
+                    <property name="ref" value=""/>
+                    <property name="updated"/>
+                    <property name="class" value="org.jasper.dta.smsterminator.SendSms"/>
                     <property name="auxiliary;index" value="4"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;635302643">
+                        <property name="ref" value=""/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
                 </properties>
+                <description></description>
             </pattern>
         </lane>
     </flow>
