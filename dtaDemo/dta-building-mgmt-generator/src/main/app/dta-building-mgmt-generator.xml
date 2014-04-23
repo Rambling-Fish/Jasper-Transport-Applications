@@ -5,7 +5,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
-    <jasper:config name="Jasper" vendor="jasper" application="dta-building-mgmt-generator" version="1.0" doc:name="Jasper" model="dta-building-mgmt-generator.dta"/>
+    <jasper:config name="Jasper" vendor="jasper" application="dta-building-mgmt-generator" version="1.0" doc:name="Jasper" model="dta-building-mgmt-generator.dta" url="${jasperUrl}"/>
     <flow name="dta-building-mgmt-generatorFlow1" doc:name="dta-building-mgmt-generatorFlow1">
         <http:inbound-endpoint exchange-pattern="one-way" host="localhost" port="8083" path="rbm" doc:name="HTTP"/>
         <choice doc:name="Choice">

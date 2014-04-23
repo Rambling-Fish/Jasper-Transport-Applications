@@ -2,16 +2,18 @@
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="dta-sms-terminator">
     <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
         <properties>
-            <property name="model" value="dta-sms-terminator.dta"/>
             <property name="application" value="dta-sms-terminator"/>
+            <property name="model" value="dta-sms-terminator.dta"/>
+            <property name="updated"/>
             <property name="vendor" value="jasper"/>
             <property name="name" value="Jasper"/>
             <property name="auxiliary;index" value="1"/>
-            <property name="url"/>
+            <property name="url" value="${jasperUrl}"/>
             <property name="version" value="1.0"/>
         </properties>
+        <description></description>
     </global-element>
-    <flow SubFlow="false" name="dta-sms-terminatorFlow1" entity-id="c0b7896d-76ca-4648-a86f-5f3cd116870d">
+    <flow SubFlow="false" name="dta-sms-terminatorFlow1" entity-id="ad8710b6-a274-404a-b923-df41ffe8dafe">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -35,16 +37,9 @@
             <pattern name="Java (send SMS - does nothing)" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="ref" value=""/>
-                    <property name="updated"/>
                     <property name="class" value="org.jasper.dta.smsterminator.SendSms"/>
                     <property name="auxiliary;index" value="4"/>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;635302643">
-                        <property name="ref" value=""/>
-                        <property name="isProcessed$$$$" value="true"/>
-                    </property-collection>
                 </properties>
-                <description></description>
             </pattern>
         </lane>
     </flow>
