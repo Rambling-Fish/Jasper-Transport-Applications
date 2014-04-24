@@ -10,10 +10,10 @@ http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/j
         <http:inbound-endpoint exchange-pattern="one-way" host="0.0.0.0" port="8083" path="rbm" doc:name="HTTP"/>
         <choice doc:name="Choice">
             <when expression="#[payload.contains('/roomTempUpdate?')]">
-                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/BuildingMgmt/sendRoomTempUpdate" doc:name="Jasper (sendRoomTempUpdate)"/>
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/BuildingMgmt/sendRoomTempUpdate" doc:name="Jasper (sendRoomTempUpdate)" exchangePattern="one_way"/>
             </when>
             <when expression="#[payload.contains('/doorStateChange?')]">
-                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/BuildingMgmt/sendDoorStateChange" doc:name="Jasper (sendDoorStateChange)"/>
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/BuildingMgmt/sendDoorStateChange" doc:name="Jasper (sendDoorStateChange)" exchangePattern="one_way"/>
             </when>
             <otherwise>
                 <logger message="unknown event, path= #[payload]" level="INFO" doc:name="Log unknown event"/>

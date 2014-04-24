@@ -11,7 +11,7 @@
             <property name="version" value="1.0"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="dta-building-mgmt-generatorFlow1" entity-id="5b3e39b1-7a5d-4577-9f22-8fd1eab34e3a">
+    <flow SubFlow="false" name="dta-building-mgmt-generatorFlow1" entity-id="ce32e490-90bf-4e10-a62a-c5d0157355e8">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -25,48 +25,47 @@
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="auxiliary;erased;contentType" value="true"/>
                     <property name="port" value="8083"/>
-                    <property name="auxiliary;erased;mimeType" value="true"/>
                     <property name="host" value="0.0.0.0"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="keep-alive" value="false"/>
-                    <property name="contentType" value=""/>
-                    <property name="disableTransportTransformer" value="false"/>
-                    <property name="password" value=""/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
                     <property name="exchange-pattern" value="one-way"/>
-                    <property name="ref" value=""/>
-                    <property name="httpLabel" value=""/>
-                    <property name="transformer-refs" value=""/>
-                    <property name="updated"/>
-                    <property name="address" value=""/>
-                    <property name="auxiliary;erased;encoding" value="true"/>
-                    <property name="encoding" value=""/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
                     <property name="path" value="rbm"/>
-                    <property name="responseTransformer-refs" value=""/>
-                    <property name="user" value=""/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method"/>
+                    <property name="user"/>
                     <property name="auxiliary;index" value="3"/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="mimeType" value=""/>
-                    <property name="connector-ref" value=""/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
                 </properties>
-                <description></description>
             </endpoint>
             <splitter index="4" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name=";INDEX" value="4"/>
-                    <property-collection name="b2d56e70-5393-4ad3-8258-9f876923ed47">
+                    <property-collection name="681a3b38-f6be-4c29-9250-17c7fc36d43d">
                         <property name="choice.otherwise" value="true"/>
                         <property-collection name="choice.attributes"/>
                     </property-collection>
-                    <property-collection name="5ef2d8b1-6747-4688-919a-96ae35e4dbde">
+                    <property-collection name="1c052bab-4f5f-4676-aebe-54e750891b6f">
                         <property name="choice.expression" value="#[payload.contains('/roomTempUpdate?')]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[payload.contains('/roomTempUpdate?')]"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="08b9c1e4-5dd4-49a8-b547-7e51533a4a05">
+                    <property-collection name="9d865df2-e896-42f4-aac0-b98d5e47dc5b">
                         <property name="choice.expression" value="#[payload.contains('/doorStateChange?')]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[payload.contains('/doorStateChange?')]"/>
@@ -76,17 +75,17 @@
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
                     <properties>
                         <property name=";INDEX" value="4"/>
-                        <property-collection name="b2d56e70-5393-4ad3-8258-9f876923ed47">
+                        <property-collection name="681a3b38-f6be-4c29-9250-17c7fc36d43d">
                             <property name="choice.otherwise" value="true"/>
                             <property-collection name="choice.attributes"/>
                         </property-collection>
-                        <property-collection name="5ef2d8b1-6747-4688-919a-96ae35e4dbde">
+                        <property-collection name="1c052bab-4f5f-4676-aebe-54e750891b6f">
                             <property name="choice.expression" value="#[payload.contains('/roomTempUpdate?')]"/>
                             <property-collection name="choice.attributes">
 <property name="expression" value="#[payload.contains('/roomTempUpdate?')]"/>
                             </property-collection>
                         </property-collection>
-                        <property-collection name="08b9c1e4-5dd4-49a8-b547-7e51533a4a05">
+                        <property-collection name="9d865df2-e896-42f4-aac0-b98d5e47dc5b">
                             <property name="choice.expression" value="#[payload.contains('/doorStateChange?')]"/>
                             <property-collection name="choice.attributes">
 <property name="expression" value="#[payload.contains('/doorStateChange?')]"/>
@@ -95,33 +94,37 @@
                     </properties>
                 </pattern>
                 <compartment entity-id="compartment#1">
-                    <lane hadOnlyOneElement="false" index="6" isChoiceOtherwiseLane="false" entity-id="5ef2d8b1-6747-4688-919a-96ae35e4dbde">
+                    <lane hadOnlyOneElement="false" index="6" isChoiceOtherwiseLane="false" entity-id="1c052bab-4f5f-4676-aebe-54e750891b6f">
                         <pattern name="Jasper (sendRoomTempUpdate)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#2">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
+<property name="updated"/>
 <property name="request" value="http://coralcea.ca/jasper/BuildingMgmt/sendRoomTempUpdate"/>
 <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/send"/>
-<property name="exchangePattern"/>
+<property name="exchangePattern" value="one_way"/>
 <property name="config-ref" value="Jasper"/>
 <property name="auxiliary;index" value="6"/>
-<property name="timeout"/>
+<property name="timeout" value="10"/>
                             </properties>
+                            <description></description>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="8" isChoiceOtherwiseLane="false" entity-id="08b9c1e4-5dd4-49a8-b547-7e51533a4a05">
+                    <lane hadOnlyOneElement="false" index="8" isChoiceOtherwiseLane="false" entity-id="9d865df2-e896-42f4-aac0-b98d5e47dc5b">
                         <pattern name="Jasper (sendDoorStateChange)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#3">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
+<property name="updated"/>
 <property name="request" value="http://coralcea.ca/jasper/BuildingMgmt/sendDoorStateChange"/>
 <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/send"/>
-<property name="exchangePattern"/>
+<property name="exchangePattern" value="one_way"/>
 <property name="config-ref" value="Jasper"/>
 <property name="auxiliary;index" value="8"/>
-<property name="timeout"/>
+<property name="timeout" value="10"/>
                             </properties>
+                            <description></description>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="10" isChoiceOtherwiseLane="true" entity-id="b2d56e70-5393-4ad3-8258-9f876923ed47">
+                    <lane hadOnlyOneElement="false" index="10" isChoiceOtherwiseLane="true" entity-id="681a3b38-f6be-4c29-9250-17c7fc36d43d">
                         <pattern name="Log unknown event" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>

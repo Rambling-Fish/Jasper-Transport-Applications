@@ -10,16 +10,16 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
         <http:inbound-endpoint exchange-pattern="one-way" host="0.0.0.0" port="8082" path="rnc" doc:name="HTTP"/>
         <choice doc:name="Choice">
             <when expression="#[payload.contains('/callNurse?')]">
-                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendCallNurse" doc:name="Jasper (sendCallNurse)"/>
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendCallNurse" doc:name="Jasper (sendCallNurse)" exchangePattern="one_way"/>
             </when>
             <when expression="#[payload.contains('/cancelCallNurse?')]">
-                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendCancelCallNurse" doc:name="Jasper (sendCancelCallNurse)"/>
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendCancelCallNurse" doc:name="Jasper (sendCancelCallNurse)" exchangePattern="one_way"/>
             </when>
             <when expression="#[payload.contains('/emergency?')]">
-                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendEmergency" doc:name="Jasper (sendEmergency)"/>
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendEmergency" doc:name="Jasper (sendEmergency)" exchangePattern="one_way"/>
             </when>
             <when expression="#[payload.contains('/cancelEmergency?')]">
-                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendCancelEmergency" doc:name="Jasper (sendCancelEmergency)"/>
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendCancelEmergency" doc:name="Jasper (sendCancelEmergency)" exchangePattern="one_way"/>
             </when>
             <otherwise>
                 <logger message="unknown event, path= #[payload]" level="INFO" doc:name="Log unknown event"/>
