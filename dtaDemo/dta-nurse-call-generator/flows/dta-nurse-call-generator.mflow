@@ -2,18 +2,16 @@
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="dta-nurse-call-generator">
     <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
         <properties>
-            <property name="application" value="dta-nurse-call-generator"/>
             <property name="model" value="dta-nurse-call-generator.dta"/>
-            <property name="updated"/>
+            <property name="application" value="dta-nurse-call-generator"/>
             <property name="vendor" value="jasper"/>
             <property name="name" value="Jasper"/>
             <property name="auxiliary;index" value="1"/>
             <property name="url" value="${jasperUrl}"/>
             <property name="version" value="1.0"/>
         </properties>
-        <description></description>
     </global-element>
-    <flow SubFlow="false" name="dta-nurse-call-generatorFlow1" entity-id="296940bd-b97a-4f1f-a6a8-f665fec3985a">
+    <flow SubFlow="false" name="dta-nurse-call-generatorFlow1" entity-id="773b328a-df74-4e9c-b49e-2900d5988fa9">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -27,100 +25,101 @@
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
+                    <property name="auxiliary;erased;contentType" value="true"/>
                     <property name="port" value="8082"/>
-                    <property name="host" value="localhost"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="followRedirects"/>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="host" value="0.0.0.0"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="keep-alive"/>
-                    <property name="contentType"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="password"/>
+                    <property name="keep-alive" value="false"/>
+                    <property name="contentType" value=""/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="password" value=""/>
                     <property name="exchange-pattern" value="one-way"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property name="ref"/>
-                    <property name="transformer-refs"/>
-                    <property name="httpLabel"/>
-                    <property name="address"/>
+                    <property name="ref" value=""/>
+                    <property name="httpLabel" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="updated"/>
+                    <property name="address" value=""/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="encoding" value=""/>
                     <property name="path" value="rnc"/>
-                    <property name="encoding"/>
-                    <property name="responseTransformer-refs"/>
-                    <property name="method"/>
-                    <property name="user"/>
+                    <property name="responseTransformer-refs" value=""/>
+                    <property name="user" value=""/>
                     <property name="auxiliary;index" value="3"/>
-                    <property name="responseTimeout"/>
-                    <property name="mimeType"/>
-                    <property name="connector-ref"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="mimeType" value=""/>
+                    <property name="connector-ref" value=""/>
                 </properties>
+                <description></description>
             </endpoint>
             <splitter index="4" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name=";INDEX" value="4"/>
-                    <property-collection name="f2320126-4f2d-420b-969a-33bc79e915a9">
-                        <property name="choice.expression" value="#[payload.contains('/callNurse?')]"/>
-                        <property-collection name="choice.attributes">
-                            <property name="expression" value="#[payload.contains('/callNurse?')]"/>
-                        </property-collection>
+                    <property-collection name="861d813a-2e5c-48e2-b9bf-ec5e9e65cd7d">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
                     </property-collection>
-                    <property-collection name="ea13eb77-95ab-44ea-906e-63cb957a02b7">
-                        <property name="choice.expression" value="#[payload.contains('/cancelEmergency?')]"/>
-                        <property-collection name="choice.attributes">
-                            <property name="expression" value="#[payload.contains('/cancelEmergency?')]"/>
-                        </property-collection>
-                    </property-collection>
-                    <property-collection name="7384d70b-6278-4d8b-919c-2f186b6bbba2">
+                    <property-collection name="b62043c9-fdbc-4f5e-bc28-7092e9dc663e">
                         <property name="choice.expression" value="#[payload.contains('/cancelCallNurse?')]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[payload.contains('/cancelCallNurse?')]"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="f8a34f95-72ac-42e7-860c-c24893921611">
+                    <property-collection name="90b45433-7f55-447d-af2a-ba58310abdb1">
+                        <property name="choice.expression" value="#[payload.contains('/callNurse?')]"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[payload.contains('/callNurse?')]"/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="3944aad2-3c0f-4673-ba4e-387c83d5c3d8">
+                        <property name="choice.expression" value="#[payload.contains('/cancelEmergency?')]"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[payload.contains('/cancelEmergency?')]"/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="deeb220a-3e4f-41a5-b917-f81b65521d81">
                         <property name="choice.expression" value="#[payload.contains('/emergency?')]"/>
                         <property-collection name="choice.attributes">
                             <property name="expression" value="#[payload.contains('/emergency?')]"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="a2e1481d-483f-48c0-b217-fc27fa82511c">
-                        <property name="choice.otherwise" value="true"/>
-                        <property-collection name="choice.attributes"/>
-                    </property-collection>
                 </properties>
                 <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
                     <properties>
                         <property name=";INDEX" value="4"/>
-                        <property-collection name="f2320126-4f2d-420b-969a-33bc79e915a9">
-                            <property name="choice.expression" value="#[payload.contains('/callNurse?')]"/>
-                            <property-collection name="choice.attributes">
-<property name="expression" value="#[payload.contains('/callNurse?')]"/>
-                            </property-collection>
+                        <property-collection name="861d813a-2e5c-48e2-b9bf-ec5e9e65cd7d">
+                            <property name="choice.otherwise" value="true"/>
+                            <property-collection name="choice.attributes"/>
                         </property-collection>
-                        <property-collection name="ea13eb77-95ab-44ea-906e-63cb957a02b7">
-                            <property name="choice.expression" value="#[payload.contains('/cancelEmergency?')]"/>
-                            <property-collection name="choice.attributes">
-<property name="expression" value="#[payload.contains('/cancelEmergency?')]"/>
-                            </property-collection>
-                        </property-collection>
-                        <property-collection name="7384d70b-6278-4d8b-919c-2f186b6bbba2">
+                        <property-collection name="b62043c9-fdbc-4f5e-bc28-7092e9dc663e">
                             <property name="choice.expression" value="#[payload.contains('/cancelCallNurse?')]"/>
                             <property-collection name="choice.attributes">
 <property name="expression" value="#[payload.contains('/cancelCallNurse?')]"/>
                             </property-collection>
                         </property-collection>
-                        <property-collection name="f8a34f95-72ac-42e7-860c-c24893921611">
+                        <property-collection name="90b45433-7f55-447d-af2a-ba58310abdb1">
+                            <property name="choice.expression" value="#[payload.contains('/callNurse?')]"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[payload.contains('/callNurse?')]"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="3944aad2-3c0f-4673-ba4e-387c83d5c3d8">
+                            <property name="choice.expression" value="#[payload.contains('/cancelEmergency?')]"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[payload.contains('/cancelEmergency?')]"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="deeb220a-3e4f-41a5-b917-f81b65521d81">
                             <property name="choice.expression" value="#[payload.contains('/emergency?')]"/>
                             <property-collection name="choice.attributes">
 <property name="expression" value="#[payload.contains('/emergency?')]"/>
                             </property-collection>
                         </property-collection>
-                        <property-collection name="a2e1481d-483f-48c0-b217-fc27fa82511c">
-                            <property name="choice.otherwise" value="true"/>
-                            <property-collection name="choice.attributes"/>
-                        </property-collection>
                     </properties>
                 </pattern>
                 <compartment entity-id="compartment#1">
-                    <lane hadOnlyOneElement="false" index="6" isChoiceOtherwiseLane="false" entity-id="f2320126-4f2d-420b-969a-33bc79e915a9">
+                    <lane hadOnlyOneElement="false" index="6" isChoiceOtherwiseLane="false" entity-id="90b45433-7f55-447d-af2a-ba58310abdb1">
                         <pattern name="Jasper (sendCallNurse)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#2">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -133,7 +132,7 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="8" isChoiceOtherwiseLane="false" entity-id="7384d70b-6278-4d8b-919c-2f186b6bbba2">
+                    <lane hadOnlyOneElement="false" index="8" isChoiceOtherwiseLane="false" entity-id="b62043c9-fdbc-4f5e-bc28-7092e9dc663e">
                         <pattern name="Jasper (sendCancelCallNurse)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#3">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -146,7 +145,7 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="10" isChoiceOtherwiseLane="false" entity-id="f8a34f95-72ac-42e7-860c-c24893921611">
+                    <lane hadOnlyOneElement="false" index="10" isChoiceOtherwiseLane="false" entity-id="deeb220a-3e4f-41a5-b917-f81b65521d81">
                         <pattern name="Jasper (sendEmergency)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#4">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -159,7 +158,7 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="12" isChoiceOtherwiseLane="false" entity-id="ea13eb77-95ab-44ea-906e-63cb957a02b7">
+                    <lane hadOnlyOneElement="false" index="12" isChoiceOtherwiseLane="false" entity-id="3944aad2-3c0f-4673-ba4e-387c83d5c3d8">
                         <pattern name="Jasper (sendCancelEmergency)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#5">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
@@ -172,7 +171,7 @@
                             </properties>
                         </pattern>
                     </lane>
-                    <lane hadOnlyOneElement="false" index="14" isChoiceOtherwiseLane="true" entity-id="a2e1481d-483f-48c0-b217-fc27fa82511c">
+                    <lane hadOnlyOneElement="false" index="14" isChoiceOtherwiseLane="true" entity-id="861d813a-2e5c-48e2-b9bf-ec5e9e65cd7d">
                         <pattern name="Log unknown event" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
