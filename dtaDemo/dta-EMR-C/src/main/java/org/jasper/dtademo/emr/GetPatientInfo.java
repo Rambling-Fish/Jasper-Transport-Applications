@@ -137,7 +137,7 @@ public class GetPatientInfo implements Callable {
 		
 		muleMessage.setOutboundProperty("statusCode", 200);  // Ok
 
-		return new PatientInfo[] {PATIENTS.get(patientId)};
+		return new PatientInfo[] {PATIENTS.get(patientId.toLowerCase())};
 	}
 
 	// method below is temporary and to be removed once above JSC code can be tested

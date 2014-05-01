@@ -131,8 +131,8 @@ public class GetBpData implements Callable {
 			return new BpData[] {null};
 		}
 
-		if(SENSORS.containsKey(bpSid)) {
-			return SENSORS.get(bpSid).getSensorData();
+		if(SENSORS.containsKey(bpSid.toLowerCase())) {
+			return SENSORS.get(bpSid.toLowerCase()).getSensorData();
 		}
 		
         int MAX_S = 145;

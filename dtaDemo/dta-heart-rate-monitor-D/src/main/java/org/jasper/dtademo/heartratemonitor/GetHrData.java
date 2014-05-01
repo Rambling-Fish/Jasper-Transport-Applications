@@ -126,8 +126,8 @@ public class GetHrData implements Callable {
 			return new HrData[] {null};
 		}
 
-		if(SENSORS.containsKey(hrSid)) {
-			return SENSORS.get(hrSid).getSensorData();
+		if(SENSORS.containsKey(hrSid.toLowerCase())) {
+			return SENSORS.get(hrSid.toLowerCase()).getSensorData();
 		}
 
 		int MAX_HR = 145;
