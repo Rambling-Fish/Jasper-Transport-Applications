@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
+    <jasper:config name="Jasper" vendor="jasper" application="dta-EMR-C" version="1.0" doc:name="Jasper" model="dta-EMR-C.dta" url="${jasperUrl}"/>
+    <flow name="HTTP-8085-dta-EMR-C-Flow" doc:name="HTTP-8085-dta-EMR-C-Flow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8085" path="patientInfo" doc:name="HTTP"/>
+        <component doc:name="Provide PatientInfo">
+            <singleton-object class="org.jasper.dtademo.emr.GetPatientInfo"/>
+        </component>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow>
+    <flow name="JSC-8080-dta-EMR-C-Flow" doc:name="JSC-8080-dta-EMR-C-Flow">
+        <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/getPatientInfo" doc:name="Jasper"/>
+        <component doc:name="Get PatientInfo">
+            <singleton-object class="org.jasper.dtademo.emr.GetPatientInfo"/>
+        </component>
+    </flow>
+</mule>

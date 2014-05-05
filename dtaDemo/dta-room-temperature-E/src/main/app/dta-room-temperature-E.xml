@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    <jasper:config name="Jasper" vendor="jasper" application="dta-room-temperature-E" version="1.0" doc:name="Jasper" model="dta-room-temperature-E.dta" url="${jasperUrl}"/>
+    <flow name="dta-room-temperature-E-Get-Flow" doc:name="dta-room-temperature-E-Get-Flow">
+        <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/getRoomTemp" doc:name="Jasper"/>
+        <component doc:name="GetRoomTemp">
+            <singleton-object class="org.jasper.dtademo.roomtemperature.GetRoomTemp"/>
+        </component>
+    </flow>
+    <flow name="dta-room-temperatureFlow1" doc:name="dta-room-temperatureFlow1">
+        <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/updateRoomTemp" doc:name="Jasper"/>
+        <component doc:name="UpdateRoomTemp">
+            <singleton-object class="org.jasper.dtademo.roomtemperature.UpdateRoomTemp"/>
+        </component>
+    </flow>
+</mule>

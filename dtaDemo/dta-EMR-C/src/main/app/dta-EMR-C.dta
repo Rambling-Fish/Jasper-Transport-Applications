@@ -1,0 +1,71 @@
+@prefix :      <http://coralcea.ca/jasper/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+
+:bed    a            owl:DatatypeProperty ;
+        rdfs:domain  :PatientInfo ;
+        rdfs:range   xsd:string .
+
+:patientID  a        owl:DatatypeProperty ;
+        rdfs:domain  :PatientInfoReq ;
+        rdfs:range   xsd:string .
+
+:hrSID  a            owl:DatatypeProperty ;
+        rdfs:domain  :PatientInfo ;
+        rdfs:range   xsd:string .
+
+:ward   a            owl:DatatypeProperty ;
+        rdfs:domain  :PatientInfo ;
+        rdfs:range   xsd:string .
+
+:PatientInfoReq  a       owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :patientID
+                         ] ;
+        dta:x            "15"^^xsd:int ;
+        dta:y            "15"^^xsd:int .
+
+:getPatientInfo  a       dta:Operation ;
+        dta:destination  "dta-emr-c/getpatientinfo/34d3fc36-b937-46fc-8834-9ff6680ab83a"^^xsd:string ;
+        dta:input        :PatientInfoReq ;
+        dta:kind         dta:Get ;
+        dta:output       :patientInfo .
+
+:bpSID  a            owl:DatatypeProperty ;
+        rdfs:domain  :PatientInfo ;
+        rdfs:range   xsd:string .
+
+:dta-EMR-C  a          dta:DTA ;
+        dta:operation  :getPatientInfo ;
+        dta:x          "219"^^xsd:int ;
+        dta:y          "15"^^xsd:int .
+
+:PatientInfo  a          owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :ward
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :hrSID
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :bpSID
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :bed
+                         ] ;
+        dta:x            "546"^^xsd:int ;
+        dta:y            "15"^^xsd:int .
+
+:dta-C  a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dtademo.emr"^^xsd:string .
+
+:patientInfo  a     owl:ObjectProperty ;
+        rdfs:range  :PatientInfo .

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    <jasper:config name="Jasper" vendor="jasper" application="dta-nurse-call-generator" version="1.0" doc:name="Jasper" model="dta-nurse-call-generator.dta" url="${jasperUrl}"/>
+    <flow name="dta-nurse-call-generatorFlow1" doc:name="dta-nurse-call-generatorFlow1">
+        <http:inbound-endpoint exchange-pattern="one-way" host="0.0.0.0" port="8082" path="rnc" doc:name="HTTP"/>
+        <choice doc:name="Choice">
+            <when expression="#[payload.contains('/callNurse?')]">
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendCallNurse" doc:name="Jasper (sendCallNurse)" exchangePattern="one_way"/>
+            </when>
+            <when expression="#[payload.contains('/cancelCallNurse?')]">
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendCancelCallNurse" doc:name="Jasper (sendCancelCallNurse)" exchangePattern="one_way"/>
+            </when>
+            <when expression="#[payload.contains('/emergency?')]">
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendEmergency" doc:name="Jasper (sendEmergency)" exchangePattern="one_way"/>
+            </when>
+            <when expression="#[payload.contains('/cancelEmergency?')]">
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/NurseCall/sendCancelEmergency" doc:name="Jasper (sendCancelEmergency)" exchangePattern="one_way"/>
+            </when>
+            <otherwise>
+                <logger message="unknown event, path= #[payload]" level="INFO" doc:name="Log unknown event"/>
+            </otherwise>
+        </choice>
+        <catch-exception-strategy enableNotifications="false" doc:name="Catch Exception Strategy">
+            <logger message="#[exception.causeException.message]" level="INFO" doc:name="Log exception"/>
+        </catch-exception-strategy>
+    </flow>
+</mule>

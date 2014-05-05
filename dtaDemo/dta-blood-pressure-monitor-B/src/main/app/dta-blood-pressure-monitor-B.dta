@@ -1,0 +1,66 @@
+@prefix :      <http://coralcea.ca/jasper/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bpSensor: <http://coralcea.ca/jasper/bpSensor/> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+
+:MsData  a      owl:Class .
+
+bpSensor:diastolic  a  owl:DatatypeProperty ;
+        rdfs:domain  :BpData ;
+        rdfs:range   xsd:integer .
+
+bpSensor:systolic  a  owl:DatatypeProperty ;
+        rdfs:domain  :BpData ;
+        rdfs:range   xsd:integer .
+
+:BpData  a               owl:Class ;
+        rdfs:subClassOf  :MsData ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   bpSensor:diastolic
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   bpSensor:systolic
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :timestamp
+                         ] .
+
+:timestamp  a        owl:DatatypeProperty ;
+        rdfs:domain  :BpData ;
+        rdfs:range   xsd:string .
+
+:BpDataReq  a            owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :bpSID
+                         ] .
+
+:dta-B  a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dtademo.bloodpressuremonitor"^^xsd:string .
+
+:bpData  a                  owl:ObjectProperty ;
+        rdfs:range          :BpData ;
+        rdfs:subPropertyOf  :msData .
+
+:bpSID  a            owl:DatatypeProperty ;
+        rdfs:domain  :BpDataReq ;
+        rdfs:range   xsd:string .
+
+:dta-blood-pressure-monitor-B
+        a              dta:DTA ;
+        dta:operation  :getBpData .
+
+:getBpData  a            dta:Operation ;
+        dta:destination  "dta-blood-pressure-monitor-b/getbpdata/8455ecf0-ac93-4f25-b3ef-45738f22299f"^^xsd:string ;
+        dta:input        :BpDataReq ;
+        dta:kind         dta:Get ;
+        dta:output       :bpData .
+
+:msData  a          owl:ObjectProperty ;
+        rdfs:range  :MsData .

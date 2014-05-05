@@ -1,0 +1,85 @@
+@prefix :      <http://coralcea.ca/jasper/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+
+:RoomTempUpdateReq  a    owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :roomId
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :roomTemperature
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      :timestamp
+                         ] ;
+        dta:x            "876"^^xsd:int ;
+        dta:y            "15"^^xsd:int .
+
+:roomTemperature  a  owl:DatatypeProperty ;
+        rdfs:domain  :RoomTempData , :RoomTempUpdateReq ;
+        rdfs:range   xsd:integer .
+
+:timestamp  a        owl:DatatypeProperty ;
+        rdfs:domain  :RoomTempData , :RoomTempUpdateReq ;
+        rdfs:range   xsd:string .
+
+:dta-E  a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dtademo.roomtemperature"^^xsd:string .
+
+:roomId  a           owl:DatatypeProperty ;
+        rdfs:domain  :RoomTempData , :RoomTempDataReq , :RoomTempUpdateReq ;
+        rdfs:range   xsd:string .
+
+:dta-room-temperature
+        a              dta:DTA ;
+        dta:operation  :updateRoomTemp , :getRoomTemp ;
+        dta:x          "208"^^xsd:int ;
+        dta:y          "15"^^xsd:int .
+
+:getRoomTemp  a                dta:Operation ;
+        dta:destination        "dta-room-temperature/roomtempdatareq/5efdb866-0797-482d-a362-d6c0e2e9a6fe"^^xsd:string ;
+        dta:input              :RoomTempDataReq ;
+        dta:kind               dta:Get ;
+        dta:output             :roomTempData ;
+        dta:outputRestriction  [ a                   owl:Restriction ;
+                                 owl:maxCardinality  "1"^^xsd:int ;
+                                 owl:onProperty      :roomTempData
+                               ] .
+
+:updateRoomTemp  a       dta:Operation ;
+        dta:destination  "dta-room-temperature/updateroomtemp/61576914-1aa1-494b-991c-6a52ed8ae24f"^^xsd:string ;
+        dta:input        :RoomTempUpdateReq ;
+        dta:kind         dta:Post .
+
+:RoomTempDataReq  a      owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :roomId
+                         ] ;
+        dta:x            "15"^^xsd:int ;
+        dta:y            "15"^^xsd:int .
+
+:roomTempData  a    owl:ObjectProperty ;
+        rdfs:range  :RoomTempData .
+
+:RoomTempData  a         owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :roomId
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :timestamp
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :roomTemperature
+                         ] ;
+        dta:x            "618"^^xsd:int ;
+        dta:y            "15"^^xsd:int .

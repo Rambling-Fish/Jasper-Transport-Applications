@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="dta-building-mgmt-generator">
+    <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
+        <properties>
+            <property name="model" value="dta-building-mgmt-generator.dta"/>
+            <property name="application" value="dta-building-mgmt-generator"/>
+            <property name="vendor" value="jasper"/>
+            <property name="name" value="Jasper"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="url" value="${jasperUrl}"/>
+            <property name="version" value="1.0"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="dta-building-mgmt-generatorFlow1" entity-id="ce32e490-90bf-4e10-a62a-c5d0157355e8">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="2"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="port" value="8083"/>
+                    <property name="host" value="0.0.0.0"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
+                    <property name="path" value="rbm"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method"/>
+                    <property name="user"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <splitter index="4" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name=";INDEX" value="4"/>
+                    <property-collection name="681a3b38-f6be-4c29-9250-17c7fc36d43d">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="1c052bab-4f5f-4676-aebe-54e750891b6f">
+                        <property name="choice.expression" value="#[payload.contains('/roomTempUpdate?')]"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[payload.contains('/roomTempUpdate?')]"/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="9d865df2-e896-42f4-aac0-b98d5e47dc5b">
+                        <property name="choice.expression" value="#[payload.contains('/doorStateChange?')]"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[payload.contains('/doorStateChange?')]"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+                    <properties>
+                        <property name=";INDEX" value="4"/>
+                        <property-collection name="681a3b38-f6be-4c29-9250-17c7fc36d43d">
+                            <property name="choice.otherwise" value="true"/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
+                        <property-collection name="1c052bab-4f5f-4676-aebe-54e750891b6f">
+                            <property name="choice.expression" value="#[payload.contains('/roomTempUpdate?')]"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[payload.contains('/roomTempUpdate?')]"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="9d865df2-e896-42f4-aac0-b98d5e47dc5b">
+                            <property name="choice.expression" value="#[payload.contains('/doorStateChange?')]"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[payload.contains('/doorStateChange?')]"/>
+                            </property-collection>
+                        </property-collection>
+                    </properties>
+                </pattern>
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="6" isChoiceOtherwiseLane="false" entity-id="1c052bab-4f5f-4676-aebe-54e750891b6f">
+                        <pattern name="Jasper (sendRoomTempUpdate)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#2">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="updated"/>
+<property name="request" value="http://coralcea.ca/jasper/BuildingMgmt/sendRoomTempUpdate"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/send"/>
+<property name="exchangePattern" value="one_way"/>
+<property name="config-ref" value="Jasper"/>
+<property name="auxiliary;index" value="6"/>
+<property name="timeout" value="10"/>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="8" isChoiceOtherwiseLane="false" entity-id="9d865df2-e896-42f4-aac0-b98d5e47dc5b">
+                        <pattern name="Jasper (sendDoorStateChange)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#3">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="updated"/>
+<property name="request" value="http://coralcea.ca/jasper/BuildingMgmt/sendDoorStateChange"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/send"/>
+<property name="exchangePattern" value="one_way"/>
+<property name="config-ref" value="Jasper"/>
+<property name="auxiliary;index" value="8"/>
+<property name="timeout" value="10"/>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="10" isChoiceOtherwiseLane="true" entity-id="681a3b38-f6be-4c29-9250-17c7fc36d43d">
+                        <pattern name="Log unknown event" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="message" value="unknown event, path= #[payload]"/>
+<property name="category"/>
+<property name="level" value="INFO"/>
+<property name="auxiliary;index" value="10"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
+            <scope name="Catch Exception Strategy" type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" entity-id="Catch Exception Strategy#1">
+                <properties>
+                    <property name="labelConfigureConditionalExecutionUsingExpression"/>
+                    <property name="when"/>
+                    <property name="enableNotifications"/>
+                    <property name="auxiliary;index" value="11"/>
+                </properties>
+                <compartment entity-id="compartment#2">
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
+                        <pattern name="Log exception" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="message" value="#[exception.causeException.message]"/>
+<property name="category"/>
+<property name="level" value="INFO"/>
+<property name="auxiliary;index" value="12"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </scope>
+        </lane>
+    </flow>
+</mule-configuration>
