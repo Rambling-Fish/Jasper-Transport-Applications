@@ -60,18 +60,18 @@ jasper:timestamp  a  owl:DatatypeProperty ;
 
 :dta-building-mgmt-generator
         a            dta:DTA ;
-        dta:request  :sendDoorStateChange , :sendRoomTempUpdate ;
+        dta:operation  :sendDoorStateChange , :sendRoomTempUpdate ;
         dta:x        "465"^^xsd:int ;
         dta:y        "15"^^xsd:int .
 
-:sendRoomTempUpdate  a   dta:Request ;
+:sendRoomTempUpdate  a   dta:Operation ;
         dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
-        dta:input        :roomTempUpdate ;
+        dta:parameter    :roomTempUpdate ;
         dta:kind         dta:Publish .
 
-:sendDoorStateChange  a  dta:Request ;
+:sendDoorStateChange  a  dta:Operation ;
         dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
-        dta:input        :doorStateChange ;
+        dta:parameter    :doorStateChange ;
         dta:kind         dta:Publish .
 
 :temperature  a      owl:DatatypeProperty ;

@@ -59,6 +59,6 @@ hrSensor:bpm  a      owl:DatatypeProperty ;
 
 :getHrData  a            dta:Operation ;
         dta:destination  "dta-heart-rate-monitor-d/gethrdata/dcf65af0-c286-472f-a4f1-03dd900eec1c"^^xsd:string ;
-        dta:input        :HrDataReq ;
+        dta:parameter    :HrDataReq ;
         dta:kind         dta:Get ;
-        dta:output       :hrData .
+        dta:data         :hrData .

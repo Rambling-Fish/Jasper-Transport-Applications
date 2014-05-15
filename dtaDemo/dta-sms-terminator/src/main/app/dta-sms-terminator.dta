@@ -29,7 +29,7 @@
 
 :sendSms  a              dta:Operation ;
         dta:destination  "dta-sms-terminator/sendsms/a8ad9225-75f8-4c59-8275-5994e9d8a031"^^xsd:string ;
-        dta:input        :SmsPostReq ;
+        dta:parameter    :SmsPostReq ;
         dta:kind         dta:Post .
 
 :fromSms  a          owl:DatatypeProperty ;

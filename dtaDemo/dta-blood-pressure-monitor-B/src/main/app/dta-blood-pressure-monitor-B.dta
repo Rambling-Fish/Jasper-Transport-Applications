@@ -58,9 +58,9 @@ bpSensor:systolic  a  owl:DatatypeProperty ;
 
 :getBpData  a            dta:Operation ;
         dta:destination  "dta-blood-pressure-monitor-b/getbpdata/8455ecf0-ac93-4f25-b3ef-45738f22299f"^^xsd:string ;
-        dta:input        :BpDataReq ;
+        dta:parameter    :BpDataReq ;
         dta:kind         dta:Get ;
-        dta:output       :bpData .
+        dta:data         :bpData .
 
 :msData  a          owl:ObjectProperty ;
         rdfs:range  :MsData .

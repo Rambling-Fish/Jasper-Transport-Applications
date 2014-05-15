@@ -18,32 +18,32 @@ public class SendCallNurse implements Callable {
 
 	/**
 	 * @param muleEventContext
-	 * @return Parameters
+	 * @return Parameter
 	 */
 	@Generated("true")
-	public Parameters onCall(MuleEventContext muleEventContext) throws Exception {
+	public Parameter onCall(MuleEventContext muleEventContext) throws Exception {
+		Parameter parameter = new Parameter();
 
-		Parameters parameters = new Parameters();
 		MuleMessage message = muleEventContext.getMessage();
 		String browserInput = message.getPayloadAsString();
 		String location = parseOutLocation(browserInput);
 
 		if (location == null) throw new Exception(errorText);
 
-		parameters.setLocation(location);
+		parameter.setLocation(location);
 
 		if (NcRequest.PAYLOADS.get(location) == null) {
-			parameters.setPayload("");
+			parameter.setPayload("");
 		}
 		else {
-			parameters.setPayload(NcRequest.PAYLOADS.get(location));
+			parameter.setPayload(NcRequest.PAYLOADS.get(location));
 		}
-		
-		return parameters;
+
+		return parameter;
 	}
 
-	private String parseOutLocation(String browserInput)
-	{		
+
+	private String parseOutLocation(String browserInput) {
 		errorText = null;
 
 		String requestArray[] = browserInput.split("\\?");
@@ -52,16 +52,16 @@ public class SendCallNurse implements Callable {
 			log.warn(errorText);
 			return null;
 		}
-		
+
 		String parmPair[] = requestArray[1].split("\\=");
 		if (parmPair.length != 2) {
-			errorText = "Invalid parameter (expect key=value) : " + requestArray[1];
+			errorText = "Invalid parameter (expect key=value) : "
+					+ requestArray[1];
 			log.warn(errorText);
 			return null;
 		}
-		
-		if (!parmPair[0].matches(NcRequest.LOCATION_URI))
-		{
+
+		if (!parmPair[0].matches(NcRequest.LOCATION_URI)) {
 			errorText = "Invalid parameter : " + parmPair[0];
 			log.warn(errorText);
 			return null;
@@ -71,10 +71,10 @@ public class SendCallNurse implements Callable {
 	}
 
 	/**
-	 * The parameters of {@link SendCallNurse}
+	 * The parameter of {@link SendCallNurse}
 	 */
 	@Generated("true")
-	public static class Parameters {
+	public static class Parameter {
 
 		@Generated("true")
 		@JsonProperty("http://coralcea.ca/jasper/NurseCall/location")
@@ -141,7 +141,7 @@ public class SendCallNurse implements Callable {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			Parameters other = (Parameters) obj;
+			Parameter other = (Parameter) obj;
 			if (location == null) {
 				if (other.location != null)
 					return false;
@@ -158,7 +158,7 @@ public class SendCallNurse implements Callable {
 		@Override
 		@Generated("true")
 		public String toString() {
-			return "Parameters [ " + "location=" + location + ", " + "payload="
+			return "Parameter [ " + "location=" + location + ", " + "payload="
 					+ payload + " ]";
 		}
 	}

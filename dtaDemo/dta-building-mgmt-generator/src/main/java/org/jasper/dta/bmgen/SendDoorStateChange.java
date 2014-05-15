@@ -8,15 +8,19 @@ import org.codehaus.jackson.annotate.JsonTypeName;
 import org.mule.api.MuleEventContext;
 import org.mule.api.MuleMessage;
 import org.mule.api.lifecycle.Callable;
+import org.codehaus.jackson.annotate.*;
 
 @Generated("true")
 @JsonTypeName("http://coralcea.ca/jasper/BuildingMgmt/sendDoorStateChange")
 public class SendDoorStateChange implements Callable {
 
-	private static Logger log = Logger.getLogger(SendDoorStateChange.class.getName());
-	
+	private static Logger log = Logger.getLogger(SendDoorStateChange.class
+			.getName());
+
 	private String parsedDoorID;
+
 	private String parsedDoorState;
+
 	private String parsedPayload;
 
 	private String errorText;
@@ -25,40 +29,34 @@ public class SendDoorStateChange implements Callable {
 	 * @param muleEventContext
 	 * @return Parameters
 	 */
-	@Generated("true")
-	public Parameters onCall(MuleEventContext muleEventContext) throws Exception {
-		
-		Parameters parameters = new Parameters();
+	@Generated("false")
+	public Parameter onCall(MuleEventContext muleEventContext)
+			throws Exception {
+
+		Parameter parameters = new Parameter();
 		MuleMessage message = muleEventContext.getMessage();
 		String browserInput = (String) message.getPayload();
 
-		if (parseDoorStateParameters(browserInput))
-		{	
+		if (parseDoorStateParameters(browserInput)) {
 			parameters.setDoorID(parsedDoorID);
 			parameters.setDoorState(parsedDoorState);
 
-			if (parsedPayload == null)
-			{
+			if (parsedPayload == null) {
 				if (BmRequest.PAYLOADS.get(parsedDoorID) == null) {
 					parameters.setPayload("");
+				} else {
+					parameters.setPayload(BmRequest.PAYLOADS.get(parsedDoorID));
 				}
-				else {
-					parameters.setPayload(BmRequest.PAYLOADS.get(parsedDoorID));				
-				}
-			}
-			else
-			{
+			} else {
 				parameters.setPayload(parsedPayload);
 			}
-		}
-		else 
-		{
+		} else {
 			throw new Exception(errorText);
 		}
-		
+
 		return parameters;
 	}
-	
+
 	private boolean parseDoorStateParameters(String browserInput) {
 
 		// RURI : http://0.0.0.0:8083/rbm/doorStateChange                ?
@@ -67,10 +65,9 @@ public class SendDoorStateChange implements Callable {
 
 		// EXAMPLE:
 		// http://0.0.0.0:8083/rbm/doorStateChange?http://coralcea.ca/jasper/BuildingMgmt/doorID=010&http://coralcea.ca/jasper/BuildingMgmt/doorState=open
-		
-		boolean haveDoorID      = false, 
-				haveDoorState   = false;
-		
+
+		boolean haveDoorID = false, haveDoorState = false;
+
 		parsedDoorID = null;
 		parsedDoorState = null;
 		parsedPayload = null;
@@ -87,53 +84,44 @@ public class SendDoorStateChange implements Callable {
 		String parmPairs[] = requestArray[1].split("\\&");
 
 		// Loop over the passed in parameter key/value pairs
-		for (String parmPairString: parmPairs)
-		{
+		for (String parmPairString : parmPairs) {
 			String parmPair[] = parmPairString.split("\\=");
-			
+
 			if (parmPair.length != 2) {
-				errorText = "Invalid parameter (expect key=value) : " + parmPairString;
+				errorText = "Invalid parameter (expect key=value) : "
+						+ parmPairString;
 				log.warn(errorText);
 				return false;
 			}
-			
+
 			// Identify the parameter key and set its value
-			if (parmPair[0].matches(BmRequest.DOOR_ID_URI))
-			{
+			if (parmPair[0].matches(BmRequest.DOOR_ID_URI)) {
 				parsedDoorID = parmPair[1];
 				haveDoorID = true;
-			}
-			else if (parmPair[0].matches(BmRequest.DOOR_STATE_URI))
-			{
+			} else if (parmPair[0].matches(BmRequest.DOOR_STATE_URI)) {
 				parsedDoorState = parmPair[1];
 				haveDoorState = true;
-			}
-			else if (parmPair[0].matches(BmRequest.PAYLOAD_URI))
-			{
+			} else if (parmPair[0].matches(BmRequest.PAYLOAD_URI)) {
 				parsedPayload = parmPair[1];
-			}
-			else
-			{
-				log.info("Unknown parameter : " + parmPair[0] + "=" + parmPair[1]);
+			} else {
+				log.info("Unknown parameter : " + parmPair[0] + "="
+						+ parmPair[1]);
 			}
 		}
-		
-		if (haveDoorID && haveDoorState)
-		{
+
+		if (haveDoorID && haveDoorState) {
 			return true;
-		}
-		else
-		{
+		} else {
 			errorText = "Mandatory parameter missing";
 			return false;
 		}
 	}
 
 	/**
-	 * The parameters of {@link SendDoorStateChange}
+	 * The parameter of {@link SendDoorStateChange}
 	 */
 	@Generated("true")
-	public static class Parameters {
+	public static class Parameter {
 
 		@Generated("true")
 		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/doorID")
@@ -224,7 +212,7 @@ public class SendDoorStateChange implements Callable {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			Parameters other = (Parameters) obj;
+			Parameter other = (Parameter) obj;
 			if (doorID == null) {
 				if (other.doorID != null)
 					return false;
@@ -246,7 +234,7 @@ public class SendDoorStateChange implements Callable {
 		@Override
 		@Generated("true")
 		public String toString() {
-			return "Parameters [ " + "doorID=" + doorID + ", " + "payload="
+			return "Parameter [ " + "doorID=" + doorID + ", " + "payload="
 					+ payload + ", " + "doorState=" + doorState + " ]";
 		}
 	}

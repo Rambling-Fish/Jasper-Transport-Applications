@@ -31,9 +31,9 @@
 
 :getPatientInfo  a       dta:Operation ;
         dta:destination  "dta-emr-c/getpatientinfo/34d3fc36-b937-46fc-8834-9ff6680ab83a"^^xsd:string ;
-        dta:input        :PatientInfoReq ;
+        dta:parameter    :PatientInfoReq ;
         dta:kind         dta:Get ;
-        dta:output       :patientInfo .
+        dta:data         :patientInfo .
 
 :bpSID  a            owl:DatatypeProperty ;
         rdfs:domain  :PatientInfo ;

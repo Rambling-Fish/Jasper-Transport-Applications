@@ -18,29 +18,29 @@ public class SendEmergency implements Callable {
 
     /**
 	 * @param muleEventContext
-	 * @return Parameters
+	 * @return Parameter
 	 */
 	@Generated("true")
-	public Parameters onCall(MuleEventContext muleEventContext) throws Exception {
+	public Parameter onCall(MuleEventContext muleEventContext) throws Exception {
 
-		Parameters parameters = new Parameters();
+		Parameter parameter = new Parameter();
 		MuleMessage message = muleEventContext.getMessage();
 		String browserInput = message.getPayloadAsString();
 		String location = parseOutLocation(browserInput);
 		
 		if (location == null) throw new Exception(errorText);
 
-		parameters.setLocation(location);
+		parameter.setLocation(location);
 
 		if (NcRequest.PAYLOADS.get(location) == null) {
-			parameters.setPayload("");
+			parameter.setPayload("");
 		}
 		else {
-			parameters.setPayload(NcRequest.PAYLOADS.get(location));
+			parameter.setPayload(NcRequest.PAYLOADS.get(location));
 			
 		}
 		
-		return parameters;
+		return parameter;
 	}
 
 	private String parseOutLocation(String browserInput)
@@ -72,10 +72,10 @@ public class SendEmergency implements Callable {
 	}
 
 	/**
-	 * The parameters of {@link SendEmergency}
+	 * The parameter of {@link SendEmergency}
 	 */
 	@Generated("true")
-	public static class Parameters {
+	public static class Parameter {
 
 		@Generated("true")
 		@JsonProperty("http://coralcea.ca/jasper/NurseCall/location")
@@ -142,7 +142,7 @@ public class SendEmergency implements Callable {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			Parameters other = (Parameters) obj;
+			Parameter other = (Parameter) obj;
 			if (location == null) {
 				if (other.location != null)
 					return false;
@@ -159,7 +159,7 @@ public class SendEmergency implements Callable {
 		@Override
 		@Generated("true")
 		public String toString() {
-			return "Parameters [ " + "location=" + location + ", " + "payload="
+			return "Parameter [ " + "location=" + location + ", " + "payload="
 					+ payload + " ]";
 		}
 	}

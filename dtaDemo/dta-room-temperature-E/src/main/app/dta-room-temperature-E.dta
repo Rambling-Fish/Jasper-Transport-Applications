@@ -44,17 +44,17 @@
 
 :getRoomTemp  a                dta:Operation ;
         dta:destination        "dta-room-temperature/roomtempdatareq/5efdb866-0797-482d-a362-d6c0e2e9a6fe"^^xsd:string ;
-        dta:input              :RoomTempDataReq ;
+        dta:parameter          :RoomTempDataReq ;
         dta:kind               dta:Get ;
-        dta:output             :roomTempData ;
-        dta:outputRestriction  [ a                   owl:Restriction ;
+        dta:data               :roomTempData ;
+        dta:dataRestriction    [ a                   owl:Restriction ;
                                  owl:maxCardinality  "1"^^xsd:int ;
                                  owl:onProperty      :roomTempData
                                ] .
 
 :updateRoomTemp  a       dta:Operation ;
         dta:destination  "dta-room-temperature/updateroomtemp/61576914-1aa1-494b-991c-6a52ed8ae24f"^^xsd:string ;
-        dta:input        :RoomTempUpdateReq ;
+        dta:parameter    :RoomTempUpdateReq ;
         dta:kind         dta:Post .
 
 :RoomTempDataReq  a      owl:Class ;
