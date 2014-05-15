@@ -12,39 +12,11 @@ import org.mule.api.MuleMessage;
 @JsonTypeName("http://coralcea.ca/jasper/NurseCall/sendCancelEmergency")
 public class SendCancelEmergency implements Callable {
 
-    private static Logger log = Logger.getLogger(SendCancelEmergency.class.getName());
+	private static Logger	log	= Logger.getLogger(SendCancelEmergency.class.getName());
 
-	private String errorText;
+	private String			errorText;
 
-    /**
-	 * @param muleEventContext
-	 * @return Parameter
-	 */
-	@Generated("true")
-	public Parameter onCall(MuleEventContext muleEventContext) throws Exception {
-		
-		Parameter parameter = new Parameter();
-		MuleMessage message = muleEventContext.getMessage();
-		String browserInput = message.getPayloadAsString();
-		String location = parseOutLocation(browserInput);
-		
-		if (location == null) throw new Exception(errorText);
-
-		parameter.setLocation(location);
-
-		if (NcRequest.PAYLOADS.get(location) == null) {
-			parameter.setPayload("");
-		}
-		else {
-			parameter.setPayload(NcRequest.PAYLOADS.get(location));
-			
-		}
-		
-		return parameter;
-	}
-
-	private String parseOutLocation(String browserInput)
-	{
+	private String parseOutLocation(String browserInput) {
 		errorText = null;
 
 		String requestArray[] = browserInput.split("\\?");
@@ -53,22 +25,31 @@ public class SendCancelEmergency implements Callable {
 			log.warn(errorText);
 			return null;
 		}
-		
+
 		String parmPair[] = requestArray[1].split("\\=");
 		if (parmPair.length != 2) {
 			errorText = "Invalid parameter (expect key=value) : " + requestArray[1];
 			log.warn(errorText);
 			return null;
 		}
-		
-		if (!parmPair[0].matches(NcRequest.LOCATION_URI))
-		{
+
+		if (!parmPair[0].matches(NcRequest.LOCATION_URI)) {
 			errorText = "Invalid parameter : " + parmPair[0];
 			log.warn(errorText);
 			return null;
 		}
 
 		return parmPair[1];
+	}
+
+	/**
+	 * @param muleEventContext
+	 * @return Parameter
+	 */
+	@Generated("true")
+	public Parameter onCall(MuleEventContext muleEventContext) throws Exception {
+		Parameter parameter = new Parameter();
+		return parameter;
 	}
 
 	/**
@@ -79,11 +60,11 @@ public class SendCancelEmergency implements Callable {
 
 		@Generated("true")
 		@JsonProperty("http://coralcea.ca/jasper/NurseCall/location")
-		private String location;
+		private String	location;
 
 		@Generated("true")
 		@JsonProperty("http://coralcea.ca/jasper/NurseCall/payload")
-		private String payload;
+		private String	payload;
 
 		/**
 		 * @return location 
@@ -126,10 +107,8 @@ public class SendCancelEmergency implements Callable {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result
-					+ ((location == null) ? 0 : location.hashCode());
-			result = prime * result
-					+ ((payload == null) ? 0 : payload.hashCode());
+			result = prime * result + ((location == null) ? 0 : location.hashCode());
+			result = prime * result + ((payload == null) ? 0 : payload.hashCode());
 			return result;
 		}
 
@@ -159,8 +138,7 @@ public class SendCancelEmergency implements Callable {
 		@Override
 		@Generated("true")
 		public String toString() {
-			return "Parameter [ " + "location=" + location + ", " + "payload="
-					+ payload + " ]";
+			return "Parameter [ " + "location=" + location + ", " + "payload=" + payload + " ]";
 		}
 	}
 }
