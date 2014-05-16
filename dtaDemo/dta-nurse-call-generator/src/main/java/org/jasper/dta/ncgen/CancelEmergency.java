@@ -4,10 +4,10 @@ import javax.annotation.Generated;
 import org.codehaus.jackson.annotate.*;
 
 @Generated("true")
-@JsonTypeName("http://coralcea.ca/jasper/NurseCall/cancelEmergency")
+@JsonTypeName("http://coralcea.ca/jasper/NurseCall/CancelEmergency")
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="@type")
 @JsonSubTypes({
-	@JsonSubTypes.Type(value=CancelEmergencyImpl.class, name="http://coralcea.ca/jasper/NurseCall/cancelEmergency")
+	@JsonSubTypes.Type(value=CancelEmergencyImpl.class, name="http://coralcea.ca/jasper/NurseCall/CancelEmergency")
 })
 public interface CancelEmergency {
 

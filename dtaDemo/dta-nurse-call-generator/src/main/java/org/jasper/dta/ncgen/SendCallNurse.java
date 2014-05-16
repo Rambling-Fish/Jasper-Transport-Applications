@@ -12,9 +12,9 @@ import org.mule.api.MuleMessage;
 @JsonTypeName("http://coralcea.ca/jasper/NurseCall/sendCallNurse")
 public class SendCallNurse implements Callable {
 
-	private static Logger	log	= Logger.getLogger(SendCallNurse.class.getName());
+	private static Logger log = Logger.getLogger(SendCallNurse.class.getName());
 
-	private String			errorText;
+	private String errorText;
 
 	/**
 	 * @param muleEventContext
@@ -33,13 +33,13 @@ public class SendCallNurse implements Callable {
 
 		CallNurse callNurse = new CallNurseImpl();
 		callNurse.setLocation(location);
-		
+
 		if (NcRequest.PAYLOADS.get(location) == null) {
 			callNurse.setPayload("");
 		} else {
 			callNurse.setPayload(NcRequest.PAYLOADS.get(location));
 		}
-		
+
 		parameter.setCallNurse(callNurse);
 
 		return parameter;
@@ -57,7 +57,8 @@ public class SendCallNurse implements Callable {
 
 		String parmPair[] = requestArray[1].split("\\=");
 		if (parmPair.length != 2) {
-			errorText = "Invalid parameter (expect key=value) : " + requestArray[1];
+			errorText = "Invalid parameter (expect key=value) : "
+					+ requestArray[1];
 			log.warn(errorText);
 			return null;
 		}
@@ -79,7 +80,7 @@ public class SendCallNurse implements Callable {
 
 		@Generated("true")
 		@JsonProperty("http://coralcea.ca/jasper/NurseCall/callNurse")
-		private CallNurse	callNurse;
+		private CallNurse callNurse;
 
 		/**
 		 * @return callNurse 
@@ -104,7 +105,8 @@ public class SendCallNurse implements Callable {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((callNurse == null) ? 0 : callNurse.hashCode());
+			result = prime * result
+					+ ((callNurse == null) ? 0 : callNurse.hashCode());
 			return result;
 		}
 

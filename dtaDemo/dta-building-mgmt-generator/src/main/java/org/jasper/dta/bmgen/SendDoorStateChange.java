@@ -30,30 +30,33 @@ public class SendDoorStateChange implements Callable {
 	 * @return Parameters
 	 */
 	@Generated("false")
-	public Parameter onCall(MuleEventContext muleEventContext)
-			throws Exception {
+	public Parameter onCall(MuleEventContext muleEventContext) throws Exception {
 
 		Parameter parameters = new Parameter();
 		MuleMessage message = muleEventContext.getMessage();
 		String browserInput = (String) message.getPayload();
 
+		DoorStateChange doorStateChange = new DoorStateChangeImpl();
+		
 		if (parseDoorStateParameters(browserInput)) {
-			parameters.setDoorID(parsedDoorID);
-			parameters.setDoorState(parsedDoorState);
+			doorStateChange.setDoorID(parsedDoorID);
+			doorStateChange.setDoorState(parsedDoorState);
 
 			if (parsedPayload == null) {
 				if (BmRequest.PAYLOADS.get(parsedDoorID) == null) {
-					parameters.setPayload("");
+					doorStateChange.setPayload("");
 				} else {
-					parameters.setPayload(BmRequest.PAYLOADS.get(parsedDoorID));
+					doorStateChange.setPayload(BmRequest.PAYLOADS.get(parsedDoorID));
 				}
 			} else {
-				parameters.setPayload(parsedPayload);
+				doorStateChange.setPayload(parsedPayload);
 			}
 		} else {
 			throw new Exception(errorText);
 		}
 
+		parameters.setDoorStateChange(doorStateChange);
+		
 		return parameters;
 	}
 
@@ -124,69 +127,25 @@ public class SendDoorStateChange implements Callable {
 	public static class Parameter {
 
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/doorID")
-		private String doorID;
-
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/payload")
-		private String payload;
-
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/doorState")
-		private String doorState;
+		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/doorStateChange")
+		private DoorStateChange doorStateChange;
 
 		/**
-		 * @return doorID 
+		 * @return doorStateChange 
 		 */
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/doorID")
-		public String getDoorID() {
-			return doorID;
+		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/doorStateChange")
+		public DoorStateChange getDoorStateChange() {
+			return doorStateChange;
 		}
 
 		/**
-		 * @return payload 
+		 * @param doorStateChange 
 		 */
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/payload")
-		public String getPayload() {
-			return payload;
-		}
-
-		/**
-		 * @return doorState 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/doorState")
-		public String getDoorState() {
-			return doorState;
-		}
-
-		/**
-		 * @param doorID 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/doorID")
-		public void setDoorID(String doorID) {
-			this.doorID = doorID;
-		}
-
-		/**
-		 * @param payload 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/payload")
-		public void setPayload(String payload) {
-			this.payload = payload;
-		}
-
-		/**
-		 * @param doorState 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/doorState")
-		public void setDoorState(String doorState) {
-			this.doorState = doorState;
+		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/doorStateChange")
+		public void setDoorStateChange(DoorStateChange doorStateChange) {
+			this.doorStateChange = doorStateChange;
 		}
 
 		@Override
@@ -194,12 +153,10 @@ public class SendDoorStateChange implements Callable {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result
-					+ ((doorID == null) ? 0 : doorID.hashCode());
-			result = prime * result
-					+ ((payload == null) ? 0 : payload.hashCode());
-			result = prime * result
-					+ ((doorState == null) ? 0 : doorState.hashCode());
+			result = prime
+					* result
+					+ ((doorStateChange == null) ? 0 : doorStateChange
+							.hashCode());
 			return result;
 		}
 
@@ -213,20 +170,10 @@ public class SendDoorStateChange implements Callable {
 			if (getClass() != obj.getClass())
 				return false;
 			Parameter other = (Parameter) obj;
-			if (doorID == null) {
-				if (other.doorID != null)
+			if (doorStateChange == null) {
+				if (other.doorStateChange != null)
 					return false;
-			} else if (!doorID.equals(other.doorID))
-				return false;
-			if (payload == null) {
-				if (other.payload != null)
-					return false;
-			} else if (!payload.equals(other.payload))
-				return false;
-			if (doorState == null) {
-				if (other.doorState != null)
-					return false;
-			} else if (!doorState.equals(other.doorState))
+			} else if (!doorStateChange.equals(other.doorStateChange))
 				return false;
 			return true;
 		}
@@ -234,8 +181,7 @@ public class SendDoorStateChange implements Callable {
 		@Override
 		@Generated("true")
 		public String toString() {
-			return "Parameter [ " + "doorID=" + doorID + ", " + "payload="
-					+ payload + ", " + "doorState=" + doorState + " ]";
+			return "Parameter [ " + "doorStateChange=" + doorStateChange + " ]";
 		}
 	}
 }

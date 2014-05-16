@@ -36,30 +36,33 @@ public class SendRoomTempUpdate implements Callable {
 	 * @return Parameters
 	 */
 	@Generated("false")
-	public Parameter onCall(MuleEventContext muleEventContext)
-			throws Exception {
+	public Parameter onCall(MuleEventContext muleEventContext) throws Exception {
 
 		Parameter parameters = new Parameter();
 		MuleMessage message = muleEventContext.getMessage();
 		String browserInput = (String) message.getPayload();
 
+		RoomTempUpdate roomTempUpdate = new RoomTempUpdateImpl();
+		
 		if (parseRoomTempParameters(browserInput)) {
-			parameters.setRoomID(parsedRoomID);
-			parameters.setTemperature(parsedTemperature);
-			parameters.setTimestamp(parsedTimestamp);
+			roomTempUpdate.setRoomID(parsedRoomID);
+			roomTempUpdate.setTemperature(parsedTemperature);
+			roomTempUpdate.setTimestamp(parsedTimestamp);
 
 			if (parsedPayload == null) {
 				if (BmRequest.PAYLOADS.get(parsedRoomID) == null) {
-					parameters.setPayload("");
+					roomTempUpdate.setPayload("");
 				} else {
-					parameters.setPayload(BmRequest.PAYLOADS.get(parsedRoomID));
+					roomTempUpdate.setPayload(BmRequest.PAYLOADS.get(parsedRoomID));
 				}
 			} else {
-				parameters.setPayload(parsedPayload);
+				roomTempUpdate.setPayload(parsedPayload);
 			}
 		} else {
 			throw new Exception(errorText);
 		}
+
+		parameters.setRoomTempUpdate(roomTempUpdate);
 
 		return parameters;
 	}
@@ -142,91 +145,25 @@ public class SendRoomTempUpdate implements Callable {
 	public static class Parameter {
 
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/temperature")
-		private int temperature;
-
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/payload")
-		private String payload;
-
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/timestamp")
-		private String timestamp;
-
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/roomID")
-		private String roomID;
+		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/roomTempUpdate")
+		private RoomTempUpdate roomTempUpdate;
 
 		/**
-		 * @return temperature 
+		 * @return roomTempUpdate 
 		 */
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/temperature")
-		public int getTemperature() {
-			return temperature;
+		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/roomTempUpdate")
+		public RoomTempUpdate getRoomTempUpdate() {
+			return roomTempUpdate;
 		}
 
 		/**
-		 * @return payload 
+		 * @param roomTempUpdate 
 		 */
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/payload")
-		public String getPayload() {
-			return payload;
-		}
-
-		/**
-		 * @return timestamp 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/timestamp")
-		public String getTimestamp() {
-			return timestamp;
-		}
-
-		/**
-		 * @return roomID 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/roomID")
-		public String getRoomID() {
-			return roomID;
-		}
-
-		/**
-		 * @param temperature 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/temperature")
-		public void setTemperature(int temperature) {
-			this.temperature = temperature;
-		}
-
-		/**
-		 * @param payload 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/payload")
-		public void setPayload(String payload) {
-			this.payload = payload;
-		}
-
-		/**
-		 * @param timestamp 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/timestamp")
-		public void setTimestamp(String timestamp) {
-			this.timestamp = timestamp;
-		}
-
-		/**
-		 * @param roomID 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/roomID")
-		public void setRoomID(String roomID) {
-			this.roomID = roomID;
+		@JsonProperty("http://coralcea.ca/jasper/BuildingMgmt/roomTempUpdate")
+		public void setRoomTempUpdate(RoomTempUpdate roomTempUpdate) {
+			this.roomTempUpdate = roomTempUpdate;
 		}
 
 		@Override
@@ -234,13 +171,9 @@ public class SendRoomTempUpdate implements Callable {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + temperature;
-			result = prime * result
-					+ ((payload == null) ? 0 : payload.hashCode());
-			result = prime * result
-					+ ((timestamp == null) ? 0 : timestamp.hashCode());
-			result = prime * result
-					+ ((roomID == null) ? 0 : roomID.hashCode());
+			result = prime
+					* result
+					+ ((roomTempUpdate == null) ? 0 : roomTempUpdate.hashCode());
 			return result;
 		}
 
@@ -254,22 +187,10 @@ public class SendRoomTempUpdate implements Callable {
 			if (getClass() != obj.getClass())
 				return false;
 			Parameter other = (Parameter) obj;
-			if (temperature != other.temperature)
-				return false;
-			if (payload == null) {
-				if (other.payload != null)
+			if (roomTempUpdate == null) {
+				if (other.roomTempUpdate != null)
 					return false;
-			} else if (!payload.equals(other.payload))
-				return false;
-			if (timestamp == null) {
-				if (other.timestamp != null)
-					return false;
-			} else if (!timestamp.equals(other.timestamp))
-				return false;
-			if (roomID == null) {
-				if (other.roomID != null)
-					return false;
-			} else if (!roomID.equals(other.roomID))
+			} else if (!roomTempUpdate.equals(other.roomTempUpdate))
 				return false;
 			return true;
 		}
@@ -277,9 +198,7 @@ public class SendRoomTempUpdate implements Callable {
 		@Override
 		@Generated("true")
 		public String toString() {
-			return "Parameter [ " + "temperature=" + temperature + ", "
-					+ "payload=" + payload + ", " + "timestamp=" + timestamp
-					+ ", " + "roomID=" + roomID + " ]";
+			return "Parameter [ " + "roomTempUpdate=" + roomTempUpdate + " ]";
 		}
 	}
 }

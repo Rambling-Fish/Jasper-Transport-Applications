@@ -6,7 +6,22 @@
 @prefix jasper: <http://coralcea.ca/jasper/> .
 @prefix dta:   <http://coralcea.ca/2014/01/dta#> .
 
-:doorStateChange  a      owl:Class ;
+:DoorStateChangeWrapped
+        a                owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :doorStateChange
+                         ] .
+
+:doorStateChange  a  owl:ObjectProperty ;
+        rdfs:domain  :DoorStateChangeWrapped ;
+        rdfs:range   :DoorStateChange .
+
+:doorID  a           owl:DatatypeProperty ;
+        rdfs:domain  :DoorStateChange ;
+        rdfs:range   xsd:string .
+
+:DoorStateChange  a      owl:Class ;
         dta:restriction  [ a                   owl:Restriction ;
                            owl:maxCardinality  "1"^^xsd:int ;
                            owl:onProperty      :payload
@@ -22,11 +37,50 @@
         dta:x            "259"^^xsd:int ;
         dta:y            "15"^^xsd:int .
 
-:doorID  a           owl:DatatypeProperty ;
-        rdfs:domain  :doorStateChange ;
+:roomTempUpdate  a   owl:ObjectProperty ;
+        rdfs:domain  :RoomTempUpdateWrapped ;
+        rdfs:range   :RoomTempUpdate .
+
+jasper:timestamp  a  owl:DatatypeProperty ;
+        rdfs:domain  :RoomTempUpdate ;
         rdfs:range   xsd:string .
 
-:roomTempUpdate  a       owl:Class ;
+:payload  a          owl:DatatypeProperty ;
+        rdfs:domain  :RoomTempUpdate , :DoorStateChange ;
+        rdfs:range   xsd:string .
+
+:doorState  a        owl:DatatypeProperty ;
+        rdfs:domain  :DoorStateChange ;
+        rdfs:range   xsd:string .
+
+:dta-building-mgmt-generator
+        a              dta:DTA ;
+        dta:operation  :sendRoomTempUpdate , :sendDoorStateChange ;
+        dta:x          "465"^^xsd:int ;
+        dta:y          "15"^^xsd:int .
+
+:sendRoomTempUpdate  a   dta:Operation ;
+        dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
+        dta:kind         dta:Publish ;
+        dta:parameter    :RoomTempUpdateWrapped .
+
+:RoomTempUpdateWrapped
+        a                owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :roomTempUpdate
+                         ] .
+
+:sendDoorStateChange  a  dta:Operation ;
+        dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
+        dta:kind         dta:Publish ;
+        dta:parameter    :DoorStateChangeWrapped .
+
+:temperature  a      owl:DatatypeProperty ;
+        rdfs:domain  :RoomTempUpdate ;
+        rdfs:range   xsd:integer .
+
+:RoomTempUpdate  a       owl:Class ;
         dta:restriction  [ a                   owl:Restriction ;
                            owl:maxCardinality  "1"^^xsd:int ;
                            owl:onProperty      :payload
@@ -46,40 +100,8 @@
         dta:x            "15"^^xsd:int ;
         dta:y            "15"^^xsd:int .
 
-jasper:timestamp  a  owl:DatatypeProperty ;
-        rdfs:domain  :roomTempUpdate ;
-        rdfs:range   xsd:string .
-
-:payload  a          owl:DatatypeProperty ;
-        rdfs:domain  :roomTempUpdate , :doorStateChange ;
-        rdfs:range   xsd:string .
-
-:doorState  a        owl:DatatypeProperty ;
-        rdfs:domain  :doorStateChange ;
-        rdfs:range   xsd:string .
-
-:dta-building-mgmt-generator
-        a            dta:DTA ;
-        dta:operation  :sendDoorStateChange , :sendRoomTempUpdate ;
-        dta:x        "465"^^xsd:int ;
-        dta:y        "15"^^xsd:int .
-
-:sendRoomTempUpdate  a   dta:Operation ;
-        dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
-        dta:parameter    :roomTempUpdate ;
-        dta:kind         dta:Publish .
-
-:sendDoorStateChange  a  dta:Operation ;
-        dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
-        dta:parameter    :doorStateChange ;
-        dta:kind         dta:Publish .
-
-:temperature  a      owl:DatatypeProperty ;
-        rdfs:domain  :roomTempUpdate ;
-        rdfs:range   xsd:integer .
-
 :roomID  a           owl:DatatypeProperty ;
-        rdfs:domain  :roomTempUpdate ;
+        rdfs:domain  :RoomTempUpdate ;
         rdfs:range   xsd:string .
 
 jasper:dta-building-mgmt-generator

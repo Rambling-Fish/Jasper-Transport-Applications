@@ -4,17 +4,17 @@ import javax.annotation.Generated;
 import org.codehaus.jackson.annotate.*;
 
 @Generated("true")
-@JsonTypeName("http://coralcea.ca/jasper/NurseCall/cancelEmergency")
+@JsonTypeName("http://coralcea.ca/jasper/NurseCall/CancelEmergency")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public class CancelEmergencyImpl implements CancelEmergency {
 
 	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/NurseCall/location")
-	private String	location;
+	private String location;
 
 	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/NurseCall/payload")
-	private String	payload;
+	private String payload;
 
 	@Override
 	@Generated("true")
@@ -49,7 +49,8 @@ public class CancelEmergencyImpl implements CancelEmergency {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result
+				+ ((location == null) ? 0 : location.hashCode());
 		result = prime * result + ((payload == null) ? 0 : payload.hashCode());
 		return result;
 	}
@@ -80,6 +81,7 @@ public class CancelEmergencyImpl implements CancelEmergency {
 	@Override
 	@Generated("true")
 	public String toString() {
-		return "CancelEmergencyImpl [ " + "location=" + location + ", " + "payload=" + payload + " ]";
+		return "CancelEmergencyImpl [ " + "location=" + location + ", "
+				+ "payload=" + payload + " ]";
 	}
 }

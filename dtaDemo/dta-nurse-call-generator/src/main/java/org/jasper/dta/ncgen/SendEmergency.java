@@ -12,9 +12,9 @@ import org.mule.api.MuleMessage;
 @JsonTypeName("http://coralcea.ca/jasper/NurseCall/sendEmergency")
 public class SendEmergency implements Callable {
 
-	private static Logger	log	= Logger.getLogger(SendEmergency.class.getName());
+	private static Logger log = Logger.getLogger(SendEmergency.class.getName());
 
-	private String			errorText;
+	private String errorText;
 
 	private String parseOutLocation(String browserInput) {
 		errorText = null;
@@ -28,7 +28,8 @@ public class SendEmergency implements Callable {
 
 		String parmPair[] = requestArray[1].split("\\=");
 		if (parmPair.length != 2) {
-			errorText = "Invalid parameter (expect key=value) : " + requestArray[1];
+			errorText = "Invalid parameter (expect key=value) : "
+					+ requestArray[1];
 			log.warn(errorText);
 			return null;
 		}
@@ -46,9 +47,28 @@ public class SendEmergency implements Callable {
 	 * @param muleEventContext
 	 * @return Parameter
 	 */
-	@Generated("true")
+	@Generated("false")
 	public Parameter onCall(MuleEventContext muleEventContext) throws Exception {
 		Parameter parameter = new Parameter();
+
+		MuleMessage message = muleEventContext.getMessage();
+		String browserInput = message.getPayloadAsString();
+		String location = parseOutLocation(browserInput);
+
+		if (location == null)
+			throw new Exception(errorText);
+
+		Emergency emergency = new EmergencyImpl();
+		emergency.setLocation(location);
+
+		if (NcRequest.PAYLOADS.get(location) == null) {
+			emergency.setPayload("");
+		} else {
+			emergency.setPayload(NcRequest.PAYLOADS.get(location));
+		}
+
+		parameter.setEmergency(emergency);
+
 		return parameter;
 	}
 
@@ -59,47 +79,25 @@ public class SendEmergency implements Callable {
 	public static class Parameter {
 
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/location")
-		private String	location;
-
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/payload")
-		private String	payload;
+		@JsonProperty("http://coralcea.ca/jasper/NurseCall/emergency")
+		private Emergency emergency;
 
 		/**
-		 * @return location 
+		 * @return emergency 
 		 */
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/location")
-		public String getLocation() {
-			return location;
+		@JsonProperty("http://coralcea.ca/jasper/NurseCall/emergency")
+		public Emergency getEmergency() {
+			return emergency;
 		}
 
 		/**
-		 * @return payload 
+		 * @param emergency 
 		 */
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/payload")
-		public String getPayload() {
-			return payload;
-		}
-
-		/**
-		 * @param location 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/location")
-		public void setLocation(String location) {
-			this.location = location;
-		}
-
-		/**
-		 * @param payload 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/payload")
-		public void setPayload(String payload) {
-			this.payload = payload;
+		@JsonProperty("http://coralcea.ca/jasper/NurseCall/emergency")
+		public void setEmergency(Emergency emergency) {
+			this.emergency = emergency;
 		}
 
 		@Override
@@ -107,8 +105,8 @@ public class SendEmergency implements Callable {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((location == null) ? 0 : location.hashCode());
-			result = prime * result + ((payload == null) ? 0 : payload.hashCode());
+			result = prime * result
+					+ ((emergency == null) ? 0 : emergency.hashCode());
 			return result;
 		}
 
@@ -122,15 +120,10 @@ public class SendEmergency implements Callable {
 			if (getClass() != obj.getClass())
 				return false;
 			Parameter other = (Parameter) obj;
-			if (location == null) {
-				if (other.location != null)
+			if (emergency == null) {
+				if (other.emergency != null)
 					return false;
-			} else if (!location.equals(other.location))
-				return false;
-			if (payload == null) {
-				if (other.payload != null)
-					return false;
-			} else if (!payload.equals(other.payload))
+			} else if (!emergency.equals(other.emergency))
 				return false;
 			return true;
 		}
@@ -138,7 +131,7 @@ public class SendEmergency implements Callable {
 		@Override
 		@Generated("true")
 		public String toString() {
-			return "Parameter [ " + "location=" + location + ", " + "payload=" + payload + " ]";
+			return "Parameter [ " + "emergency=" + emergency + " ]";
 		}
 	}
 }

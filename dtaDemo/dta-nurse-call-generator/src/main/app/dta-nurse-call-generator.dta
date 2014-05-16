@@ -13,9 +13,18 @@
 :sendCancelEmergency  a  dta:Operation ;
         dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
         dta:kind         dta:Publish ;
-        dta:parameter    :cancelEmergency .
+        dta:parameter    :CancelEmergencyWrapped .
 
-:cancelEmergency  a      owl:Class ;
+:cancelEmergency  a  owl:ObjectProperty ;
+        rdfs:domain  :CancelEmergencyWrapped ;
+        rdfs:range   :CancelEmergency .
+
+:sendEmergency  a        dta:Operation ;
+        dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
+        dta:kind         dta:Publish ;
+        dta:parameter    :EmergencyWrapped .
+
+:Emergency  a            owl:Class ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
                            owl:onProperty   :location
@@ -24,11 +33,6 @@
                            owl:maxCardinality  "1"^^xsd:int ;
                            owl:onProperty      :payload
                          ] .
-
-:sendEmergency  a        dta:Operation ;
-        dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
-        dta:kind         dta:Publish ;
-        dta:parameter    :emergency .
 
 jasper:dta-nurse-call-generator
         a                owl:Ontology ;
@@ -40,12 +44,7 @@ jasper:dta-nurse-call-generator
                            owl:onProperty   :callNurse
                          ] .
 
-:sendCancelCallNurse  a  dta:Operation ;
-        dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
-        dta:kind         dta:Publish ;
-        dta:parameter    :cancelCallNurse .
-
-:cancelCallNurse  a      owl:Class ;
+:CancelCallNurse  a      owl:Class ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
                            owl:onProperty   :location
@@ -54,6 +53,22 @@ jasper:dta-nurse-call-generator
                            owl:maxCardinality  "1"^^xsd:int ;
                            owl:onProperty      :payload
                          ] .
+
+:CancelEmergencyWrapped
+        a                owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :cancelEmergency
+                         ] .
+
+:sendCancelCallNurse  a  dta:Operation ;
+        dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
+        dta:kind         dta:Publish ;
+        dta:parameter    :CancelCallNurseWrapped .
+
+:cancelCallNurse  a  owl:ObjectProperty ;
+        rdfs:domain  :CancelCallNurseWrapped ;
+        rdfs:range   :CancelCallNurse .
 
 :sendCallNurse  a        dta:Operation ;
         dta:destination  "jms.jasper.delegate.global.queue"^^xsd:string ;
@@ -61,20 +76,41 @@ jasper:dta-nurse-call-generator
         dta:parameter    :CallNurseWrapped .
 
 :CallNurse  a            owl:Class ;
-        dta:restriction  [ a                   owl:Restriction ;
-                           owl:maxCardinality  "1"^^xsd:int ;
-                           owl:onProperty      :payload
-                         ] ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
                            owl:onProperty   :location
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      :payload
                          ] .
+
+:emergency  a        owl:ObjectProperty ;
+        rdfs:domain  :EmergencyWrapped ;
+        rdfs:range   :Emergency .
 
 :location  a         owl:DatatypeProperty ;
-        rdfs:domain  :CallNurse , :cancelCallNurse , :cancelEmergency , :emergency ;
+        rdfs:domain  :Emergency , :CancelEmergency , :CancelCallNurse , :CallNurse ;
         rdfs:range   xsd:string .
 
-:emergency  a            owl:Class ;
+:payload  a          owl:DatatypeProperty ;
+        rdfs:domain  :Emergency , :CancelEmergency , :CancelCallNurse , :CallNurse ;
+        rdfs:range   xsd:string .
+
+:CancelCallNurseWrapped
+        a                owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :cancelCallNurse
+                         ] .
+
+:EmergencyWrapped  a     owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :emergency
+                         ] .
+
+:CancelEmergency  a      owl:Class ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
                            owl:onProperty   :location
@@ -83,11 +119,7 @@ jasper:dta-nurse-call-generator
                            owl:maxCardinality  "1"^^xsd:int ;
                            owl:onProperty      :payload
                          ] .
-
-:payload  a          owl:DatatypeProperty ;
-        rdfs:domain  :CallNurse , :cancelCallNurse , :cancelEmergency , :emergency ;
-        rdfs:range   xsd:string .
 
 :dta-nurse-call-generator
         a              dta:DTA ;
-        dta:operation  :sendCallNurse , :sendCancelCallNurse , :sendEmergency , :sendCancelEmergency .
+        dta:operation  :sendCancelEmergency , :sendEmergency , :sendCancelCallNurse , :sendCallNurse .

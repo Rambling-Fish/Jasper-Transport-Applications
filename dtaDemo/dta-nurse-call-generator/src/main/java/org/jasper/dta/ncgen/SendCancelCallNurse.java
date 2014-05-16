@@ -12,9 +12,10 @@ import org.mule.api.MuleMessage;
 @JsonTypeName("http://coralcea.ca/jasper/NurseCall/sendCancelCallNurse")
 public class SendCancelCallNurse implements Callable {
 
-	private static Logger	log	= Logger.getLogger(SendCancelCallNurse.class.getName());
+	private static Logger log = Logger.getLogger(SendCancelCallNurse.class
+			.getName());
 
-	private String			errorText;
+	private String errorText;
 
 	private String parseOutLocation(String browserInput) {
 		errorText = null;
@@ -28,7 +29,8 @@ public class SendCancelCallNurse implements Callable {
 
 		String parmPair[] = requestArray[1].split("\\=");
 		if (parmPair.length != 2) {
-			errorText = "Invalid parameter (expect key=value) : " + requestArray[1];
+			errorText = "Invalid parameter (expect key=value) : "
+					+ requestArray[1];
 			log.warn(errorText);
 			return null;
 		}
@@ -46,9 +48,28 @@ public class SendCancelCallNurse implements Callable {
 	 * @param muleEventContext
 	 * @return Parameter
 	 */
-	@Generated("true")
+	@Generated("false")
 	public Parameter onCall(MuleEventContext muleEventContext) throws Exception {
 		Parameter parameter = new Parameter();
+
+		MuleMessage message = muleEventContext.getMessage();
+		String browserInput = message.getPayloadAsString();
+		String location = parseOutLocation(browserInput);
+
+		if (location == null)
+			throw new Exception(errorText);
+
+		CancelCallNurse cancelCallNurse = new CancelCallNurseImpl();
+		cancelCallNurse.setLocation(location);
+
+		if (NcRequest.PAYLOADS.get(location) == null) {
+			cancelCallNurse.setPayload("");
+		} else {
+			cancelCallNurse.setPayload(NcRequest.PAYLOADS.get(location));
+		}
+
+		parameter.setCancelCallNurse(cancelCallNurse);
+
 		return parameter;
 	}
 
@@ -59,47 +80,25 @@ public class SendCancelCallNurse implements Callable {
 	public static class Parameter {
 
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/location")
-		private String	location;
-
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/payload")
-		private String	payload;
+		@JsonProperty("http://coralcea.ca/jasper/NurseCall/cancelCallNurse")
+		private CancelCallNurse cancelCallNurse;
 
 		/**
-		 * @return location 
+		 * @return cancelCallNurse 
 		 */
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/location")
-		public String getLocation() {
-			return location;
+		@JsonProperty("http://coralcea.ca/jasper/NurseCall/cancelCallNurse")
+		public CancelCallNurse getCancelCallNurse() {
+			return cancelCallNurse;
 		}
 
 		/**
-		 * @return payload 
+		 * @param cancelCallNurse 
 		 */
 		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/payload")
-		public String getPayload() {
-			return payload;
-		}
-
-		/**
-		 * @param location 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/location")
-		public void setLocation(String location) {
-			this.location = location;
-		}
-
-		/**
-		 * @param payload 
-		 */
-		@Generated("true")
-		@JsonProperty("http://coralcea.ca/jasper/NurseCall/payload")
-		public void setPayload(String payload) {
-			this.payload = payload;
+		@JsonProperty("http://coralcea.ca/jasper/NurseCall/cancelCallNurse")
+		public void setCancelCallNurse(CancelCallNurse cancelCallNurse) {
+			this.cancelCallNurse = cancelCallNurse;
 		}
 
 		@Override
@@ -107,8 +106,10 @@ public class SendCancelCallNurse implements Callable {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((location == null) ? 0 : location.hashCode());
-			result = prime * result + ((payload == null) ? 0 : payload.hashCode());
+			result = prime
+					* result
+					+ ((cancelCallNurse == null) ? 0 : cancelCallNurse
+							.hashCode());
 			return result;
 		}
 
@@ -122,15 +123,10 @@ public class SendCancelCallNurse implements Callable {
 			if (getClass() != obj.getClass())
 				return false;
 			Parameter other = (Parameter) obj;
-			if (location == null) {
-				if (other.location != null)
+			if (cancelCallNurse == null) {
+				if (other.cancelCallNurse != null)
 					return false;
-			} else if (!location.equals(other.location))
-				return false;
-			if (payload == null) {
-				if (other.payload != null)
-					return false;
-			} else if (!payload.equals(other.payload))
+			} else if (!cancelCallNurse.equals(other.cancelCallNurse))
 				return false;
 			return true;
 		}
@@ -138,7 +134,7 @@ public class SendCancelCallNurse implements Callable {
 		@Override
 		@Generated("true")
 		public String toString() {
-			return "Parameter [ " + "location=" + location + ", " + "payload=" + payload + " ]";
+			return "Parameter [ " + "cancelCallNurse=" + cancelCallNurse + " ]";
 		}
 	}
 }

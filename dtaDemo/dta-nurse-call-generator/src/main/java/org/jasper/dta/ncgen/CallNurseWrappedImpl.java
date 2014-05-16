@@ -10,7 +10,7 @@ public class CallNurseWrappedImpl implements CallNurseWrapped {
 
 	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/NurseCall/callNurse")
-	private CallNurse	callNurse;
+	private CallNurse callNurse;
 
 	@Override
 	@Generated("true")
@@ -31,7 +31,8 @@ public class CallNurseWrappedImpl implements CallNurseWrapped {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((callNurse == null) ? 0 : callNurse.hashCode());
+		result = prime * result
+				+ ((callNurse == null) ? 0 : callNurse.hashCode());
 		return result;
 	}
 
