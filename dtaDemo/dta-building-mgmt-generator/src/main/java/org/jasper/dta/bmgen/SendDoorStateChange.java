@@ -17,14 +17,6 @@ public class SendDoorStateChange implements Callable {
 	private static Logger log = Logger.getLogger(SendDoorStateChange.class
 			.getName());
 
-	private String parsedDoorID;
-
-	private String parsedDoorState;
-
-	private String parsedPayload;
-
-	private String errorText;
-
 	/**
 	 * @param muleEventContext
 	 * @return Parameters
@@ -36,52 +28,31 @@ public class SendDoorStateChange implements Callable {
 		MuleMessage message = muleEventContext.getMessage();
 		String browserInput = (String) message.getPayload();
 
+		String parsedDoorID = null;
+		String parsedDoorState = null;
+		String parsedPayload = null;
+		String errorText = null;
+
+		// Flags for mandatory parameters
+		boolean haveDoorID = false, haveDoorState = false;
+
 		DoorStateChange doorStateChange = new DoorStateChangeImpl();
-		
-		if (parseDoorStateParameters(browserInput)) {
-			doorStateChange.setDoorID(parsedDoorID);
-			doorStateChange.setDoorState(parsedDoorState);
 
-			if (parsedPayload == null) {
-				if (BmRequest.PAYLOADS.get(parsedDoorID) == null) {
-					doorStateChange.setPayload("");
-				} else {
-					doorStateChange.setPayload(BmRequest.PAYLOADS.get(parsedDoorID));
-				}
-			} else {
-				doorStateChange.setPayload(parsedPayload);
-			}
-		} else {
-			throw new Exception(errorText);
-		}
-
-		parameters.setDoorStateChange(doorStateChange);
-		
-		return parameters;
-	}
-
-	private boolean parseDoorStateParameters(String browserInput) {
-
-		// RURI : http://0.0.0.0:8083/rbm/doorStateChange                ?
-		// PARM : http://coralcea.ca/jasper/BuildingMgmt/doorID=010      &
+		// Process the http input string
+		//
+		// RURI :           http://0.0.0.0:8083/rbm/doorStateChange       ?
+		// PARM : http://coralcea.ca/jasper/BuildingMgmt/doorID=010       &
 		// PARM : http://coralcea.ca/jasper/BuildingMgmt/doorState=open
 
 		// EXAMPLE:
 		// http://0.0.0.0:8083/rbm/doorStateChange?http://coralcea.ca/jasper/BuildingMgmt/doorID=010&http://coralcea.ca/jasper/BuildingMgmt/doorState=open
-
-		boolean haveDoorID = false, haveDoorState = false;
-
-		parsedDoorID = null;
-		parsedDoorState = null;
-		parsedPayload = null;
-		errorText = null;
 
 		String requestArray[] = browserInput.split("\\?");
 
 		if (requestArray.length != 2) {
 			errorText = "Invalid request : " + browserInput;
 			log.warn(errorText);
-			return false;
+			throw new Exception(errorText);
 		}
 
 		String parmPairs[] = requestArray[1].split("\\&");
@@ -94,7 +65,7 @@ public class SendDoorStateChange implements Callable {
 				errorText = "Invalid parameter (expect key=value) : "
 						+ parmPairString;
 				log.warn(errorText);
-				return false;
+				throw new Exception(errorText);
 			}
 
 			// Identify the parameter key and set its value
@@ -112,12 +83,28 @@ public class SendDoorStateChange implements Callable {
 			}
 		}
 
-		if (haveDoorID && haveDoorState) {
-			return true;
-		} else {
+		// Check that we have parsed values for the mandatory parameters
+		if (!haveDoorID || !haveDoorState) {
 			errorText = "Mandatory parameter missing";
-			return false;
+			throw new Exception(errorText);
 		}
+		
+		// Populate the mandatory (doorID, doorState) and optional (payload) parameters
+		doorStateChange.setDoorID(parsedDoorID);
+		doorStateChange.setDoorState(parsedDoorState);
+		if (parsedPayload == null) {
+			if (BmRequest.PAYLOADS.get(parsedDoorID) == null) {
+				doorStateChange.setPayload("");
+			} else {
+				doorStateChange.setPayload(BmRequest.PAYLOADS.get(parsedDoorID));
+			}
+		} else {
+			doorStateChange.setPayload(parsedPayload);
+		}
+
+		parameters.setDoorStateChange(doorStateChange);
+		
+		return parameters;
 	}
 
 	/**

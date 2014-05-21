@@ -85,9 +85,9 @@ jasper:timestamp  a  owl:DatatypeProperty ;
                            owl:maxCardinality  "1"^^xsd:int ;
                            owl:onProperty      :payload
                          ] ;
-        dta:restriction  [ a                   owl:Restriction ;
-                           owl:maxCardinality  "1"^^xsd:int ;
-                           owl:onProperty      jasper:timestamp
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:timestamp
                          ] ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;

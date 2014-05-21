@@ -21,16 +21,6 @@ public class SendRoomTempUpdate implements Callable {
 	private static final SimpleDateFormat dt = new SimpleDateFormat(
 			"yyyy-MM-dd'T'hh:mm:ss.SSSZ");
 
-	private String parsedRoomID;
-
-	private int parsedTemperature;
-
-	private String parsedTimestamp;
-
-	private String parsedPayload;
-
-	private String errorText;
-
 	/**
 	 * @param muleEventContext
 	 * @return Parameters
@@ -42,55 +32,33 @@ public class SendRoomTempUpdate implements Callable {
 		MuleMessage message = muleEventContext.getMessage();
 		String browserInput = (String) message.getPayload();
 
+		String parsedRoomID = null;
+		int parsedTemperature = 0;
+		String parsedTimestamp = null;
+		String parsedPayload = null;
+		String errorText = null;
+
+		// Flags for mandatory parameters
+		boolean haveRoomID = false, haveTemperature = false, haveTimestamp = false;
+
 		RoomTempUpdate roomTempUpdate = new RoomTempUpdateImpl();
 		
-		if (parseRoomTempParameters(browserInput)) {
-			roomTempUpdate.setRoomID(parsedRoomID);
-			roomTempUpdate.setTemperature(parsedTemperature);
-			roomTempUpdate.setTimestamp(parsedTimestamp);
-
-			if (parsedPayload == null) {
-				if (BmRequest.PAYLOADS.get(parsedRoomID) == null) {
-					roomTempUpdate.setPayload("");
-				} else {
-					roomTempUpdate.setPayload(BmRequest.PAYLOADS.get(parsedRoomID));
-				}
-			} else {
-				roomTempUpdate.setPayload(parsedPayload);
-			}
-		} else {
-			throw new Exception(errorText);
-		}
-
-		parameters.setRoomTempUpdate(roomTempUpdate);
-
-		return parameters;
-	}
-
-	private boolean parseRoomTempParameters(String browserInput) {
-
+		// Process the http input string
+		//
 		// RURI : http://0.0.0.0:8083/rbm/roomTempUpdate
 		// PARM : http://coralcea.ca/jasper/BuildingMgmt/roomID=010
 		// PARM : http://coralcea.ca/jasper/BuildingMgmt/temperature=25
-		// PARM : http://coralcea.ca/jasper/timestamp=2014-03-18T12:09:51.841-0400  (optional)
+		// PARM : http://coralcea.ca/jasper/timestamp=2014-03-18T12:09:51.841-0400  (optional, DTA will ensure it is present)
 
 		// EXAMPLE:
 		// 0.0.0.0:8083/rbm/roomTempUpdate?http://coralcea.ca/jasper/BuildingMgmt/roomID=010&http://coralcea.ca/jasper/BuildingMgmt/temperature=25&http://coralcea.ca/jasper/timestamp=2014-03-18T12:09:51.841-0400
-
-		boolean haveRoomID = false, haveTemperature = false, haveTimestamp = false;
-
-		parsedRoomID = null;
-		parsedTemperature = 0;
-		parsedTimestamp = null;
-		parsedPayload = null;
-		errorText = null;
 
 		String requestArray[] = browserInput.split("\\?");
 
 		if (requestArray.length != 2) {
 			errorText = "Invalid request : " + browserInput;
 			log.warn(errorText);
-			return false;
+			throw new Exception(errorText);
 		}
 
 		String parmPairs[] = requestArray[1].split("\\&");
@@ -103,7 +71,7 @@ public class SendRoomTempUpdate implements Callable {
 				errorText = "Invalid parameter (expect key=value) : "
 						+ parmPairString;
 				log.warn(errorText);
-				return false;
+				throw new Exception(errorText);
 			}
 
 			// Identify the parameter key and set its value
@@ -130,12 +98,31 @@ public class SendRoomTempUpdate implements Callable {
 			haveTimestamp = true;
 		}
 
-		if (haveRoomID && haveTemperature && haveTimestamp) {
-			return true;
-		} else {
+		// Check that we have parsed values for the mandatory parameters
+		if (!haveRoomID || !haveTemperature || !haveTimestamp) {
 			errorText = "Mandatory parameter missing";
-			return false;
+			log.warn(errorText);
+			throw new Exception(errorText);
 		}
+				
+		// Populate the mandatory (roomID, temperature, timestamp) and optional (payload) parameters
+		roomTempUpdate.setRoomID(parsedRoomID);
+		roomTempUpdate.setTemperature(parsedTemperature);
+		roomTempUpdate.setTimestamp(parsedTimestamp);
+
+		if (parsedPayload == null) {
+			if (BmRequest.PAYLOADS.get(parsedRoomID) == null) {
+				roomTempUpdate.setPayload("");
+			} else {
+				roomTempUpdate.setPayload(BmRequest.PAYLOADS.get(parsedRoomID));
+			}
+		} else {
+			roomTempUpdate.setPayload(parsedPayload);
+		}
+
+		parameters.setRoomTempUpdate(roomTempUpdate);
+
+		return parameters;
 	}
 
 	/**
