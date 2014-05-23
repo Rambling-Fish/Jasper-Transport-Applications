@@ -9,8 +9,8 @@ import org.codehaus.jackson.annotate.*;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public class PatientInfoImpl implements PatientInfo {
 
-	public PatientInfoImpl (String ward, String bed, String hrSID, String bpSID)
-	{
+	public PatientInfoImpl(String patientID, String ward, String bed, String hrSID, String bpSID) {
+		this.patientID = patientID;
 		this.bed = bed;
 		this.ward = ward;
 		this.hrSID = hrSID;
@@ -18,12 +18,16 @@ public class PatientInfoImpl implements PatientInfo {
 	}
 
 	@Generated("true")
-	@JsonProperty("http://coralcea.ca/jasper/ward")
-	private String ward;
+	@JsonProperty("http://coralcea.ca/jasper/patientID")
+	private String patientID;
 
 	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/hrSID")
 	private String hrSID;
+
+	@Generated("true")
+	@JsonProperty("http://coralcea.ca/jasper/ward")
+	private String ward;
 
 	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/bpSID")
@@ -35,9 +39,9 @@ public class PatientInfoImpl implements PatientInfo {
 
 	@Override
 	@Generated("true")
-	@JsonProperty("http://coralcea.ca/jasper/ward")
-	public String getWard() {
-		return ward;
+	@JsonProperty("http://coralcea.ca/jasper/patientID")
+	public String getPatientID() {
+		return patientID;
 	}
 
 	@Override
@@ -45,6 +49,13 @@ public class PatientInfoImpl implements PatientInfo {
 	@JsonProperty("http://coralcea.ca/jasper/hrSID")
 	public String getHrSID() {
 		return hrSID;
+	}
+
+	@Override
+	@Generated("true")
+	@JsonProperty("http://coralcea.ca/jasper/ward")
+	public String getWard() {
+		return ward;
 	}
 
 	@Override
@@ -63,9 +74,9 @@ public class PatientInfoImpl implements PatientInfo {
 
 	@Override
 	@Generated("true")
-	@JsonProperty("http://coralcea.ca/jasper/ward")
-	public void setWard(String ward) {
-		this.ward = ward;
+	@JsonProperty("http://coralcea.ca/jasper/patientID")
+	public void setPatientID(String patientID) {
+		this.patientID = patientID;
 	}
 
 	@Override
@@ -73,6 +84,13 @@ public class PatientInfoImpl implements PatientInfo {
 	@JsonProperty("http://coralcea.ca/jasper/hrSID")
 	public void setHrSID(String hrSID) {
 		this.hrSID = hrSID;
+	}
+
+	@Override
+	@Generated("true")
+	@JsonProperty("http://coralcea.ca/jasper/ward")
+	public void setWard(String ward) {
+		this.ward = ward;
 	}
 
 	@Override
@@ -94,8 +112,10 @@ public class PatientInfoImpl implements PatientInfo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ward == null) ? 0 : ward.hashCode());
+		result = prime * result
+				+ ((patientID == null) ? 0 : patientID.hashCode());
 		result = prime * result + ((hrSID == null) ? 0 : hrSID.hashCode());
+		result = prime * result + ((ward == null) ? 0 : ward.hashCode());
 		result = prime * result + ((bpSID == null) ? 0 : bpSID.hashCode());
 		result = prime * result + ((bed == null) ? 0 : bed.hashCode());
 		return result;
@@ -111,15 +131,20 @@ public class PatientInfoImpl implements PatientInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		PatientInfoImpl other = (PatientInfoImpl) obj;
-		if (ward == null) {
-			if (other.ward != null)
+		if (patientID == null) {
+			if (other.patientID != null)
 				return false;
-		} else if (!ward.equals(other.ward))
+		} else if (!patientID.equals(other.patientID))
 			return false;
 		if (hrSID == null) {
 			if (other.hrSID != null)
 				return false;
 		} else if (!hrSID.equals(other.hrSID))
+			return false;
+		if (ward == null) {
+			if (other.ward != null)
+				return false;
+		} else if (!ward.equals(other.ward))
 			return false;
 		if (bpSID == null) {
 			if (other.bpSID != null)
@@ -137,7 +162,8 @@ public class PatientInfoImpl implements PatientInfo {
 	@Override
 	@Generated("true")
 	public String toString() {
-		return "PatientInfoImpl [ " + "ward=" + ward + ", " + "hrSID=" + hrSID
-				+ ", " + "bpSID=" + bpSID + ", " + "bed=" + bed + " ]";
+		return "PatientInfoImpl [ " + "patientID=" + patientID + ", "
+				+ "hrSID=" + hrSID + ", " + "ward=" + ward + ", " + "bpSID="
+				+ bpSID + ", " + "bed=" + bed + " ]";
 	}
 }

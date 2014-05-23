@@ -10,7 +10,7 @@
         rdfs:range   xsd:string .
 
 :patientID  a        owl:DatatypeProperty ;
-        rdfs:domain  :PatientInfoReq ;
+        rdfs:domain  :PatientInfo , :PatientInfoReq ;
         rdfs:range   xsd:string .
 
 :hrSID  a            owl:DatatypeProperty ;
@@ -29,15 +29,15 @@
         dta:x            "15"^^xsd:int ;
         dta:y            "15"^^xsd:int .
 
-:getPatientInfo  a       dta:Operation ;
-        dta:destination  "dta-emr-c/getpatientinfo/34d3fc36-b937-46fc-8834-9ff6680ab83a"^^xsd:string ;
-        dta:parameter    :PatientInfoReq ;
-        dta:kind         dta:Get ;
-        dta:data         :patientInfo .
-
 :bpSID  a            owl:DatatypeProperty ;
         rdfs:domain  :PatientInfo ;
         rdfs:range   xsd:string .
+
+:getPatientInfo  a       dta:Operation ;
+        dta:data         :patientInfo ;
+        dta:destination  "dta-emr-c/getpatientinfo/34d3fc36-b937-46fc-8834-9ff6680ab83a"^^xsd:string ;
+        dta:kind         dta:Get ;
+        dta:parameter    :PatientInfoReq .
 
 :dta-EMR-C  a          dta:DTA ;
         dta:operation  :getPatientInfo ;
@@ -47,11 +47,11 @@
 :PatientInfo  a          owl:Class ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
-                           owl:onProperty   :ward
+                           owl:onProperty   :patientID
                          ] ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
-                           owl:onProperty   :hrSID
+                           owl:onProperty   :bed
                          ] ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
@@ -59,7 +59,11 @@
                          ] ;
         dta:restriction  [ a                owl:Restriction ;
                            owl:cardinality  "1"^^xsd:int ;
-                           owl:onProperty   :bed
+                           owl:onProperty   :hrSID
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :ward
                          ] ;
         dta:x            "546"^^xsd:int ;
         dta:y            "15"^^xsd:int .
