@@ -117,11 +117,18 @@ public class GetHrData implements Callable {
 	@Generated("false")
 	private Object process(HrDataReq hrDataReq, MuleMessage muleMessage) throws Exception {
 
+		if (hrDataReq.getHrSID() == null) 
+		{
+			log.warn("null HrDataReq hrSID parameter : http://coralcea.ca/jasper/hrSID");
+			muleMessage.setOutboundProperty("statusCode", 400);  // Bad request
+			return new HrData[] {null};
+		}
+
 		String hrSid = new String(hrDataReq.getHrSID());
 
 		if ((hrSid == null) || (hrSid.length() == 0)) 
 		{
-			log.warn("null parameter : http://coralcea.ca/jasper/hrSID");
+			log.warn("null hrSid parameter : http://coralcea.ca/jasper/hrSID");
 			muleMessage.setOutboundProperty("statusCode", 400);  // Bad request
 			return new HrData[] {null};
 		}

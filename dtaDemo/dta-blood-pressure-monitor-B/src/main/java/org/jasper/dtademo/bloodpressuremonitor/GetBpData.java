@@ -122,11 +122,18 @@ public class GetBpData implements Callable {
 	@Generated("false")
 	private Object process(BpDataReq bpDataReq, MuleMessage muleMessage) throws Exception {
 
+		if (bpDataReq.getBpSID() == null)
+		{
+			log.warn("null BpDataReq bpSID parameter : http://coralcea.ca/jasper/bpSID");
+			muleMessage.setOutboundProperty("statusCode", 400);  // Bad request
+			return new BpData[] {null};
+		}
+		
 		String bpSid = new String(bpDataReq.getBpSID());
 		
 		if ((bpSid == null) || (bpSid.length() == 0)) 
 		{
-			log.warn("null parameter : http://coralcea.ca/jasper/bpSID");
+			log.warn("null bpSid parameter : http://coralcea.ca/jasper/bpSID");
 			muleMessage.setOutboundProperty("statusCode", 400);  // Bad request
 			return new BpData[] {null};
 		}
