@@ -138,6 +138,11 @@ public class GetBpData implements Callable {
 			return new BpData[] {null};
 		}
 
+		if (bpSid.equalsIgnoreCase("0k"))
+		{
+			return new BpData[] {null};
+		}
+
 		if(SENSORS.containsKey(bpSid.toLowerCase())) {
 			return SENSORS.get(bpSid.toLowerCase()).getSensorData();
 		}

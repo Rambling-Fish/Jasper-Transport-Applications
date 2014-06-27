@@ -133,10 +133,15 @@ public class GetHrData implements Callable {
 			return new HrData[] {null};
 		}
 
+		if (hrSid.equalsIgnoreCase("0k"))
+		{
+			return new HrData[] {null};
+		}
+
 		if(SENSORS.containsKey(hrSid.toLowerCase())) {
 			return SENSORS.get(hrSid.toLowerCase()).getSensorData();
 		}
-
+		
 		int MAX_HR = 145;
 		int MIN_HR = 45;
 		int bpm = MIN_HR + (int)(Math.random() * ((MAX_HR - MIN_HR) + 1));
