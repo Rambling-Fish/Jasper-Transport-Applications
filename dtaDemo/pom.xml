@@ -11,13 +11,13 @@
     <packaging>pom</packaging>
     <modules>
         <module>demo-heart-rate-monitor-A</module>
-        <module>demo-heart-rate-monitor-A-static-payload</module>
+      <!--  <module>demo-heart-rate-monitor-A-static-payload</module>
         <module>demo-blood-pressure-monitor-B</module>
         <module>demo-EMR-C</module>
         <module>demo-heart-rate-monitor-D</module>
         <module>demo-room-temperature-monitor-E</module>
         <module>demo-email-service-F</module>
-        <module>demo-sms-service-G</module>
+        <module>demo-sms-service-G</module> -->
         <module>dta-blood-pressure-monitor-B</module>
         <module>dta-EMR-C</module>
         <module>dta-heart-rate-monitor-D</module>
@@ -25,7 +25,7 @@
         <module>dta-nurse-call-generator</module>
         <module>dta-building-mgmt-generator</module>
         <module>dta-sms-terminator</module>
-        <module>demo-wardinfo-H</module>
+       <!--  <module>demo-wardinfo-H</module> -->
     </modules>
     <build>
        <plugins>
