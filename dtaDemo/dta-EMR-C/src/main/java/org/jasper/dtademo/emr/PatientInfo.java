@@ -12,11 +12,11 @@ import org.codehaus.jackson.annotate.*;
 public interface PatientInfo {
 
 	/**
-	 * @return ward 
+	 * @return patientID 
 	 */
 	@Generated("true")
-	@JsonProperty("http://coralcea.ca/jasper/ward")
-	public String getWard();
+	@JsonProperty("http://coralcea.ca/jasper/patientID")
+	public String getPatientID();
 
 	/**
 	 * @return hrSID 
@@ -24,6 +24,13 @@ public interface PatientInfo {
 	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/hrSID")
 	public String getHrSID();
+
+	/**
+	 * @return ward 
+	 */
+	@Generated("true")
+	@JsonProperty("http://coralcea.ca/jasper/ward")
+	public String getWard();
 
 	/**
 	 * @return bpSID 
@@ -40,11 +47,11 @@ public interface PatientInfo {
 	public String getBed();
 
 	/**
-	 * @param ward 
+	 * @param patientID 
 	 */
 	@Generated("true")
-	@JsonProperty("http://coralcea.ca/jasper/ward")
-	public void setWard(String ward);
+	@JsonProperty("http://coralcea.ca/jasper/patientID")
+	public void setPatientID(String patientID);
 
 	/**
 	 * @param hrSID 
@@ -52,6 +59,13 @@ public interface PatientInfo {
 	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/hrSID")
 	public void setHrSID(String hrSID);
+
+	/**
+	 * @param ward 
+	 */
+	@Generated("true")
+	@JsonProperty("http://coralcea.ca/jasper/ward")
+	public void setWard(String ward);
 
 	/**
 	 * @param bpSID 
