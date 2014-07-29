@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
+    <jasper:config name="Jasper" vendor="jasper" application="dta-medical-record-I" version="1.0" model="dta-medical-record-I.dta" doc:name="Jasper" url="${jasperUrl}"/>
+    <flow name="get-medical-record" doc:name="get-medical-record">
+        <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/getMedicalRecord" doc:name="Jasper (GET)"/>
+        <message-properties-transformer scope="session" doc:name="save correlationID">
+            <add-message-property key="MULE_CORRELATION_ID" value="#[header:OUTBOUND:MULE_CORRELATION_ID]"/>
+        </message-properties-transformer>
+        <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/requestPatientInfo" doc:name="Jasper (REQUEST patientInfo)"/>
+        <all doc:name="All">
+            <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/requestPatientInfo" doc:name="Jasper (REQUEST patientInfo)"/>
+            <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/requestHrData" doc:name="Jasper (REQUEST hrData)"/>
+            <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/requestBpData" doc:name="Jasper (REQUEST  bpData)"/>
+        </all>
+        <component doc:name="Java (aggregate MedicalRecord)">
+            <singleton-object class="org.jasper.dtademo.medicalrecord.AggregateMedicalRecord"/>
+        </component>
+        <message-properties-transformer doc:name="restore correlationID">
+            <add-message-property key="MULE_CORRELATION_ID" value="#[header:SESSION:MULE_CORRELATION_ID]"/>
+        </message-properties-transformer>
+    </flow>
+</mule>

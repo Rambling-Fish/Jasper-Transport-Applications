@@ -1,0 +1,65 @@
+@prefix :      <http://coralcea.ca/jasper/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+@prefix composite: <http://coralcea.ca/jasper/composite/> .
+
+:getMedicalRecord  a         dta:Operation ;
+        dta:data             composite:medicalRecord ;
+        dta:dataRestriction  [ a                owl:Restriction ;
+                               owl:cardinality  "1"^^xsd:int ;
+                               owl:onProperty   composite:medicalRecord
+                             ] ;
+        dta:destination      "dta-medical-record-I/getMedicalRecord/0fcfc7d4-a067-49a8-8904-d6bd1b1da3ea"^^xsd:string ;
+        dta:kind             dta:Get ;
+        dta:parameter        :PatientInfoReq .
+
+composite:MedicalRecord
+        a                owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :patientInfo
+                         ] .
+
+:dta-I  a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dtademo.medicalrecord"^^xsd:string ;
+        owl:imports      <http://coralcea.ca/jasper> .
+
+:requestBpData  a      dta:Request ;
+        dta:data       :bpData ;
+        dta:expires    "10"^^xsd:int ;
+        dta:kind       dta:Get ;
+        dta:parameter  :BpDataReq .
+
+:bpData  rdfs:domain  composite:MedicalRecord .
+
+:dta-medical-record-I
+        a              dta:DTA ;
+        dta:operation  :getMedicalRecord ;
+        dta:request    :requestHrData , :requestPatientInfo , :requestBpData .
+
+:requestHrData  a      dta:Request ;
+        dta:data       :hrData ;
+        dta:expires    "10"^^xsd:int ;
+        dta:kind       dta:Get ;
+        dta:parameter  :HrDataReq .
+
+:hrData  rdfs:domain  composite:MedicalRecord .
+
+:requestPatientInfo  a       dta:Request ;
+        dta:data             :patientInfo ;
+        dta:dataRestriction  [ a                owl:Restriction ;
+                               owl:cardinality  "1"^^xsd:int ;
+                               owl:onProperty   :patientInfo
+                             ] ;
+        dta:expires          "10"^^xsd:int ;
+        dta:kind             dta:Get ;
+        dta:parameter        :PatientInfoReq .
+
+:patientInfo  rdfs:domain  composite:MedicalRecord .
+
+composite:medicalRecord
+        a           owl:ObjectProperty ;
+        rdfs:range  composite:MedicalRecord .

@@ -1,0 +1,161 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix hrSensor: <http://coralcea.ca/jasper/hrSensor/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bpSensor: <http://coralcea.ca/jasper/bpSensor/> .
+@prefix jasper: <http://coralcea.ca/jasper/> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+
+jasper:ward  a       owl:DatatypeProperty ;
+        rdfs:domain  jasper:PatientInfo ;
+        rdfs:range   xsd:string .
+
+jasper:HrData  a         owl:Class ;
+        rdfs:subClassOf  jasper:MsData ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:timestamp
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   hrSensor:bpm
+                         ] .
+
+jasper:dta-blood-pressure-monitor-B
+        a              dta:DTA ;
+        dta:operation  jasper:getBpData .
+
+bpSensor:systolic  a  owl:DatatypeProperty ;
+        rdfs:domain  jasper:BpData ;
+        rdfs:range   xsd:integer .
+
+jasper:getBpData  a      dta:Operation ;
+        dta:data         jasper:bpData ;
+        dta:destination  "dta-blood-pressure-monitor-b/getbpdata/8455ecf0-ac93-4f25-b3ef-45738f22299f"^^xsd:string ;
+        dta:kind         dta:Get ;
+        dta:parameter    jasper:BpDataReq .
+
+<http://coralcea.ca/jasper>
+        a              owl:Ontology ;
+        dta:isLibrary  true .
+
+jasper:bpData  a            owl:ObjectProperty ;
+        rdfs:range          jasper:BpData ;
+        rdfs:subPropertyOf  jasper:msData .
+
+bpSensor:diastolic  a  owl:DatatypeProperty ;
+        rdfs:domain  jasper:BpData ;
+        rdfs:range   xsd:integer .
+
+hrSensor:bpm  a      owl:DatatypeProperty ;
+        rdfs:domain  jasper:HrData ;
+        rdfs:range   xsd:integer .
+
+jasper:HrDataReq  a      owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:hrSID
+                         ] .
+
+jasper:PatientInfo  a    owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:hrSID
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:ward
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:bed
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:patientID
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:bpSID
+                         ] .
+
+jasper:dta-EMR-C  a    dta:DTA ;
+        dta:operation  jasper:getPatientInfo .
+
+jasper:timestamp  a  owl:DatatypeProperty ;
+        rdfs:domain  jasper:BpData , jasper:HrData ;
+        rdfs:range   xsd:string .
+
+jasper:getHrData  a      dta:Operation ;
+        dta:data         jasper:hrData ;
+        dta:destination  "dta-heart-rate-monitor-d/gethrdata/dcf65af0-c286-472f-a4f1-03dd900eec1c"^^xsd:string ;
+        dta:kind         dta:Get ;
+        dta:parameter    jasper:HrDataReq .
+
+jasper:hrData  a            owl:ObjectProperty ;
+        rdfs:range          jasper:HrData ;
+        rdfs:subPropertyOf  jasper:msData .
+
+jasper:MsData  a  owl:Class .
+
+jasper:BpData  a         owl:Class ;
+        rdfs:subClassOf  jasper:MsData ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   bpSensor:diastolic
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   bpSensor:systolic
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:timestamp
+                         ] .
+
+jasper:bpSID  a      owl:DatatypeProperty ;
+        rdfs:domain  jasper:BpDataReq , jasper:PatientInfo ;
+        rdfs:range   xsd:string .
+
+jasper:patientInfo  a  owl:ObjectProperty ;
+        rdfs:range  jasper:PatientInfo .
+
+jasper:hrSID  a      owl:DatatypeProperty ;
+        rdfs:domain  jasper:PatientInfo , jasper:HrDataReq ;
+        rdfs:range   xsd:string .
+
+jasper:dta-heart-rate-monitor-D
+        a              dta:DTA ;
+        dta:operation  jasper:getHrData .
+
+jasper:patientID  a  owl:DatatypeProperty ;
+        rdfs:domain  jasper:PatientInfo , jasper:PatientInfoReq ;
+        rdfs:range   xsd:string .
+
+jasper:bed  a        owl:DatatypeProperty ;
+        rdfs:domain  jasper:PatientInfo ;
+        rdfs:range   xsd:string .
+
+jasper:getPatientInfo
+        a                dta:Operation ;
+        dta:data         jasper:patientInfo ;
+        dta:destination  "dta-emr-c/getpatientinfo/34d3fc36-b937-46fc-8834-9ff6680ab83a"^^xsd:string ;
+        dta:kind         dta:Get ;
+        dta:parameter    jasper:PatientInfoReq .
+
+jasper:PatientInfoReq
+        a                owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:patientID
+                         ] .
+
+jasper:BpDataReq  a      owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:bpSID
+                         ] .
+
+jasper:msData  a    owl:ObjectProperty ;
+        rdfs:range  jasper:MsData .
