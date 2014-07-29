@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
+    <jasper:config name="Jasper" url="${jasperUrl}" vendor="jasper" application="dta-contact-info-K" version="1.0" model="dta-contact-info-K.dta" doc:name="Jasper"/>
+    <flow name="get-contact-info" doc:name="get-contact-info">
+        <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/getContactInfo" doc:name="Jasper (execute GET)"/>
+        <component doc:name="GetContactInfo">
+            <singleton-object class="org.jasper.dta.contactinfo.GetContactInfo"/>
+        </component>
+    </flow>
+</mule>

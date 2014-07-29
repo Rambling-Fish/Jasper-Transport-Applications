@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+
+    <jasper:config name="Jasper" url="${jasperUrl}" vendor="jasper" application="dta-notify-J" version="1.0" model="dta-notify-J.dta" doc:name="Jasper"/>
+
+    <flow name="notify-email-sms" doc:name="notify-email-sms">
+
+        <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/dta-J/postNotificationMsg" doc:name="Jasper (POST)"/>
+
+        <message-properties-transformer scope="session" doc:name="save correlationID">
+            <add-message-property key="MULE_CORRELATION_ID" value="#[header:OUTBOUND:MULE_CORRELATION_ID]"/>
+        </message-properties-transformer>
+
+        <message-properties-transformer scope="session" doc:name="Save notify parms">
+            <add-message-property key="NOTIFY_FROM"        value="#[#[payload.fromName]]"/>
+            <add-message-property key="NOTIFY_TO"          value="#[#[payload.toName]]"/>
+            <add-message-property key="NOTIFY_MSG_SUBJECT" value="#[#[payload.msgSubject]]"/>
+            <add-message-property key="NOTIFY_MSG_BODY"    value="#[#[payload.msgBody]]"/>
+        </message-properties-transformer>
+        <all doc:name="All">
+            <processor-chain>
+                <set-payload value="#[header:SESSION:NOTIFY_FROM]" doc:name="from name"/>
+                <component doc:name="set GET parm">
+                    <singleton-object class="org.jasper.dta.notify.SetContactNameParm"/>
+                </component>
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/dta-J/getContactInfo" doc:name="Jasper (GET from contactInfo)"/>
+                <message-properties-transformer scope="session" doc:name="Save from details">
+                    <add-message-property key="NOTIFY_FROM_EMAIL" value="#[#[payload.workEmail]]"/>
+                    <add-message-property key="NOTIFY_FROM_SMS" value="#[#[payload.workCellphone]]"/>
+                </message-properties-transformer>
+            </processor-chain>
+            <processor-chain>
+                <set-payload value="#[header:SESSION:NOTIFY_TO]" doc:name="to name"/>
+                <component doc:name="set GET parm">
+                    <singleton-object class="org.jasper.dta.notify.SetContactNameParm"/>
+                </component>
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/dta-J/getContactInfo" doc:name="Jasper (GET to contactInfo)"/>
+                <message-properties-transformer scope="session" doc:name="Save to details">
+                    <add-message-property key="NOTIFY_TO_EMAIL" value="#[#[payload.workEmail]]"/>
+                    <add-message-property key="NOTIFY_TO_SMS" value="#[#[payload.workCellphone]]"/>
+                </message-properties-transformer>
+            </processor-chain>
+        </all>
+        <all doc:name="All">
+            <processor-chain>
+                <set-variable variableName="mop_email_from" value="#[header:SESSION:NOTIFY_FROM_EMAIL]" doc:name="email_from"/>
+                <set-variable variableName="mop_email_to" value="#[header:SESSION:NOTIFY_TO_EMAIL]" doc:name="email_to"/>
+                <set-variable variableName="mop_email_subject" value="#[header:SESSION:NOTIFY_MSG_SUBJECT]" doc:name="email_subject"/>
+                <set-variable variableName="mop_email_body" value="#[header:SESSION:NOTIFY_MSG_BODY]" doc:name="email_body"/>
+                <set-payload value="#[['emailAddressFrom':flowVars.mop_email_from.toString(), 'emailAddressTo':flowVars.mop_email_to.toString(), 'emailSubject':flowVars.mop_email_subject.toString(), 'emailBody':flowVars.mop_email_body.toString()]]" doc:name="email details"/>
+                <component doc:name="Set email parms">
+                    <singleton-object class="org.jasper.dta.notify.SetEmailParms"/>
+                </component>
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/dta-J/postSendEmail" doc:name="Jasper (POST send email)"/>
+            </processor-chain>
+            <processor-chain>
+                <set-variable variableName="mop_sms_to" value="#[header:SESSION:NOTIFY_TO_SMS]" doc:name="sms_to"/>
+                <set-variable variableName="mop_sms_from" value="#[header:SESSION:NOTIFY_FROM_SMS]" doc:name="sms_from"/>
+                <set-variable variableName="mop_sms_body" value="#[header:SESSION:NOTIFY_MSG_SUBJECT] ; #[header:SESSION:NOTIFY_MSG_BODY]" doc:name="sms_body"/>
+                <set-payload value="#[['fromSms':flowVars.mop_sms_from.toString(), 'toSms':flowVars.mop_sms_to.toString(), 'bodySms':flowVars.mop_sms_body.toString()]]" doc:name="Set sms details"/>
+                <component doc:name="Set sms parms">
+                    <singleton-object class="org.jasper.dta.notify.SetSmsParms"/>
+                </component>
+                <jasper:send config-ref="Jasper" request="http://coralcea.ca/jasper/dta-J/postSendSms" doc:name="Jasper (POST send sms)"/>
+            </processor-chain>
+        </all>
+
+        <message-properties-transformer doc:name="restore correlationID">
+            <add-message-property key="MULE_CORRELATION_ID" value="#[header:SESSION:MULE_CORRELATION_ID]"/>
+        </message-properties-transformer>
+        
+    </flow>
+</mule>

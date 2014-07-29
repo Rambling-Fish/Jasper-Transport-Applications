@@ -1,0 +1,76 @@
+@prefix :      <http://coralcea.ca/jasper/dta-J/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix notify: <http://coralcea.ca/jasper/notify/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+
+:dta-J  a              dta:DTA ;
+        dta:operation  :postNotificationMsg ;
+        dta:request    :getContactInfo , :postSendEmail , :postSendSms .
+
+notify:fromName  a   owl:DatatypeProperty ;
+        rdfs:domain  <http://coralcea.ca/jasper/NotifyMessageReq> ;
+        rdfs:range   xsd:string .
+
+notify:msgSubject  a  owl:DatatypeProperty ;
+        rdfs:domain  <http://coralcea.ca/jasper/NotifyMessageReq> ;
+        rdfs:range   xsd:string .
+
+notify:msgBody  a    owl:DatatypeProperty ;
+        rdfs:domain  <http://coralcea.ca/jasper/NotifyMessageReq> ;
+        rdfs:range   xsd:string .
+
+:postSendSms  a        dta:Request ;
+        dta:expires    "10"^^xsd:int ;
+        dta:kind       dta:Post ;
+        dta:parameter  <http://coralcea.ca/jasper/Sms/SmsPostReq> .
+
+notify:toName  a     owl:DatatypeProperty ;
+        rdfs:domain  <http://coralcea.ca/jasper/NotifyMessageReq> ;
+        rdfs:range   xsd:string .
+
+:postNotificationMsg  a  dta:Operation ;
+        dta:destination  "dta-J/postNotificationMsg/9f4eb633-d757-4461-889b-5dbd0a1cf98c"^^xsd:string ;
+        dta:kind         dta:Post ;
+        dta:parameter    <http://coralcea.ca/jasper/NotifyMessageReq> .
+
+<http://coralcea.ca/jasper/dta-J>
+        a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dta.notify"^^xsd:string ;
+        owl:imports      <http://coralcea.ca/jasper> .
+
+<http://coralcea.ca/jasper/NotifyMessageReq>
+        a                owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   notify:msgSubject
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   notify:msgBody
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   notify:fromName
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   notify:toName
+                         ] .
+
+:getContactInfo  a           dta:Request ;
+        dta:data             <http://coralcea.ca/jasper/contactInfo> ;
+        dta:dataRestriction  [ a                owl:Restriction ;
+                               owl:cardinality  "1"^^xsd:int ;
+                               owl:onProperty   <http://coralcea.ca/jasper/contactInfo>
+                             ] ;
+        dta:expires          "10"^^xsd:int ;
+        dta:kind             dta:Get ;
+        dta:parameter        <http://coralcea.ca/jasper/ContactInfoReq> .
+
+:postSendEmail  a      dta:Request ;
+        dta:expires    "10"^^xsd:int ;
+        dta:kind       dta:Post ;
+        dta:parameter  <http://coralcea.ca/jasper/EmailReq> .

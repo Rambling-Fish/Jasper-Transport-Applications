@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://jena.hpl.hp.com/schemas/2003/03/ont-manager#">
+     <OntologySpec>
+          <altURL rdf:resource="file:Jasper.dta"/>
+          <publicURI rdf:resource="http://coralcea.ca/jasper"/>
+     </OntologySpec>
+</rdf:RDF>

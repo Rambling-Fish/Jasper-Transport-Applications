@@ -1,0 +1,205 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix Sms:   <http://coralcea.ca/jasper/Sms/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix EmailMsg: <http://coralcea.ca/jasper/EmailMsg/> .
+@prefix jasper: <http://coralcea.ca/jasper/> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+@prefix info:  <http://coralcea.ca/jasper/info/> .
+
+jasper:ContactInfoReq
+        a                owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   jasper:contactName
+                         ] .
+
+info:workEmail  a    owl:DatatypeProperty ;
+        rdfs:domain  jasper:ContactInfo ;
+        rdfs:range   xsd:string .
+
+Sms:fromSms  a       owl:DatatypeProperty ;
+        rdfs:domain  Sms:SmsPostReq ;
+        rdfs:range   xsd:string .
+
+info:nameLast  a     owl:DatatypeProperty ;
+        rdfs:domain  jasper:ContactInfo ;
+        rdfs:range   xsd:string .
+
+jasper:sendEmail  a      dta:Operation ;
+        dta:destination  "dta-email-service-K/sendEmail/fa17822c-54ba-43f6-8551-e95e0d8e1c7b"^^xsd:string ;
+        dta:kind         dta:Post ;
+        dta:parameter    jasper:EmailReq .
+
+EmailMsg:emailSubject
+        a            owl:DatatypeProperty ;
+        rdfs:domain  jasper:EmailReq ;
+        rdfs:range   xsd:string .
+
+EmailMsg:emailAddressFrom
+        a            owl:DatatypeProperty ;
+        rdfs:domain  jasper:EmailReq ;
+        rdfs:range   xsd:string .
+
+jasper:EmailReq  a       owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   EmailMsg:emailBody
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   EmailMsg:emailAddressTo
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   EmailMsg:emailAddressFrom
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   EmailMsg:emailSubject
+                         ] .
+
+<http://coralcea.ca/jasper>
+        a              owl:Ontology ;
+        dta:isLibrary  true .
+
+Sms:SmsPostReq  a        owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   Sms:bodySms
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      Sms:logId
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   Sms:toSms
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   Sms:fromSms
+                         ] .
+
+info:homeEmail  a    owl:DatatypeProperty ;
+        rdfs:domain  jasper:ContactInfo ;
+        rdfs:range   xsd:string .
+
+info:workCellphone  a  owl:DatatypeProperty ;
+        rdfs:domain  jasper:ContactInfo ;
+        rdfs:range   xsd:string .
+
+info:nameMiddle  a   owl:DatatypeProperty ;
+        rdfs:domain  jasper:ContactInfo ;
+        rdfs:range   xsd:string .
+
+Sms:logId  a         owl:DatatypeProperty ;
+        rdfs:domain  Sms:SmsPostReq ;
+        rdfs:range   xsd:string .
+
+Sms:bodySms  a       owl:DatatypeProperty ;
+        rdfs:domain  Sms:SmsPostReq ;
+        rdfs:range   xsd:string .
+
+info:homeCellphone  a  owl:DatatypeProperty ;
+        rdfs:domain  jasper:ContactInfo ;
+        rdfs:range   xsd:string .
+
+info:workTelephone  a  owl:DatatypeProperty ;
+        rdfs:domain  jasper:ContactInfo ;
+        rdfs:range   xsd:string .
+
+EmailMsg:emailAddressTo
+        a            owl:DatatypeProperty ;
+        rdfs:domain  jasper:EmailReq ;
+        rdfs:range   xsd:string .
+
+jasper:contactName  a  owl:DatatypeProperty ;
+        rdfs:domain  jasper:ContactInfoReq ;
+        rdfs:range   xsd:string .
+
+jasper:ContactInfo  a    owl:Class ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:homeCellphone
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:workTelephone
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:workEmail
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   info:nameLast
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   info:nameFirst
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:homeEmail
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:nameMiddle
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:homeTelephone
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:workCellphone
+                         ] .
+
+jasper:dta-email-service-K
+        a              dta:DTA ;
+        dta:operation  jasper:sendEmail .
+
+info:nameFirst  a    owl:DatatypeProperty ;
+        rdfs:domain  jasper:ContactInfo ;
+        rdfs:range   xsd:string .
+
+info:homeTelephone  a  owl:DatatypeProperty ;
+        rdfs:domain  jasper:ContactInfo ;
+        rdfs:range   xsd:string .
+
+jasper:contactInfo  a  owl:ObjectProperty ;
+        rdfs:range  jasper:ContactInfo .
+
+Sms:sendSms  a           dta:Operation ;
+        dta:destination  "dta-sms-terminator/sendsms/a8ad9225-75f8-4c59-8275-5994e9d8a031"^^xsd:string ;
+        dta:kind         dta:Post ;
+        dta:parameter    Sms:SmsPostReq .
+
+EmailMsg:emailBody  a  owl:DatatypeProperty ;
+        rdfs:domain  jasper:EmailReq ;
+        rdfs:range   xsd:string .
+
+jasper:dta-contact-info-M
+        a              dta:DTA ;
+        dta:operation  jasper:getContactInfo .
+
+Sms:toSms  a         owl:DatatypeProperty ;
+        rdfs:domain  Sms:SmsPostReq ;
+        rdfs:range   xsd:string .
+
+jasper:getContactInfo
+        a                    dta:Operation ;
+        dta:data             jasper:contactInfo ;
+        dta:dataRestriction  [ a                owl:Restriction ;
+                               owl:cardinality  "1"^^xsd:int ;
+                               owl:onProperty   jasper:contactInfo
+                             ] ;
+        dta:destination      "dta-contact-info-M/getContactInfo/c8778832-4361-4b5d-a306-4cc7de100999"^^xsd:string ;
+        dta:kind             dta:Get ;
+        dta:parameter        jasper:ContactInfoReq .
+
+Sms:dta-sms-terminator
+        a              dta:DTA ;
+        dta:operation  Sms:sendSms .

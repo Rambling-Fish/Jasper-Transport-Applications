@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="dta-notify-J">
+    <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="Jasper#1">
+        <properties>
+            <property name="application" value="dta-notify-J"/>
+            <property name="model" value="dta-notify-J.dta"/>
+            <property name="vendor" value="jasper"/>
+            <property name="name" value="Jasper"/>
+            <property name="url" value="${jasperUrl}"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="version" value="1.0"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="notify-email-sms" entity-id="8fdd0f83-bc5e-46b4-8fee-a9720bd3931f">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="initialState"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="2"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Jasper (POST)" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="Jasper (Streaming)#1">
+                <graphicalData x="19" y="125" width="85" height="67"/>
+                <properties>
+                    <property name="operation" value="http://coralcea.ca/jasper/dta-J/postNotificationMsg"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/execute"/>
+                    <property name="config-ref" value="Jasper"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="auxiliary;index" value="3"/>
+                </properties>
+            </endpoint>
+            <pattern name="save correlationID" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#1">
+                <graphicalData x="164" y="125" width="111" height="67"/>
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="scope" value="session"/>
+                    <property name="overwrite"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                        <property name="value" value="#[header:OUTBOUND:MULE_CORRELATION_ID]"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;wrapIn" value="5"/>
+                        <property name="auxiliary;index" value="5"/>
+                        <property name="key" value="MULE_CORRELATION_ID"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern name="Save notify parms" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#2">
+                <graphicalData x="335" y="125" width="109" height="67"/>
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="scope" value="session"/>
+                    <property name="overwrite"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="6"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                        <property name="value" value="#[#[payload.fromName]]"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;wrapIn" value="7"/>
+                        <property name="auxiliary;index" value="7"/>
+                        <property name="key" value="NOTIFY_FROM"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;1">
+                        <property name="value" value="#[#[payload.toName]]"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;wrapIn" value="8"/>
+                        <property name="auxiliary;index" value="8"/>
+                        <property name="key" value="NOTIFY_TO"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;2">
+                        <property name="value" value="#[#[payload.msgSubject]]"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;wrapIn" value="9"/>
+                        <property name="auxiliary;index" value="9"/>
+                        <property name="key" value="NOTIFY_MSG_SUBJECT"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;3">
+                        <property name="value" value="#[#[payload.msgBody]]"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;wrapIn" value="10"/>
+                        <property name="auxiliary;index" value="10"/>
+                        <property name="key" value="NOTIFY_MSG_BODY"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <splitter index="0" name="All" type="http://www.mulesoft.org/schema/mule/core/all" entity-id="22f5564e-0deb-4465-a0dd-66b5493725cd">
+                <graphicalData x="504" y="62" width="778" height="193"/>
+                <properties>
+                    <property name=";INDEX" value="0"/>
+                </properties>
+                <pattern name="All" type="http://www.mulesoft.org/schema/mule/core/all" entity-id="51c95d31-a2ef-43d6-8a32-29a5c3df15f4">
+                    <properties>
+                        <property name=";INDEX" value="0"/>
+                    </properties>
+                </pattern>
+                <compartment entity-id="df5dbf57-bcb4-4294-b1b9-26f0e0a4b69f">
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="42dbd2bd-8701-4720-90b8-ca5a1a5b35f6">
+                        <pattern name="from name" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#1">
+                            <graphicalData x="652" y="121" width="73" height="67"/>
+                            <properties>
+<property name="auxiliary;moved-from" value="11"/>
+<property name="value" value="#[header:SESSION:NOTIFY_FROM]"/>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                        <pattern name="set GET parm" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                            <graphicalData x="785" y="121" width="86" height="67"/>
+                            <properties>
+<property name="ref" value=""/>
+<property name="updated"/>
+<property name="class" value=""/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;356744142">
+    <property name="ref" value=""/>
+    <property name="isProcessed$$$$" value="true"/>
+</property-collection>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+    <property name="class" value="org.jasper.dta.notify.SetContactNameParm"/>
+    <property name="isProcessed$$$$" value="true"/>
+    <property name="auxiliary;wrapIn" value="13"/>
+    <property name="auxiliary;index" value="13"/>
+</property-collection>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                        <pattern name="Jasper (GET from contactInfo)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#2">
+                            <graphicalData x="931" y="121" width="171" height="67"/>
+                            <properties>
+<property name="auxiliary;moved-from"/>
+<property name="request" value="http://coralcea.ca/jasper/dta-J/getContactInfo"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/send"/>
+<property name="exchangePattern"/>
+<property name="config-ref" value="Jasper"/>
+<property name="timeout"/>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                        <pattern name="Save from details" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#3">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="scope" value="session"/>
+<property name="auxiliary;moved-from" value="15"/>
+<property name="overwrite"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+    <property name="value" value="#[#[payload.workEmail]]"/>
+    <property name="isProcessed$$$$" value="true"/>
+    <property name="auxiliary;wrapIn" value="16"/>
+    <property name="auxiliary;index" value="16"/>
+    <property name="key" value="NOTIFY_FROM_EMAIL"/>
+</property-collection>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;1">
+    <property name="value" value="#[#[payload.workCellphone]]"/>
+    <property name="isProcessed$$$$" value="true"/>
+    <property name="auxiliary;wrapIn" value="17"/>
+    <property name="auxiliary;index" value="17"/>
+    <property name="key" value="NOTIFY_FROM_SMS"/>
+</property-collection>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="c8832567-5bff-4b60-b345-6c0622dbe1a7">
+                        <pattern name="to name" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#2">
+                            <graphicalData x="652" y="166" width="68" height="67"/>
+                            <properties>
+<property name="auxiliary;moved-from" value="18"/>
+<property name="value" value="#[header:SESSION:NOTIFY_TO]"/>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                        <pattern name="set GET parm" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#2">
+                            <graphicalData x="780" y="166" width="86" height="67"/>
+                            <properties>
+<property name="ref" value=""/>
+<property name="updated"/>
+<property name="class" value=""/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1671218443">
+    <property name="ref" value=""/>
+    <property name="isProcessed$$$$" value="true"/>
+</property-collection>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+    <property name="class" value="org.jasper.dta.notify.SetContactNameParm"/>
+    <property name="isProcessed$$$$" value="true"/>
+    <property name="auxiliary;wrapIn" value="20"/>
+    <property name="auxiliary;index" value="20"/>
+</property-collection>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                        <pattern name="Jasper (GET to contactInfo)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#3">
+                            <graphicalData x="926" y="166" width="156" height="67"/>
+                            <properties>
+<property name="auxiliary;moved-from" value="21"/>
+<property name="request" value="http://coralcea.ca/jasper/dta-J/getContactInfo"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/send"/>
+<property name="exchangePattern"/>
+<property name="config-ref" value="Jasper"/>
+<property name="timeout"/>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                        <pattern name="Save to details" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#4">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="scope" value="session"/>
+<property name="auxiliary;moved-from" value="22"/>
+<property name="overwrite"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+    <property name="value" value="#[#[payload.workEmail]]"/>
+    <property name="isProcessed$$$$" value="true"/>
+    <property name="auxiliary;wrapIn" value="23"/>
+    <property name="auxiliary;index" value="23"/>
+    <property name="key" value="NOTIFY_TO_EMAIL"/>
+</property-collection>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;1">
+    <property name="value" value="#[#[payload.workCellphone]]"/>
+    <property name="isProcessed$$$$" value="true"/>
+    <property name="auxiliary;wrapIn" value="24"/>
+    <property name="auxiliary;index" value="24"/>
+    <property name="key" value="NOTIFY_TO_SMS"/>
+</property-collection>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
+            <splitter index="25" name="All" type="org.mule.tooling.ui.modules.core.pattern.all" entity-id="All#1">
+                <graphicalData x="1493" y="62" width="1124" height="193"/>
+                <properties>
+                    <property name="bussinessEventsLabel"/>
+                    <property name=";INDEX" value="25"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="auxiliary;index" value="25"/>
+                </properties>
+                <pattern name="All" type="org.mule.tooling.ui.modules.core.pattern.all" entity-id="All#2">
+                    <properties>
+                        <property name="bussinessEventsLabel"/>
+                        <property name=";INDEX" value="25"/>
+                        <property name="tracking:enable-default-events"/>
+                        <property name="auxiliary;index" value="25"/>
+                    </properties>
+                </pattern>
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="26" isChoiceOtherwiseLane="false" entity-id="890f3a40-87f8-4fd0-9361-e9b81d55541c">
+                        <pattern name="email_from" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="variableName" value="mop_email_from"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="value" value="#[header:SESSION:NOTIFY_FROM_EMAIL]"/>
+<property name="auxiliary;index" value="27"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="email_to" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#2">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="variableName" value="mop_email_to"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="value" value="#[header:SESSION:NOTIFY_TO_EMAIL]"/>
+<property name="auxiliary;index" value="28"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="email_subject" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#3">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="variableName" value="mop_email_subject"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="value" value="#[header:SESSION:NOTIFY_MSG_SUBJECT]"/>
+<property name="auxiliary;index" value="29"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="email_body" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#4">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="variableName" value="mop_email_body"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="value" value="#[header:SESSION:NOTIFY_MSG_BODY]"/>
+<property name="auxiliary;index" value="30"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="email details" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#3">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="value" value="#[['emailAddressFrom':flowVars.mop_email_from.toString(), 'emailAddressTo':flowVars.mop_email_to.toString(), 'emailSubject':flowVars.mop_email_subject.toString(), 'emailBody':flowVars.mop_email_body.toString()]]"/>
+<property name="auxiliary;index" value="31"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="Set email parms" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#3">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="class"/>
+<property name="auxiliary;index" value="32"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+    <property name="class" value="org.jasper.dta.notify.SetEmailParms"/>
+    <property name="isProcessed$$$$" value="true"/>
+    <property name="auxiliary;wrapIn" value="33"/>
+    <property name="auxiliary;index" value="33"/>
+</property-collection>
+                            </properties>
+                        </pattern>
+                        <pattern name="Jasper (POST send email)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#4">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="request" value="http://coralcea.ca/jasper/dta-J/postSendEmail"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/send"/>
+<property name="exchangePattern"/>
+<property name="config-ref" value="Jasper"/>
+<property name="timeout"/>
+<property name="auxiliary;index" value="34"/>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="35" isChoiceOtherwiseLane="false" entity-id="cb81120e-45db-4958-8b3b-fa523ddd5fcc">
+                        <pattern name="sms_to" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#5">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="variableName" value="mop_sms_to"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="value" value="#[header:SESSION:NOTIFY_TO_SMS]"/>
+<property name="auxiliary;index" value="36"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="sms_from" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#6">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="variableName" value="mop_sms_from"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="value" value="#[header:SESSION:NOTIFY_FROM_SMS]"/>
+<property name="auxiliary;index" value="37"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="sms_body" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#7">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="variableName" value="mop_sms_body"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="value" value="#[header:SESSION:NOTIFY_MSG_SUBJECT] ; #[header:SESSION:NOTIFY_MSG_BODY]"/>
+<property name="auxiliary;index" value="38"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="Set sms details" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#4">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="value" value="#[['fromSms':flowVars.mop_sms_from.toString(), 'toSms':flowVars.mop_sms_to.toString(), 'bodySms':flowVars.mop_sms_body.toString()]]"/>
+<property name="auxiliary;index" value="39"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="Set sms parms" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#4">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="class"/>
+<property name="auxiliary;index" value="40"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+    <property name="class" value="org.jasper.dta.notify.SetSmsParms"/>
+    <property name="isProcessed$$$$" value="true"/>
+    <property name="auxiliary;wrapIn" value="41"/>
+    <property name="auxiliary;index" value="41"/>
+</property-collection>
+                            </properties>
+                        </pattern>
+                        <pattern name="Jasper (POST send sms)" type="http://www.mulesoft.org/schema/mule/jasper/jasper-connector" entity-id="Jasper#5">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="request" value="http://coralcea.ca/jasper/dta-J/postSendSms"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/send"/>
+<property name="exchangePattern"/>
+<property name="config-ref" value="Jasper"/>
+<property name="timeout"/>
+<property name="auxiliary;index" value="42"/>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
+            <pattern name="restore correlationID" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="Message Properties#5">
+                <graphicalData x="2677" y="125" width="125" height="67"/>
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="scope"/>
+                    <property name="overwrite"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="43"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                        <property name="value" value="#[header:SESSION:MULE_CORRELATION_ID]"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;wrapIn" value="44"/>
+                        <property name="auxiliary;index" value="44"/>
+                        <property name="key" value="MULE_CORRELATION_ID"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+</mule-configuration>

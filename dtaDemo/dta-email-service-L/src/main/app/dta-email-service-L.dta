@@ -1,0 +1,55 @@
+@prefix :      <http://coralcea.ca/jasper/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix EmailMsg: <http://coralcea.ca/jasper/EmailMsg/> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+
+EmailMsg:emailBody  a  owl:DatatypeProperty ;
+        rdfs:domain  :EmailReq ;
+        rdfs:range   xsd:string .
+
+EmailMsg:emailAddressFrom
+        a            owl:DatatypeProperty ;
+        rdfs:domain  :EmailReq ;
+        rdfs:range   xsd:string .
+
+:dta-L  a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dtademo.email"^^xsd:string .
+
+:EmailReq  a             owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   EmailMsg:emailBody
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   EmailMsg:emailAddressFrom
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   EmailMsg:emailAddressTo
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   EmailMsg:emailSubject
+                         ] .
+
+:dta-email-service-L  a  dta:DTA ;
+        dta:operation  :sendEmail .
+
+EmailMsg:emailSubject
+        a            owl:DatatypeProperty ;
+        rdfs:domain  :EmailReq ;
+        rdfs:range   xsd:string .
+
+:sendEmail  a            dta:Operation ;
+        dta:destination  "dta-email-service-L/sendEmail/fa17822c-54ba-43f6-8551-e95e0d8e1c7b"^^xsd:string ;
+        dta:kind         dta:Post ;
+        dta:parameter    :EmailReq .
+
+EmailMsg:emailAddressTo
+        a            owl:DatatypeProperty ;
+        rdfs:domain  :EmailReq ;
+        rdfs:range   xsd:string .

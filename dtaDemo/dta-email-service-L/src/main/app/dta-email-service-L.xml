@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:smtps="http://www.mulesoft.org/schema/mule/smtps"
+	xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/smtps http://www.mulesoft.org/schema/mule/smtps/current/mule-smtps.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
+    <jasper:config name="Jasper" url="${jasperUrl}" vendor="jasper" application="dta-email-service-L" version="1.0" model="dta-email-service-L.dta" doc:name="Jasper"/>
+    <flow name="send-email" doc:name="send-email">
+        <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/sendEmail" doc:name="Jasper (execute POST)"/>
+
+        <set-variable variableName="var_from" value="#[payload.emailAddressFrom]" doc:name="Variable"/>
+        <set-variable variableName="var_to" value="#[payload.emailAddressTo]" doc:name="Variable"/>
+        <set-variable variableName="var_subject" value="#[payload.emailSubject]" doc:name="Variable"/>
+        <set-payload doc:name="Set Payload" value="#[payload.emailBody]"/>
+
+<!-- 
+        <smtps:outbound-endpoint host="smtp.gmail.com" port="465" user="${emailUserID}" password="${emailPassword}" to="#[var_to]" from="#[var_from]" subject="#[var_subject]" responseTimeout="10000" mimeType="text/plain" doc:name="SMTP"/>
+-->
+        <logger message="TO=#[var_to] , FROM=#[var_from] , SUBJECT=#[var_subject] , BODY=#[payload]" level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>

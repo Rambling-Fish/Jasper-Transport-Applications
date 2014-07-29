@@ -1,0 +1,110 @@
+@prefix :      <http://coralcea.ca/jasper/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+@prefix info:  <http://coralcea.ca/jasper/info/> .
+
+:ContactInfoReq  a       owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :contactName
+                         ] .
+
+:ContactInfo  a          owl:Class ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:workTelephone
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:workCellphone
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   info:nameLast
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:workEmail
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:nameMiddle
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:homeEmail
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   info:nameFirst
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:homeCellphone
+                         ] ;
+        dta:restriction  [ a                   owl:Restriction ;
+                           owl:maxCardinality  "1"^^xsd:int ;
+                           owl:onProperty      info:homeTelephone
+                         ] .
+
+:contactName  a      owl:DatatypeProperty ;
+        rdfs:domain  :ContactInfoReq ;
+        rdfs:range   xsd:string .
+
+:getContactInfo  a           dta:Operation ;
+        dta:data             :contactInfo ;
+        dta:dataRestriction  [ a                owl:Restriction ;
+                               owl:cardinality  "1"^^xsd:int ;
+                               owl:onProperty   :contactInfo
+                             ] ;
+        dta:destination      "dta-contact-info-K/getContactInfo/c8778832-4361-4b5d-a306-4cc7de100999"^^xsd:string ;
+        dta:kind             dta:Get ;
+        dta:parameter        :ContactInfoReq .
+
+:contactInfo  a     owl:ObjectProperty ;
+        rdfs:range  :ContactInfo .
+
+info:homeTelephone  a  owl:DatatypeProperty ;
+        rdfs:domain  :ContactInfo ;
+        rdfs:range   xsd:string .
+
+:dta-K  a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dta.contactinfo"^^xsd:string .
+
+info:homeEmail  a    owl:DatatypeProperty ;
+        rdfs:domain  :ContactInfo ;
+        rdfs:range   xsd:string .
+
+info:homeCellphone  a  owl:DatatypeProperty ;
+        rdfs:domain  :ContactInfo ;
+        rdfs:range   xsd:string .
+
+info:workTelephone  a  owl:DatatypeProperty ;
+        rdfs:domain  :ContactInfo ;
+        rdfs:range   xsd:string .
+
+info:workEmail  a    owl:DatatypeProperty ;
+        rdfs:domain  :ContactInfo ;
+        rdfs:range   xsd:string .
+
+info:nameMiddle  a   owl:DatatypeProperty ;
+        rdfs:domain  :ContactInfo ;
+        rdfs:range   xsd:string .
+
+info:workCellphone  a  owl:DatatypeProperty ;
+        rdfs:domain  :ContactInfo ;
+        rdfs:range   xsd:string .
+
+:dta-contact-info-K  a  dta:DTA ;
+        dta:operation  :getContactInfo .
+
+info:nameFirst  a    owl:DatatypeProperty ;
+        rdfs:domain  :ContactInfo ;
+        rdfs:range   xsd:string .
+
+info:nameLast  a     owl:DatatypeProperty ;
+        rdfs:domain  :ContactInfo ;
+        rdfs:range   xsd:string .
