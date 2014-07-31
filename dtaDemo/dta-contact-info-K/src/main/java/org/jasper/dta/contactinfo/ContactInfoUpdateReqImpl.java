@@ -1,34 +1,14 @@
 package org.jasper.dta.contactinfo;
 
 import javax.annotation.Generated;
-
 import org.codehaus.jackson.annotate.*;
 
 @Generated("true")
-@JsonTypeName("http://coralcea.ca/jasper/ContactInfo")
+@JsonTypeName("http://coralcea.ca/jasper/ContactInfoUpdateReq")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
-public class ContactInfoImpl implements ContactInfo {
+public class ContactInfoUpdateReqImpl implements ContactInfoUpdateReq {
 
-    @Generated("false")
-    public ContactInfoImpl() {}
-    
-    @Generated("false")
-    public ContactInfoImpl(String nameFirst,     String nameMiddle,    String nameLast,
-                           String homeTelephone, String homeCellphone, String homeEmail,
-                           String workTelephone, String workCellphone, String workEmail)
-    {
-            this.nameFirst = nameFirst;
-            this.nameMiddle = nameMiddle;
-            this.nameLast = nameLast;
-            this.homeTelephone = homeTelephone;
-            this.homeCellphone = homeCellphone;
-            this.homeEmail = homeEmail;
-            this.workTelephone = workTelephone;
-            this.workCellphone = workCellphone;
-            this.workEmail = workEmail;
-    }
-
-    @Generated("true")
+	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/info/workTelephone")
 	private String workTelephone;
 
@@ -59,6 +39,10 @@ public class ContactInfoImpl implements ContactInfo {
 	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/info/nameLast")
 	private String nameLast;
+
+	@Generated("true")
+	@JsonProperty("http://coralcea.ca/jasper/contactName")
+	private String contactName;
 
 	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/info/nameFirst")
@@ -118,6 +102,13 @@ public class ContactInfoImpl implements ContactInfo {
 	@JsonProperty("http://coralcea.ca/jasper/info/nameLast")
 	public String getNameLast() {
 		return nameLast;
+	}
+
+	@Override
+	@Generated("true")
+	@JsonProperty("http://coralcea.ca/jasper/contactName")
+	public String getContactName() {
+		return contactName;
 	}
 
 	@Override
@@ -185,6 +176,13 @@ public class ContactInfoImpl implements ContactInfo {
 
 	@Override
 	@Generated("true")
+	@JsonProperty("http://coralcea.ca/jasper/contactName")
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+
+	@Override
+	@Generated("true")
 	@JsonProperty("http://coralcea.ca/jasper/info/nameFirst")
 	public void setNameFirst(String nameFirst) {
 		this.nameFirst = nameFirst;
@@ -212,6 +210,8 @@ public class ContactInfoImpl implements ContactInfo {
 		result = prime * result
 				+ ((nameLast == null) ? 0 : nameLast.hashCode());
 		result = prime * result
+				+ ((contactName == null) ? 0 : contactName.hashCode());
+		result = prime * result
 				+ ((nameFirst == null) ? 0 : nameFirst.hashCode());
 		return result;
 	}
@@ -225,7 +225,7 @@ public class ContactInfoImpl implements ContactInfo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ContactInfoImpl other = (ContactInfoImpl) obj;
+		ContactInfoUpdateReqImpl other = (ContactInfoUpdateReqImpl) obj;
 		if (workTelephone == null) {
 			if (other.workTelephone != null)
 				return false;
@@ -266,6 +266,11 @@ public class ContactInfoImpl implements ContactInfo {
 				return false;
 		} else if (!nameLast.equals(other.nameLast))
 			return false;
+		if (contactName == null) {
+			if (other.contactName != null)
+				return false;
+		} else if (!contactName.equals(other.contactName))
+			return false;
 		if (nameFirst == null) {
 			if (other.nameFirst != null)
 				return false;
@@ -277,11 +282,12 @@ public class ContactInfoImpl implements ContactInfo {
 	@Override
 	@Generated("true")
 	public String toString() {
-		return "ContactInfoImpl [ " + "workTelephone=" + workTelephone + ", "
-				+ "homeEmail=" + homeEmail + ", " + "nameMiddle=" + nameMiddle
-				+ ", " + "homeCellphone=" + homeCellphone + ", " + "workEmail="
-				+ workEmail + ", " + "homeTelephone=" + homeTelephone + ", "
-				+ "workCellphone=" + workCellphone + ", " + "nameLast="
-				+ nameLast + ", " + "nameFirst=" + nameFirst + " ]";
+		return "ContactInfoUpdateReqImpl [ " + "workTelephone=" + workTelephone
+				+ ", " + "homeEmail=" + homeEmail + ", " + "nameMiddle="
+				+ nameMiddle + ", " + "homeCellphone=" + homeCellphone + ", "
+				+ "workEmail=" + workEmail + ", " + "homeTelephone="
+				+ homeTelephone + ", " + "workCellphone=" + workCellphone
+				+ ", " + "nameLast=" + nameLast + ", " + "contactName="
+				+ contactName + ", " + "nameFirst=" + nameFirst + " ]";
 	}
 }

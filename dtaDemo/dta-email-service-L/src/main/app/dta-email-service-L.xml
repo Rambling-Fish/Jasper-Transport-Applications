@@ -14,9 +14,14 @@ http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/j
         <set-variable variableName="var_subject" value="#[payload.emailSubject]" doc:name="Variable"/>
         <set-payload doc:name="Set Payload" value="#[payload.emailBody]"/>
 
-<!-- 
-        <smtps:outbound-endpoint host="smtp.gmail.com" port="465" user="${emailUserID}" password="${emailPassword}" to="#[var_to]" from="#[var_from]" subject="#[var_subject]" responseTimeout="10000" mimeType="text/plain" doc:name="SMTP"/>
--->
-        <logger message="TO=#[var_to] , FROM=#[var_from] , SUBJECT=#[var_subject] , BODY=#[payload]" level="INFO" doc:name="Logger"/>
+        <choice doc:name="Choice">
+            <when expression="${sendEmail} == 'true'">
+                <smtps:outbound-endpoint host="smtp.gmail.com" port="465" user="${emailUserID}" password="${emailPassword}" to="#[var_to]" from="#[var_from]" subject="#[var_subject]" responseTimeout="10000" mimeType="text/plain" doc:name="SMTP"/>
+            </when>
+            <otherwise>
+                <logger message="TO=#[var_to] , FROM=#[var_from] , SUBJECT=#[var_subject] , BODY=#[payload]" level="WARN" doc:name="Logger"/>
+            </otherwise>
+        </choice>
+
     </flow>
 </mule>

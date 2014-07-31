@@ -11,7 +11,7 @@
             <property name="version" value="1.0"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="send-email" entity-id="f0edcce0-8de5-4415-b6a7-6614f50a5672">
+    <flow SubFlow="false" name="send-email" entity-id="5a707b91-5fe4-4f78-98b2-c1154d9b5922">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -66,15 +66,65 @@
                     <property name="auxiliary;index" value="7"/>
                 </properties>
             </pattern>
-            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
+            <splitter index="8" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="message" value="TO=#[var_to] , FROM=#[var_from] , SUBJECT=#[var_subject] , BODY=#[payload]"/>
-                    <property name="category"/>
-                    <property name="level" value="INFO"/>
-                    <property name="auxiliary;index" value="8"/>
+                    <property-collection name="e9d1fbc9-d218-44d3-99e3-771dd1394479">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="253742ab-4933-4246-a70b-e60b03a8e70a">
+                        <property name="choice.expression" value="${sendEmail} == 'true'"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="${sendEmail} == 'true'"/>
+                        </property-collection>
+                    </property-collection>
                 </properties>
-            </pattern>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2"/>
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="10" isChoiceOtherwiseLane="false" entity-id="253742ab-4933-4246-a70b-e60b03a8e70a">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="SMTP" type="http://www.mulesoft.org/schema/mule/smtps/endpoint" entity-id="SMTP#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="port" value="465"/>
+<property name="to" value="#[var_to]"/>
+<property name="host" value="smtp.gmail.com"/>
+<property name="businessEventsLabel"/>
+<property name="subject" value="#[var_subject]"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/smtps/endpoint"/>
+<property name="bcc"/>
+<property name="from" value="#[var_from]"/>
+<property name="disableTransportTransformer"/>
+<property name="password" value="${emailPassword}"/>
+<property name="tracking:enable-default-events"/>
+<property name="exchange-pattern" value="one-way"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="replyTo"/>
+<property name="address"/>
+<property name="encoding"/>
+<property name="user" value="${emailUserID}"/>
+<property name="auxiliary;index" value="10"/>
+<property name="mimeType" value="text/plain"/>
+<property name="responseTimeout" value="10000"/>
+<property name="cc"/>
+<property name="connector-ref"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="12" isChoiceOtherwiseLane="true" entity-id="e9d1fbc9-d218-44d3-99e3-771dd1394479">
+                        <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="message" value="TO=#[var_to] , FROM=#[var_from] , SUBJECT=#[var_subject] , BODY=#[payload]"/>
+<property name="category"/>
+<property name="level" value="WARN"/>
+<property name="auxiliary;index" value="12"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
         </lane>
     </flow>
 </mule-configuration>

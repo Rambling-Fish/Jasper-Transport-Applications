@@ -10,4 +10,10 @@ http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/j
             <singleton-object class="org.jasper.dta.contactinfo.GetContactInfo"/>
         </component>
     </flow>
+    <flow name="post-contact-info" doc:name="post-contact-info">
+        <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/postContactInfo" doc:name="Jasper (execute POST)"/>
+        <component doc:name="PostContactInfo">
+            <singleton-object class="org.jasper.dta.contactinfo.PostContactInfo"/>
+        </component>
+    </flow>
 </mule>

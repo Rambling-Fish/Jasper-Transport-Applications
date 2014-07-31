@@ -11,7 +11,7 @@
             <property name="version" value="1.0"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="get-contact-info" entity-id="d3a0717d-4d57-482f-be15-641fd37e3a0f">
+    <flow SubFlow="false" name="get-contact-info" entity-id="f286eebc-d4eb-42fd-8206-3598e18cccfb">
         <properties>
             <property name="processingStrategy"/>
             <property name="initialState"/>
@@ -31,19 +31,12 @@
                     <property name="exchange-pattern" value="one-way"/>
                     <property name="auxiliary;index" value="3"/>
                 </properties>
-                <description></description>
             </endpoint>
             <pattern name="GetContactInfo" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="ref" value=""/>
-                    <property name="updated"/>
-                    <property name="class" value=""/>
+                    <property name="class"/>
                     <property name="auxiliary;index" value="4"/>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1834372577">
-                        <property name="ref" value=""/>
-                        <property name="isProcessed$$$$" value="true"/>
-                    </property-collection>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="org.jasper.dta.contactinfo.GetContactInfo"/>
                         <property name="isProcessed$$$$" value="true"/>
@@ -51,7 +44,42 @@
                         <property name="auxiliary;index" value="5"/>
                     </property-collection>
                 </properties>
-                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="post-contact-info" entity-id="0a9f9c44-9bcb-453e-b756-d04ba04b9d68">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="initialState"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="6"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Jasper (execute POST)" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="Jasper (Streaming)#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="operation" value="http://coralcea.ca/jasper/postContactInfo"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/execute"/>
+                    <property name="config-ref" value="Jasper"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="auxiliary;index" value="7"/>
+                </properties>
+            </endpoint>
+            <pattern name="PostContactInfo" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class"/>
+                    <property name="auxiliary;index" value="8"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
+                        <property name="class" value="org.jasper.dta.contactinfo.PostContactInfo"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property name="auxiliary;wrapIn" value="9"/>
+                        <property name="auxiliary;index" value="9"/>
+                    </property-collection>
+                </properties>
             </pattern>
         </lane>
     </flow>
