@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="dta-room-map-M">
+    <global-element name="Jasper" type="http://www.mulesoft.org/schema/mule/jasper/config" entity-id="!!!ec8e0389-b926-4806-8f9f-fbeb457835fb">
+        <properties>
+            <property name="application" value="dta-room-map-M"/>
+            <property name="model" value="dta-room-map-M.dta"/>
+            <property name="vendor" value="jasper"/>
+            <property name="name" value="Jasper"/>
+            <property name="url" value="tcp://0.0.0.0:61616"/>
+            <property name="version" value="1.0"/>
+        </properties>
+        <description></description>
+    </global-element>
+    <flow SubFlow="false" name="get-mapping-info" entity-id="a14a504e-4894-4ad7-bd56-081d17ed558a">
+        <description></description>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="b412e327-9851-43ec-89ec-6fda8080d633">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Jasper (execute GET)" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="3842a338-f474-4869-9f5a-9224fdd975a8">
+                <graphicalData x="19" y="71" width="124" height="67"/>
+                <properties>
+                    <property name="operation" value="http://coralcea.ca/jasper/getMapInfo"/>
+                    <property name="updated"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/execute"/>
+                    <property name="config-ref" value="Jasper"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern name="GetMapInfo" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="2b7f40b3-18c7-4f56-a9ea-f3d504e39de1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="ref" value=""/>
+                    <property name="updated"/>
+                    <property name="class" value=""/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;152986115">
+                        <property name="ref" value=""/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;800117917">
+                        <property name="class" value="org.jasper.dta.mapinfo.GetMapInfo"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="post-mapping-info" entity-id="bdd940b2-337c-4f4a-af2c-5f6b03227311">
+        <description></description>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="582ee95e-d9fb-4635-8952-5ad142b22e41">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Jasper (execute POST)" type="http://www.mulesoft.org/schema/mule/jasper/endpoint" entity-id="ccbf4220-1ded-419f-86fd-e827646c76c8">
+                <graphicalData x="19" y="222" width="130" height="67"/>
+                <properties>
+                    <property name="operation" value="http://coralcea.ca/jasper/postMapInfo"/>
+                    <property name="updated"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/jasper/execute"/>
+                    <property name="config-ref" value="Jasper"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern name="PostMapInfo" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="ed750fc8-185c-45cf-9fea-30587c79bd0a">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="ref" value=""/>
+                    <property name="updated"/>
+                    <property name="class" value=""/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;2042906867">
+                        <property name="ref" value=""/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;766831925">
+                        <property name="class" value="org.jasper.dta.mapinfo.PostMapInfo"/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

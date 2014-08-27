@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:jasper="http://www.mulesoft.org/schema/mule/jasper" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jasper http://www.mulesoft.org/schema/mule/jasper/1.0/mule-jasper.xsd">
+    <jasper:config name="Jasper" vendor="jasper" application="dta-room-map-M" version="1.0" model="dta-room-map-M.dta" doc:name="Jasper"/>
+    <flow name="get-mapping-info" doc:name="get-mapping-info">
+        <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/getMapInfo" doc:name="Jasper (execute GET)"/>
+        <component doc:name="GetMapInfo">
+            <singleton-object class="org.jasper.dta.mapinfo.GetMapInfo"/>
+        </component>
+    </flow>
+    <flow name="post-mapping-info" doc:name="post-mapping-info">
+        <jasper:execute config-ref="Jasper" operation="http://coralcea.ca/jasper/postMapInfo" doc:name="Jasper (execute POST)"/>
+        <component doc:name="PostMapInfo">
+            <singleton-object class="org.jasper.dta.mapinfo.PostMapInfo"/>
+        </component>
+    </flow>
+</mule>

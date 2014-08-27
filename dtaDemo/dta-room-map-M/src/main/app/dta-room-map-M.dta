@@ -1,0 +1,58 @@
+@prefix :      <http://coralcea.ca/jasper/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix map:   <http://coralcea.ca/jasper/map/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dta:   <http://coralcea.ca/2014/01/dta#> .
+
+:roomId  a           owl:DatatypeProperty ;
+        rdfs:domain  :MapInfoUpdateReq , :MapInfoReq ;
+        rdfs:range   xsd:string .
+
+map:fullName  a      owl:DatatypeProperty ;
+        rdfs:domain  :MapInfoUpdateReq , :MapInfo ;
+        rdfs:range   xsd:string .
+
+:MapInfoReq  a           owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :roomId
+                         ] .
+
+:MapInfoUpdateReq  a     owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   map:fullName
+                         ] ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   :roomId
+                         ] .
+
+:MapInfo  a              owl:Class ;
+        dta:restriction  [ a                owl:Restriction ;
+                           owl:cardinality  "1"^^xsd:int ;
+                           owl:onProperty   map:fullName
+                         ] .
+
+:dta-room-map-M  a     dta:DTA ;
+        dta:operation  :postMapInfo , :getMapInfo .
+
+:postMapInfo  a          dta:Operation ;
+        dta:destination  "dta-room-map-M/postMapInfo/336c99b5-9d46-480a-8b7f-0d09106c5504"^^xsd:string ;
+        dta:kind         dta:Post ;
+        dta:parameter    :MapInfoUpdateReq .
+
+:dta-M  a                owl:Ontology ;
+        dta:basepackage  "org.jasper.dta.mapinfo"^^xsd:string .
+
+:getMapInfo  a               dta:Operation ;
+        dta:data             map:fullName ;
+        dta:dataRestriction  [ a                   owl:Restriction ;
+                               owl:maxCardinality  "1"^^xsd:int ;
+                               owl:onProperty      map:fullName
+                             ] ;
+        dta:destination      "dta-room-map-M/getMapInfo/0ee0d374-6594-4196-8f32-cd08b2691f35"^^xsd:string ;
+        dta:kind             dta:Get ;
+        dta:parameter        :MapInfoReq .
